@@ -20,3 +20,7 @@ Then we need to configure laravel with `.env` at root of project, you can copy `
 
 Now we need run migration with `php artisan migrate` and you can run a server with `php artisan serve` :)
 
+# 2. Deploy 
+ 
+On server run the `update.sh` in the `$HOME` directory.
+ 
