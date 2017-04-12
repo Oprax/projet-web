@@ -3,6 +3,7 @@
 
 ### Laravel ###
 vendor/
+composer.phar
 node_modules/
 npm-debug.log
 
