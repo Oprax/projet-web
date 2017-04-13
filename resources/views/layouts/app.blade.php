@@ -48,6 +48,11 @@
                 Mon Compte
             </div>
         </div>
+        @if (Request::is('shop*'))
+            @include('layouts/side/left-bar-shop')
+        @else
+            @include('layouts/side/left-bar')
+        @endif
 
     </div>
 
@@ -78,7 +83,21 @@
             </div>
         </div>
         <!-- Site content !-->
+        <div class="container">
+            <div class="ui grid">
+                <div class="twelve wide column">
+                    @yield('content')
+                </div>
 
+                <div class="four wide column">
+                    @if (Request::is('shop*'))
+                        @include('layouts/side/right-bar-shop')
+                    @else
+                        @include('layouts/side/right-bar')
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
