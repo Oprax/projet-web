@@ -17,7 +17,7 @@ class CreateShopCategoriesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('name');
-            $table->integer('cat_parent')->unsigned();
+            $table->integer('cat_parent')->nullable()->unsigned();
             $table->foreign('cat_parent')
                 ->references('id')->on('shop_categories');
         });

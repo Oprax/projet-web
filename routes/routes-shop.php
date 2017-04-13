@@ -6,14 +6,10 @@
  * Time: 15:41
  */
 
-
-
 Route::group(['prefix' => 'shop'], function(){
 
     //accueil boutique
-    Route::get('/', ['as' => 'shop_home' ,function () {
-        return "Boutique accueil";
-    }]);
+    Route::get('/', ['as' => 'shop_home' , 'uses' => 'ShopController@index']);
 
 
     //Groupe avec middleware : interdit aux noms membres du cesi

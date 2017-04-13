@@ -1,6 +1,5 @@
-<div class="item">
-    Vêtement
-</div>
-<div class="item">
-    Goodies
-</div>
+@foreach ($categories as $category)
+    <div class="item">
+        <p> {{ $category->name }}</p>
+    </div>
+@endforeach
