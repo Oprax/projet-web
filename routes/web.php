@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-require_once('routes-boutiques.php');
+require_once('routes-shop.php');
