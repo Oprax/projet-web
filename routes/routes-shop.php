@@ -16,9 +16,8 @@ Route::group(['prefix' => 'shop'], function(){
     Route::group(['middleware' => 'role.cesi'], function(){
 
         //Ajout d'un produit -> CESI
-        Route::get('/add-product', ['as' => 'shop_add_product', function(){
-            return "add a product";
-        }]);
+        Route::get('/add-product', ['as' => 'shop_add_product', 'uses' => 'ShopController@addProduct']);
+        Route::post('/add-product', ['as' => 'shop_post_product', 'uses' => 'ShopController@postProduct']);
 
     });
 

@@ -13,4 +13,13 @@ class ShopController extends Controller
 
         return view('pages/shop/index', ['categories' => $categoryGestion->getCategories()]);
     }
+
+    public function addProduct(ICategoryGestion $categoryGestion){
+
+        return view('pages/shop/addProduct', ['categories' => $categoryGestion->getCategories()]);
+    }
+
+    public function postProduct(){
+
+    }
 }
