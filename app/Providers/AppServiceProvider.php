@@ -30,5 +30,10 @@ class AppServiceProvider extends ServiceProvider
             'App\Gestion\Shop\ICategoryGestion',
             'App\Gestion\Shop\CategoryGestion'
         );
+
+        $this->app->bind(
+            'App\Model\Shop\shop_productsRepositoryInterface',
+            'App\Model\Shop\shop_productsRepository'
+        );
     }
 }

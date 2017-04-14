@@ -18,7 +18,8 @@ class CreateShopProductsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('slug');
-            $table->integer('quantities')->unsigned();
+            $table->integer('quantities')->unsigned()->nullable();
+            $table->text('description');
             $table->float('price');
 
             $table->integer('category_id')->unsigned();
