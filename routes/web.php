@@ -15,4 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 require_once('routes-shop.php');
+Route::group(['prefix' => 'auth'], function() {
+    Auth::routes();
+});
+
+//Route::get('/home', 'HomeController@index');
