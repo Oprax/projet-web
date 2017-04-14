@@ -42,7 +42,7 @@
                 Activités
             </div>
             <div class="item">
-                Boutique
+                <a href="{{ route('shop_home') }}"> Boutique</a>
             </div>
             <div class="item">
                 Mon Compte
@@ -65,7 +65,7 @@
                 <a id="MenuButtonSideBar" class="item"><i class="bars icon"></i></a>
                 <a href="#" class="item hidden-xs">Accueil</a>
                 <a href="#" class="item hidden-xs">Activités</a>
-                <a href="#" class="item hidden-xs">Boutique</a>
+                <a href="{{ route('shop_home') }}" class="item hidden-xs">Boutique</a>
                 <div class="right menu hidden-xs">
                     <a href="#" class="item">Mon Compte</a>
                 </div>

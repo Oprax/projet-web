@@ -17,22 +17,11 @@ class ShopController extends Controller
         return view('pages/shop/index', ['categories' => $categoryGestion->getCategories(), 'products' => $products]);
     }
 
-    public function addProduct(ICategoryGestion $categoryGestion){
+    public function getaddProduct(ICategoryGestion $categoryGestion){
 
         return view('pages/shop/addProduct', ['categories' => $categoryGestion->getCategories()]);
     }
-
-    public function postProduct(Request $request){
-        $shop_products = new shop_products;
-        $shop_products->name = $request->input('name');
-        $shop_products->price = $request->input('price');
-        $shop_products->slug = $request->input('name');
-        $shop_products->quantities = '3';
-        $shop_products->category_id = '1';
-
-        $shop_products->save();
-        return "article ok";
-    }
+    
 
     public function store (Request $request, shop_productsRepositoryInterface $shopRepository){
         $product = $shopRepository->save($request->only('name', 'price', 'quantityIlimity', 'quantity', 'description', 'new_cat'));
