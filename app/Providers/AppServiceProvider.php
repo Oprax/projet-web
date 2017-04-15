@@ -26,6 +26,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment() !== 'production') {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
+
+        $this->app->bind(
+            'App\Gestion\Shop\ICategoryGestion',
+            'App\Gestion\Shop\CategoryGestion'
+        );
+
+        $this->app->bind(
+            'App\Model\Shop\shop_productsRepositoryInterface',
+            'App\Model\Shop\shop_productsRepository'
+        );
     }
 }

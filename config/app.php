@@ -176,12 +176,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
         /*
          * Additionnal Provider
          */
-        Barryvdh\Debugbar\ServiceProvider::class,
-
+        Collective\Html\HtmlServiceProvider::class,
+        
     ],
 
     /*
@@ -234,6 +233,8 @@ return [
          * Additionnal Aliases
          */
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Form'  => Collective\Html\FormFacade::class,
+        'Html'  => Collective\Html\HtmlFacade::class,
 
     ],
 
