@@ -15,7 +15,7 @@
 
                 <div class="card">
                     <div class="extra" style="padding-top: 0; padding-bottom: 0; margin-top: 0; ">
-                        <a class="header">{{ str_limit($product->name, 15) }}</a>
+                        <a class="header" href="{{ route('shop_product', ['category' => $category->name, 'product' => $product->slug]) }}" >{{ str_limit($product->name, 15) }}</a>
                     </div>
                     <div class="image">
                         {{ Html::image("images/shop/test.png") }}

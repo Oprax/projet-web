@@ -16,7 +16,7 @@ class CreateShopProductsTable extends Migration
         Schema::create('shop_products', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('slug');
             $table->integer('quantities')->unsigned()->nullable();
             $table->text('description');
