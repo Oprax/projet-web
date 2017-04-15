@@ -9,4 +9,6 @@ namespace App\Model\Shop;
 
 interface shop_productsRepositoryInterface{
     public function save($product);
-}
+    public function getProducts5perCategory();
+
+    }

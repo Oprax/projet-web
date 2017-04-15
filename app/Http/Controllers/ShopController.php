@@ -10,10 +10,11 @@ use App\Model\Shop\shop_products;
 
 class ShopController extends Controller
 {
-    public function index(ICategoryGestion $categoryGestion){
+    public function index(ICategoryGestion $categoryGestion, shop_productsRepositoryInterface $shopRepository){
 
         $products = shop_products::all();
-
+        
+        $products = $shopRepository->getProducts5perCategory();
         return view('pages/shop/index', ['categories' => $categoryGestion->getCategories(), 'products' => $products]);
     }
 

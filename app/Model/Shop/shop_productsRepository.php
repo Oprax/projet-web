@@ -52,4 +52,17 @@ class shop_productsRepository implements shop_productsRepositoryInterface{
 
         $this->shop_products->save();
     }
+    
+    public function getProducts5perCategory(){
+        $categories = DB::table('shop_categories')->get();
+
+        foreach ($categories as $key => $category){
+            //$products = shop_products::all()->where('category_id', $category->id)->groupBy('update_at')->take(5);
+            //$this->shop_products = DB::table('shop_products')->get()->where('category_id', $category->id)->groupBy('update_at')->take(5);
+            $products[$key] = shop_products::all()->where('category_id', $category->id)->take(5);
+        }
+
+
+        return $products;
+    }
 }
