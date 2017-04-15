@@ -26,4 +26,44 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isCesi() {
+        return $this->role === 'cesi';
+    }
+
+    public function isBDE() {
+        return $this->role === 'BDE';
+    }
+
+    public function role() {
+        return $this->belongsTo('App\Role');
+    }
+
+    public function status() {
+        return $this->belongsTo('App\Status');
+    }
+
+    public function association() {
+        return $this->belongsTo('App\Association');
+    }
+
+    public function photos() {
+        return $this->hasMany('App\Photo');
+    }
+
+    public function subscribes() {
+        return $this->hasMany('App\Subscribe');
+    }
+
+    public function soundings() {
+        return $this->hasMany('App\Sounding');
+    }
+
+    public function comments_activities() {
+        return $this->hasMany('App\CommentsActivities');
+    }
+
+    public function comments_photos() {
+        return $this->hasMany('App\CommentsPhotos');
+    }
 }
