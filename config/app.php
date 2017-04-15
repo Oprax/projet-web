@@ -179,7 +179,6 @@ return [
         /*
          * Additionnal Provider
          */
-        Barryvdh\Debugbar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         
     ],
