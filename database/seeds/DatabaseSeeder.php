@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('role')->insert([
+        DB::table('roles')->insert([
             ['name' => 'BDE'],
             ['name' => 'cesi'],
             ['name' => 'student'],
@@ -28,21 +28,32 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Tuteur'],
         ]);
 
+        DB::table('associations')->insert([
+            ['name' => 'Cesi'],
+            ['name' => 'BDE'],
+            ['name' => 'eXia.Lan'],
+            ['name' => "en'k"],
+        ]);
+
         $id_vet = DB::table('shop_categories')->insertGetId([
             'name' => 'Vetement'
         ]);
         $id_vai = DB::table('shop_categories')->insertGetId([
             'name' => 'Vaisselle'
         ]);
-        $vet = DB::table('shop_categories')->insert([
+
+        DB::table('shop_categories')->insert([
             'name' => 'pull',
             'cat_parent' => $id_vet
         ]);
 
-            $vai = DB::table('sgop_categories')->insertGetId([
-                'name' => 'mug',
-                'cat_parent' => $id_vai
-
+        DB::table('shop_categories')->insert([
+            'name' => 'mug',
+            'cat_parent' => $id_vai
         ]);
+
+        $this->call(UsersTableSeeder::class);
+        $this->call(ActivitiesTableSeeder::class);
+        $this->call(PhotosTableSeeder::class);
     }
 }

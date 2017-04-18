@@ -15,13 +15,17 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
+    $name = $faker->name;
+    $forename = $faker->name;
+
     return [
-        'name' => $faker->name,
-        'forname' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'name' => $name,
+        'forename' => $forename,
+        'email' => str_slug($forename).'.'.str_slug($name).'@viacesi.fr',
+        'birthday' => $faker->dateTime('2000-01-01'),
         'password' => $faker->password,
-        'avatar' => $faker->image(),
-        'remember_token' => str_random(10),
+        'is_valid' => true,
+        'avatar' => $faker->imageUrl(100, 100, 'people'),
     ];
 });
 
@@ -29,62 +33,64 @@ $factory->define(App\Activity::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
-        'date' => $faker->dateTime('now'),
+        'date' => $faker->dateTimeThisMonth('now'),
         'lieu' => $faker->city,
-        'photo' => $faker->url,
+        'like' => $faker->numberBetween(0, 50),
+        'photo' => $faker->imageUrl(600, 400, 'sports'),
     ];
 });
 
-    $factory->define(App\Association::class, function (Faker\Generator $faker) {
+$factory->define(App\Association::class, function (Faker\Generator $faker) {
 
-        return [
-            'name' => $faker->name,
-        ];
-    });
-
-    $factory->define(App\Photo::class, function (Faker\Generator $faker) {
-
-        return [
-            'path' => $faker->image(),
-        ];
-    });
-
-    $factory->define(App\ShopProduct::class, function (Faker\Generator $faker) {
-
-        return [
-            'name' => $faker->name,
-            'price' =>$faker->randomDigit(5, 40),
-            'color' =>$faker->colorName,
-            'quantities' =>$faker->randomDigit(0, 100)
+    return [
+        'name' => $faker->name,
     ];
 });
-    $factory->define(App\ShopPicture::class, function (Faker\Generator $faker) {
 
-        return [
-            'name' => $faker->name,
-            'url' => $faker->url,
-        ];
-    });
+$factory->define(App\Photo::class, function (Faker\Generator $faker) {
 
-    $factory->define(App\ShopOrder::class, function (Faker\Generator $faker) {
+    return [
+        'path' => $faker->imageUrl(),
+        'like' => $faker->numberBetween(0, 50),
+    ];
+});
 
-        return [
-            'city' => $faker->city,
-            'address' => $faker->streetAddress,
-            'zip_code' => $faker->postcode,
-            'quantities'=> $faker->randomDigit(1, 100),
-            'price' => $faker->randomDigit(5),
+$factory->define(App\ShopProduct::class, function (Faker\Generator $faker) {
 
-        ];
-    });
+    return [
+        'name' => $faker->name,
+        'price' => $faker->randomFloat(2,5, 40),
+        'color' => $faker->colorName,
+        'quantities' => $faker->numberBetween(0, 100)
+    ];
+});
+$factory->define(App\ShopPicture::class, function (Faker\Generator $faker) {
 
-    $factory->define(App\ShopProductOrder::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'url' => $faker->imageUrl(),
+    ];
+});
 
-        return [
-            'size' => $faker->randomElements(['S', 'M', 'L', 'XL', 'XXL']),
-            'product' => $faker->name,
-            'price' => $faker->randomFloat(2, 5, 30),
-        ];
-    });
+$factory->define(App\ShopOrder::class, function (Faker\Generator $faker) {
+
+    return [
+        'city' => $faker->city,
+        'address' => $faker->streetAddress,
+        'zip_code' => $faker->postcode,
+        'quantities'=> $faker->randomDigit(1, 100),
+        'price' => $faker->randomDigit(5),
+
+    ];
+});
+
+$factory->define(App\ShopProductOrder::class, function (Faker\Generator $faker) {
+
+    return [
+        'size' => $faker->randomElements(['S', 'M', 'L', 'XL', 'XXL']),
+        'product' => $faker->name,
+        'price' => $faker->randomFloat(2, 5, 30),
+    ];
+});
 
 
