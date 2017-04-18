@@ -35,7 +35,7 @@
         </div>
         <div class="hidden-md hidden-lg hidden-sm">
             <div class="item">
-                <a href="{{route('welcome')}}"></a> Accueil
+                <a href="{{route('home')}}"></a> Accueil
             </div>
             <div class="item">
                 <a href="{{route('activity.index')}}"></a> Activités
@@ -58,7 +58,7 @@
     <div class="pushed">
         <div class="ui massive fixed inverted menu">
             <div class="ui container">
-                <a href="{{route('welcome')}}" class="header item">
+                <a href="{{route('home')}}" class="header item">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <a id="MenuButtonSideBar" class="item"><i class="bars icon"></i></a>
