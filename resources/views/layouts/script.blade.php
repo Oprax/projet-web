@@ -51,6 +51,21 @@
 @endif
 <script src="{{asset('semantic-ui/calendar.min.js')}}"></script>
 
+@if(Request::is('/'))
+    <script src="{{ asset('slick/slick.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+          $('.carousel').slick({
+            autoplay: true,
+            autoplaySpeed: 2000,
+            dots: true,
+            infinite: true,
+            arrows: false
+          })
+        })
+    </script>
+@endif
+
 <script>
     $('#MenuButtonSideBar').click(function() {
         $('.ui.sidebar')

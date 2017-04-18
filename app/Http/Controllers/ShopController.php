@@ -14,10 +14,17 @@ class ShopController extends Controller
 {
     public function index(ICategoryGestion $categoryGestion, shop_productsRepositoryInterface $shopRepository){
 
-        $products = shop_products::all();
-        
-        $products = $shopRepository->getProducts5perCategory();
+        $products = shop_products::with('category')->get();
+
+        //$products = $shopRepository->getProducts5perCategory();
         return view('pages/shop/index', ['categories' => $categoryGestion->getCategories(), 'products' => $products]);
+    }
+
+    public function categoryindex(ICategoryGestion $categoryGestion, shop_productsRepositoryInterface $shopRepository, Request $request){
+        
+        $products = $shopRepository->getProductsperCategory($request->category);
+
+        return view('pages/shop/categoryindex', ['categories' => $categoryGestion->getCategories(), 'products' => $products, 'cat_act' => $request->category]);
     }
 
     public function getaddProduct(ICategoryGestion $categoryGestion){
