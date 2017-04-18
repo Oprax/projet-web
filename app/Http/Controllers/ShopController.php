@@ -44,7 +44,7 @@ class ShopController extends Controller
     public function view (Request $request, ICategoryGestion $categoryGestion){
 
         //$productcat = $request->category;
-        $product = shop_products::all()->where('slug', $request->slugproduct)->first();
+        $product = shop_products::with('pictures')->get()->where('slug', $request->slugproduct)->first();
         $product->category = $request->category;
         
         $comments = shop_comments::all()->where('product_id', $product->id);
