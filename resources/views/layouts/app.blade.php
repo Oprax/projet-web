@@ -20,7 +20,6 @@
         ]) !!};
     </script>
 </head>
-<body>
 
 <body>
     <div class="ui sidebar inverted vertical menu">
@@ -63,8 +62,8 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <a id="MenuButtonSideBar" class="item"><i class="bars icon"></i></a>
-                <a href="#" class="item hidden-xs">Accueil</a>
-                <a href="#" class="item hidden-xs">Activités</a>
+                <a href="{{ route('home') }}" class="item hidden-xs">Accueil</a>
+                <a href="{{ route('activity.index') }}" class="item hidden-xs">Activités</a>
                 <a href="{{ route('shop_home') }}" class="item hidden-xs">Boutique</a>
                 <div class="right menu hidden-xs">
                     <a href="#" class="item">Mon Compte</a>
@@ -105,7 +104,6 @@
             </div>
         </div>
     </div>
-</body>
 
     @include('layouts/script')
 </body>

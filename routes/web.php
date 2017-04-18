@@ -13,9 +13,7 @@
 
 
 Route::group([/*'middleware' => 'auth'*/], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
     Route::resource('activity', 'ActivityController');
     Route::resource('activity.photos', 'PhotoController');
@@ -28,5 +26,3 @@ require_once('routes-shop.php');
 Route::group(['prefix' => 'auth'], function() {
     Auth::routes();
 });
-
-//Route::get('/home', 'HomeController@index');

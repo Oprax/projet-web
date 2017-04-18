@@ -14,7 +14,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.activity.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.activity.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        //
+        return view('pages.activity.show');
     }
 
     /**
