@@ -36,10 +36,10 @@
         </div>
         <div class="hidden-md hidden-lg hidden-sm">
             <div class="item">
-                Accueil
+                <a href="{{route('welcome')}}"></a> Accueil
             </div>
             <div class="item">
-                Activités
+                <a href="{{route('activity.index')}}"></a> Activités
             </div>
             <div class="item">
                 <a href="{{ route('shop_home') }}"> Boutique</a>
@@ -59,15 +59,26 @@
     <div class="pushed">
         <div class="ui massive fixed inverted menu">
             <div class="ui container">
-                <a href="#" class="header item">
+                <a href="{{route('welcome')}}" class="header item">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <a id="MenuButtonSideBar" class="item"><i class="bars icon"></i></a>
-                <a href="#" class="item hidden-xs">Accueil</a>
-                <a href="#" class="item hidden-xs">Activités</a>
+                <a href="{{route('welcome')}}" class="item hidden-xs">Accueil</a>
+                <a href="{{route('activity.index')}}" class="item hidden-xs">Activités</a>
                 <a href="{{ route('shop_home') }}" class="item hidden-xs">Boutique</a>
                 <div class="right menu hidden-xs">
-                    <a href="#" class="item">Mon Compte</a>
+
+                    <div class="ui simple dropdown item" style="padding-top: 0px; padding-bottom: 0px;">
+                        <img style="height:25px; width: 25px; margin-right: 5px" id="avatar-navbar" class="ui mini circular image" src="{{asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}">
+                        {{\Illuminate\Support\Facades\Auth::user()->name}} {{\Illuminate\Support\Facades\Auth::user()->forename}}<i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item" href="{{route('user.show', ['user' => \Illuminate\Support\Facades\Auth::id()])}}">Mon compte</a>
+                            <a class="item" href="{{route('user.edit', ['user' => \Illuminate\Support\Facades\Auth::id()])}}">Editer mon compte</a>
+                            <a class="item" href="{{route('logout')}}">Déconnexion</a>
+                            <div class="ui divider"></div>
+                            <a class="item" href="{{route('user.index')}}">Gestion des utilisateurs</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,7 +96,7 @@
         <!-- Site content !-->
         <div class="container">
             <div class="ui grid">
-                @if(! (Request::is('/') || Request::is('/user')))
+                @if(!(Request::is('/') || Request::is('/user')))
                     <div class="twelve wide column">
                         @yield('content')
                     </div>

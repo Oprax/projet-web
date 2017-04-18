@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('pages/user/show', ['User' => $user]);
+        return view('pages/user/show', ['User' => User::find($user->id)->with('subscribes')->first()]);
     }
 
     /**

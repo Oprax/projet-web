@@ -13,9 +13,9 @@
 
 
 Route::group([/*'middleware' => 'auth'*/], function () {
-    Route::get('/', function () {
+    Route::get('/', ['as' => 'welcome', function () {
         return view('welcome');
-    });
+    }]);
 
     Route::resource('activity', 'ActivityController');
     Route::resource('activity.photos', 'PhotoController');
@@ -27,6 +27,7 @@ require_once('routes-shop.php');
 
 Route::group(['prefix' => 'auth'], function() {
     Auth::routes();
+    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 });
 
 //Route::get('/home', 'HomeController@index');
