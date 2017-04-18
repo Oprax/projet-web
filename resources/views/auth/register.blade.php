@@ -1,76 +1,90 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+                    <form class="ui equal width big form {{ $errors ? ' error' : '' }}" role="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
+                        <div class="fields">
+                            <div class="required field{{ $errors->has('name') ? ' error' : '' }}">
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                                <label for="name">Nom</label>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
+                                <div class="ui left icon input">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                    <i class="user icon"></i>
+                                </div>
                                 @if ($errors->has('name'))
-                                    <span class="help-block">
+                                    <div class="ui error message">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </div>
+                                @endif
+                            </div>
+                            <div class="required field{{ $errors->has('name') ? ' error' : '' }}">
+                                <label for="forename">Prénom</label>
+
+                                <div class="ui left icon input">
+                                    <input id="forename" type="text" class="form-control" name="forename" value="{{ old('name') }}" required autofocus>
+                                    <i class="user icon"></i>
+                                </div>
+                                @if ($errors->has('name'))
+                                    <div class="ui error message">
                                         <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
+                        <div class="required field{{ $errors->has('email') ? ' error' : '' }}">
+                            <label for="email">E-Mail</label>
+                            <div class="ui left icon input">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
+                                <i class="mail icon"></i>
+                            </div>
+                            @if ($errors->has('email'))
+                                <div class="ui error message">
                                         <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                                    </div>
+                            @endif
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                        <div class="required field{{ $errors->has('password') ? ' error' : '' }}">
+                            <label for="password">Mot de passe</label>
 
-                            <div class="col-md-6">
+                            <div class="ui left icon input">
                                 <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
+                                <i class="lock icon"></i>
+                            </div>
+                            @if ($errors->has('password'))
+                                <div class="ui error message">
                                         <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                                    </div>
+                            @endif
                         </div>
 
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                        <div class="required field">
+                            <label for="password-confirm" >Confirmation du mot de passe</label>
 
-                            <div class="col-md-6">
+                            <div class="ui left icon input">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <i class="repeat icon"></i>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
+                        <div class="field">
+                                <button type="submit" class="huge ui icon button">
+                                    <i class="sign in icon"></i> S'inscrire
                                 </button>
-                            </div>
+                        </div>
+                        <div class="field">
+                            <a href="{{route('login')}}">Se connecter</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

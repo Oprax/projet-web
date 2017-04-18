@@ -42,7 +42,7 @@
                 </div>
             </div>
             <hr>
-            <div class="">
+            <div class="sixteen wide column">
                 @yield('content')
             </div>
         </div>

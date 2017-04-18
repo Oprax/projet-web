@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 
 require_once('routes-shop.php');
+
 Route::group(['prefix' => 'auth'], function() {
     Auth::routes();
 });
