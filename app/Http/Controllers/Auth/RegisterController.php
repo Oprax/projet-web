@@ -47,6 +47,12 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
 
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register', ['Status' => Status::get()]);
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
