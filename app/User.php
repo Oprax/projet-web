@@ -66,4 +66,8 @@ class User extends Authenticatable
     public function comments_photos() {
         return $this->hasMany('App\CommentsPhotos');
     }
+
+    public function comments_product() {
+        return $this->hasMany('App\Model\Shop\shop_comments');
+    }
 }

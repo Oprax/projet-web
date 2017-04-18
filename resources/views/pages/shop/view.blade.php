@@ -65,6 +65,7 @@
             <form class="ui form">
                 <div class="field">
                     <br>
+                    <input type="text" class="hidden" name="product_id" value="{{ $product->id }}">
                     <textarea type="text" name="content" placeholder="Ajouter un commentaire" class="form-control"></textarea>
                 </div>
                 <br>
