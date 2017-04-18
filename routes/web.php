@@ -19,7 +19,7 @@ Route::group([/*'middleware' => 'auth'*/], function () {
 
     Route::resource('activity', 'ActivityController');
     Route::resource('activity.photos', 'PhotoController');
-    Route::resource('user', 'UserController');
+    Route::resource('user', 'UserController', ['except' => ['create']]);
 });
 
 

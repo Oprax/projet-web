@@ -35,6 +35,18 @@ class User extends Authenticatable
         return $this->role === 'BDE';
     }
 
+    public function isCesiBDE(){
+        if($this->role === 'BDE') {
+            return true;
+        }
+        elseif($this->role === 'cesi'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function role() {
         return $this->belongsTo('App\Role');
     }
