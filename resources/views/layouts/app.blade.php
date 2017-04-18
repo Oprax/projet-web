@@ -85,17 +85,23 @@
         <!-- Site content !-->
         <div class="container">
             <div class="ui grid">
-                <div class="twelve wide column">
-                    @yield('content')
-                </div>
+                @if(!Request::is('/'))
+                    <div class="twelve wide column">
+                        @yield('content')
+                    </div>
 
-                <div class="four wide column">
-                    @if (Request::is('shop*'))
-                        @include('layouts/side/right-bar-shop')
-                    @else
-                        @include('layouts/side/right-bar')
-                    @endif
-                </div>
+                    <div class="four wide column">
+                        @if (Request::is('shop*'))
+                            @include('layouts/side/right-bar-shop')
+                        @else
+                            @include('layouts/side/right-bar')
+                        @endif
+                    </div>
+                @else
+                    <div class="sixteen wide column">
+                        @yield('content')
+                    </div>
+                @endif
             </div>
         </div>
     </div>

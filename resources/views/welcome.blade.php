@@ -1,95 +1,75 @@
-<!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts/app')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
+@section('content')
+    <div>&nbsp;</div>
+    <div class="ui grid">
+        <div class="three wide column computer only"></div>
+        <div class="carousel sixteen wide phone ten wide computer column ">
+            <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/1"></div>
+            <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/2"></div>
+            <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/3"></div>
+            <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/4"></div>
+        </div>
+    </div>
+    <div class="ui segment">
+        Le Bureau des Elèves est composé de huit membres, élus en deux temps (responsables d’une fonction en fin d’année et vice responsable en début d’année), qui animent et structurent les différentes sections du BDE. Un bureau physique se trouve sur le campus pour les réunions et le matériel.
+    </div>
+    <div class="ui stackable grid">
+        <div class="eight wide column">
+            <h2>Activité</h2>
+            <div class="ui grid">
+                <div class="four wide column">
+                    <div class="ui card">
+                        <div class="content">
+                            <div class="header">Activité 1</div>
+                        </div>
+                        <div class="image">
+                            <img src="https://semantic-ui.com/images/avatar/large/helen.jpg">
+                        </div>
+                    </div>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="twelve wide column">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam, dolorem eum excepturi explicabo harum id inventore ipsum iste maiores natus nemo odit qui quisquam ratione suscipit tempora vel, velit.
+                    </p>
+                    <div class="ui grid">
+                        <div class="four wide column ui center">
+                            <i class="thumbs up icon"></i>
+                            5 J'aime
+                        </div>
+                        <div class="six wide column ui center">
+                            <i class="comments up icon"></i>
+                            10 commentaires
+                        </div>
+                        <div class="four column ui center">
+                            <button class="ui icon button">
+                                <i class="share alternate icon"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+        <div class="eight wide column">
+            <h2>Boutique</h2>
+            <div class="ui grid">
+                <div class="four wide column">
+                    <div class="ui card">
+                        <div class="content">
+                            <div class="header">Produit 1</div>
+                        </div>
+                        <div class="image">
+                            <img src="https://semantic-ui.com/images/avatar/large/helen.jpg">
+                        </div>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam, dolorem eum excepturi explicabo harum id inventore ipsum iste maiores natus nemo odit qui quisquam ratione suscipit tempora vel, velit.
+                    </p>
+                    {{ '10' }}&nbsp;<i class="euro icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
