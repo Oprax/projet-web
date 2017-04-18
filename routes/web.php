@@ -14,10 +14,15 @@
 
 Route::group([/*'middleware' => 'auth'*/], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-
+    Route::group(['prefix' => 'activity'], function(){
+        Route::get('future', 'ActivityController@future')->name('activity.future');
+        Route::get('current', 'ActivityController@current')->name('activity.current');
+        Route::get('past', '\App\Http\Controllers\ActivityController@past')->name('activity.past');
+    });
     Route::resource('activity', 'ActivityController');
     Route::resource('activity.photos', 'PhotoController');
     Route::resource('user', 'UserController', ['except' => ['create']]);
+
 });
 
 

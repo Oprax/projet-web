@@ -82,4 +82,16 @@ class ActivityController extends Controller
     {
         //
     }
+
+    public function future(){
+        return view('pages.activity.future');
+    }
+
+    public function current(){
+        return view('pages.activity.current');
+    }
+
+    public function past(){
+        return view('pages.activity.past');
+    }
 }
