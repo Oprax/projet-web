@@ -23,10 +23,7 @@ Route::group(['prefix' => 'shop'], function(){
     });
 
 
-    //Panier d'un produit
-    Route::get('/basket', ['as' => 'shop_basket', function(){
-        return "panier";
-    }]);
+    
 
 
     //Tous les produits d'une catégorie
@@ -37,5 +34,9 @@ Route::group(['prefix' => 'shop'], function(){
     );//->where('category', '[a-z0-9\-]+')->where('product', '[a-z0-9\-]+')
 
     Route::post('/storecomment', ['as' => 'shop_store_comment', 'uses' => 'ShopController@storeComment']);
+
+    Route::post('/basket', ['as' => 'shop_add_badsket', 'uses' => 'ShopController@add_badsket']);
+
+
 
 });

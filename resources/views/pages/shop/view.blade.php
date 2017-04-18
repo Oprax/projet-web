@@ -2,42 +2,59 @@
 
 @section('content')
 
-    
+    <style>
 
-    <style>body{
-        }</style>
+    </style>
 
     <h1>{{ $product->name }}</h1>
     <p>{{ $product->category }}</p>
 
+
+
+
     <div class="ui two column grid">
         <div class="column">
-            <div class="image">
-                {{ Html::image("images/shop/test.png") }}
-            </div>
+
+                        <div class="three wide column computer only"></div>
+                        <div class="carousel sixteen wide phone ten wide computer column ">
+                            @foreach($product->pictures as $image)
+
+                                {{ Html::image("$image->url") }}
+
+                            @endforeach
+                        </div>
         </div>
+        {!! Form::open(['route' => 'shop_add_badsket']) !!}
+
         <div class="column">
             <div class="column">
                 <p>{{ $product->description }}</p>
             </div>
             <div class="column">
                 <br>
+
                 <div class="ui three column grid">
                     <div class="column">
                         couleur
                     </div>
                     <div class="column">
-                        taille
+
+                        @if($sizes)
+                            {{  Form::select('sizes', $sizes, null, array('class' => 'form-control')) }}
+                        @endif
                     </div>
                     <div class="column">
                         <h4>Prix : {{ $product->price }} €</h4>
                     </div>
                 </div>
                 <div class="ui one column grid">
-                    <div class="column"><a href="#"> Ajouter au panier </a></div>
+
+                    <div class="ui button"><a href="#"> Ajouter au panier </a></div>
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
+
     </div>
 
     <br> <br>
