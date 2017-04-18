@@ -4,6 +4,6 @@
 
 @foreach ($categories as $category)
     <div class="item">
-        <p> {{ $category->name }}</p>
+        <a href="{{ route('shop_products_categories', ['category' => $category->name]) }}"> {{ $category->name }}</a>
     </div>
 @endforeach

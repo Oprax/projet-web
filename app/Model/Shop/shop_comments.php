@@ -8,7 +8,13 @@ class shop_comments extends Model
 {
     public $fillable = ['content', 'user_id', 'product_id'];
 
-    public function user(){
-        return $this->hasOne('App\User');
+    public function product() {
+        return $this->belongsTo('App\Model\Shop\shop_products');
     }
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+    
+    
 }
