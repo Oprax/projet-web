@@ -51,17 +51,17 @@
                     </div>
 
                 </div>
-                <div class="required field">
+                <div class="field">
                     <label for="email">Email</label>
                     <input type="email" name="email" value="{{old('email') ? old('email') : $User->email}}" required>
                 </div>
-                <div class="required field">
+                <div class="field">
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" required>
+                    <input type="password" name="password">
                 </div>
                 <div class="required field">
                     <label for="password-confirm">Confirmation du mot de passe</label>
-                    <input type="password" name="password" required>
+                    <input type="password" name="password">
                 </div>
                 <div class="required field">
                     <label for="status">Status</label>
@@ -90,6 +90,7 @@
                         @endforeach
                     </select>
                 </div>
+                <button class="ui button" type="submit">Submit</button>
             </form>
         </div>
     </div>
