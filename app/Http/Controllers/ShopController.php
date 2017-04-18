@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Shop\shop_productsRepository;
 use App\Model\Shop\shop_comments;
+use App\Model\Shop\shop_sizes;
 use Illuminate\Http\Request;
 use App\Gestion\Shop\ICategoryGestion;
 use App\Model\Shop\shop_productsRepositoryInterface;
@@ -53,9 +54,16 @@ class ShopController extends Controller
             $comment->lastname = User::find($comment->user_id, ['forename'])->forename;
         }
 
-        if ($product){
+        $sizes = shop_sizes::pluck('content', 'id');//if product->size ok
+
+        if ($product AND $sizes){
+            return view('pages/shop/view', ['categories' => $categoryGestion->getCategories(), 'product' => $product, 'comments' => $comments, 'sizes' => $sizes]);
+
+        }elseif ($product){
             return view('pages/shop/view', ['categories' => $categoryGestion->getCategories(), 'product' => $product, 'comments' => $comments]);
-        }else{
+
+        }
+        else{
             abort(404, 'Produit introuvable');
         }
     }

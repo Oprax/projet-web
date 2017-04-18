@@ -21,6 +21,8 @@ class CreateShopProductsTable extends Migration
             $table->integer('quantities')->unsigned()->nullable();
             $table->text('description');
             $table->float('price');
+            $table->boolean('size');
+            $table->boolean('color');
 
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')

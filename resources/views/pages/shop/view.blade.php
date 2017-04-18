@@ -24,18 +24,24 @@
                             @endforeach
                         </div>
         </div>
+        {!! Form::open(['route' => 'shop_add_badsket']) !!}
+
         <div class="column">
             <div class="column">
                 <p>{{ $product->description }}</p>
             </div>
             <div class="column">
                 <br>
+
                 <div class="ui three column grid">
                     <div class="column">
                         couleur
                     </div>
                     <div class="column">
-                        taille
+
+                        @if($sizes)
+                            {{  Form::select('sizes', $sizes, null, array('class' => 'form-control')) }}
+                        @endif
                     </div>
                     <div class="column">
                         <h4>Prix : {{ $product->price }} €</h4>
@@ -47,6 +53,8 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
+
     </div>
 
     <br> <br>
