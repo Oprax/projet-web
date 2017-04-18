@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class shop_comments extends Model
 {
     public $fillable = ['content', 'user_id', 'product_id'];
+
+    public function user(){
+        return $this->hasOne('App\User');
+    }
 }

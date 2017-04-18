@@ -45,7 +45,7 @@ class ShopController extends Controller
             $comment->firstname = User::find($comment->user_id, ['name'])->name;
             $comment->lastname = User::find($comment->user_id, ['forename'])->forename;
         }
-        
+
         if ($product){
             return view('pages/shop/view', ['categories' => $categoryGestion->getCategories(), 'product' => $product, 'comments' => $comments]);
         }else{
@@ -55,6 +55,13 @@ class ShopController extends Controller
 
     public function storeComment(Request $request){
 
-        redirect()->route('shop_home');
+        $comment = new shop_comments();
+        $comment->content = $request->content;
+        $comment->user_id = 5;
+        $comment->product_id = $request->product_id;
+
+        $comment->save();
+
+        return redirect()->route('shop_home');
     }
 }
