@@ -8,11 +8,15 @@ class shop_categories extends Model
 {
       public $fillable = ['name', 'cat_parent'];
 
-      public function shop_category() {
-            return $this->belongsTo('App\ShopCategory');
+      public function category() {
+            return $this->belongsTo('App\Model\Shop\shop_categories');
       }
 
-      public function shop_categories() {
-            return $this->hasMany('App\ShopCategory');
+      public function categories() {
+            return $this->hasMany('App\Model\Shop\shop_categories');
+      }
+
+      public function products() {
+            return $this->hasMany('App\Model\Shop\shop_products');
       }
 }

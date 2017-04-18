@@ -30,9 +30,7 @@ Route::group(['prefix' => 'shop'], function(){
 
 
     //Tous les produits d'une catégorie
-    Route::get('/{category}', ['as' => 'shop_products_categories', function($category){
-        return "Catégorie : $category";
-    }])->where('category', '[a-z0-9\-]+');
+    Route::get('/{category}', ['as' => 'shop_products_categories', 'uses' => 'ShopController@categoryindex']);//->where('category', '[a-z0-9\-]+');
 
     //Présentation d'un produit
     Route::get('/{category}/{slugproduct}', ['as' => 'shop_product', 'uses' => 'ShopController@view']

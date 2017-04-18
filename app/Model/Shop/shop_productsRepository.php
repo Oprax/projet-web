@@ -65,4 +65,16 @@ class shop_productsRepository implements shop_productsRepositoryInterface{
 
         return $products;
     }
+
+    public function getProductsperCategory($category){
+
+        $category_obj = shop_categories::all()->where('name', $category)->first();
+
+        // $products = shop_products::with('category')->get()->where('category', $category);
+
+        $products = shop_products::with('category')->get()->where('category_id', $category_obj->id);
+
+
+        return $products;
+    }
 }

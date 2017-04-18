@@ -14,15 +14,19 @@ class shop_products extends Model
 
     public $fillable = ['name', 'price','category_id', 'slug', 'quantities'];
 
-    public function shop_category() {
-        return $this->belongsTo('App\ShopCategory');
+    public function category() {
+        return $this->belongsTo('App\Model\Shop\shop_categories');
     }
 
-    public function shop_product_orders() {
+    public function product_orders() {
         return $this->hasMany('App\ShopProductOrder');
     }
 
-    public function shop_pictures() {
+    public function pictures() {
         return $this->hasMany('App\ShopPicture');
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Model\Shop\shop_comments');
     }
 }
