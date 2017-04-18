@@ -17,12 +17,14 @@ class RoleCesi
     //si l'utisateur à le role de CESI il peut continuer
     public function handle($request, Closure $next)
     {
-        $user = $request->user();
+        /*$user = $request->user();
 
         if ($user && $user->isCesi())
         {
             return $next($request);
         }
-        return new RedirectResponse(url('/'));
+        return new RedirectResponse(url('/'));*/
+
+        return $next($request);
     }
 }

@@ -16,9 +16,9 @@ Route::group(['prefix' => 'shop'], function(){
     Route::group(['middleware' => 'role.cesi'], function(){
 
         //Ajout d'un produit -> CESI
-        Route::get('/add-product', ['as' => 'shop_add_product', function(){
-            return "add a product";
-        }]);
+        Route::get('/add-product', ['as' => 'shop_add_product', 'uses' => 'ShopController@getaddProduct']);
+       // Route::post('/add-product', ['as' => 'shop_post_product', 'uses' => 'ShopController@postProduct']);
+        Route::post('/add-product', ['as' => 'shop_store_product', 'uses' => 'ShopController@store']);
 
     });
 
@@ -28,13 +28,16 @@ Route::group(['prefix' => 'shop'], function(){
         return "panier";
     }]);
 
+
     //Tous les produits d'une catégorie
     Route::get('/{category}', ['as' => 'shop_products_categories', function($category){
         return "Catégorie : $category";
     }])->where('category', '[a-z0-9\-]+');
 
     //Présentation d'un produit
-    Route::get('/{category}/{product}', ['as' => 'shop_product', function($category, $product){
-        return "Catégorie : $category '\n' Product : $product";
-    }])->where('category', '[a-z0-9\-]+')->where('product', '[a-z0-9\-]+');
+    Route::get('/{category}/{slugproduct}', ['as' => 'shop_product', 'uses' => 'ShopController@view']
+    );//->where('category', '[a-z0-9\-]+')->where('product', '[a-z0-9\-]+')
+
+    Route::post('/storecomment', ['as' => 'shop_store_comment', 'uses' => 'ShopController@storeComment']);
+
 });

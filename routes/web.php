@@ -11,8 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::resource('activity', 'ActivityController');
+    Route::resource('activity.photos', 'PhotoController');
+    Route::resource('user', 'UserController');
 });
 
 
