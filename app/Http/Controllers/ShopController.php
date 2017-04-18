@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Shop\shop_colors;
 use App\Model\Shop\shop_productsRepository;
 use App\Model\Shop\shop_comments;
 use App\Model\Shop\shop_sizes;
@@ -43,7 +44,6 @@ class ShopController extends Controller
     }
 
     public function view (Request $request, ICategoryGestion $categoryGestion){
-
         //$productcat = $request->category;
         $product = shop_products::with('pictures')->get()->where('slug', $request->slugproduct)->first();
         $product->category = $request->category;
@@ -54,9 +54,22 @@ class ShopController extends Controller
             $comment->lastname = User::find($comment->user_id, ['forename'])->forename;
         }
 
-        $sizes = shop_sizes::pluck('content', 'id');//if product->size ok
 
-        if ($product AND $sizes){
+        if($product->size == 1){
+            $sizes = shop_sizes::pluck('content', 'id');//if product->size ok
+        }
+
+        if($product->color == 1){
+            $colors = shop_colors::pluck('content', 'id');//if product->size ok
+        }
+
+
+        if ($product AND !empty($sizes) AND !empty($colors)){
+
+            return view('pages/shop/view', ['categories' => $categoryGestion->getCategories(), 'product' => $product, 'comments' => $comments, 'sizes' => $sizes, 'colors' => $colors]);
+
+        }elseif ($product AND !empty($sizes)){
+
             return view('pages/shop/view', ['categories' => $categoryGestion->getCategories(), 'product' => $product, 'comments' => $comments, 'sizes' => $sizes]);
 
         }elseif ($product){
@@ -78,5 +91,11 @@ class ShopController extends Controller
         $comment->save();
 
         return redirect()->route('shop_home');
+    }
+
+    public function add_badsket(Request $request){
+        //dd($request);
+
+        return redirect()->route('shop_product', ['category' => $request->category_name, 'product' => $request->product_slug]);
     }
 }

@@ -26,6 +26,17 @@
         </div>
         {!! Form::open(['route' => 'shop_add_badsket']) !!}
 
+        @php
+        if(!empty($sizes) and !empty($colors)){
+             $number='three';
+        }
+        elseif((empty($sizes) and !empty($colors)) OR (!empty($sizes) and empty($colors))){
+             $number='two';
+        }else{
+            $number='one';
+        }
+        @endphp
+
         <div class="column">
             <div class="column">
                 <p>{{ $product->description }}</p>
@@ -33,23 +44,31 @@
             <div class="column">
                 <br>
 
-                <div class="ui three column grid">
-                    <div class="column">
-                        couleur
-                    </div>
-                    <div class="column">
+                <div class="ui {{ $number }} column grid">
 
-                        @if($sizes)
-                            {{  Form::select('sizes', $sizes, null, array('class' => 'form-control')) }}
-                        @endif
-                    </div>
+                    @if(!empty($colors))
+                        <div class="column">
+                            {{  Form::select('colors', $colors, null, array('class' => 'form-control')) }}
+                        </div>
+                    @endif
+
+                    @if(!empty($sizes))
+                        <div class="column">
+
+                                {{  Form::select('sizes', $sizes, null, array('class' => 'form-control')) }}
+                        </div>
+                    @endif
+
                     <div class="column">
                         <h4>Prix : {{ $product->price }} €</h4>
                     </div>
                 </div>
                 <div class="ui one column grid">
+                    <input type="text" class="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="text" class="hidden" name="product_slug" value="{{ $product->slug }}">
+                    <input type="text" class="hidden" name="category_name" value="{{ $product->category }}">
 
-                    <div class="ui button"><a href="#"> Ajouter au panier </a></div>
+                    <button class="ui button" type="submit">Ajouter au panier</button>
                 </div>
             </div>
         </div>
