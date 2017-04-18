@@ -74,6 +74,28 @@
                             </div>
                         </div>
 
+                        <div class="required field">
+                            <label for="status">Status</label>
+                            <select class="ui fluid dropdown" name="status" id="status" required>
+                                <option value="">Status</option>
+                                @foreach ($Status as $status)
+                                <option value="{{ $status->name }}">{{ $status->name }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+                        <div class="required field">
+                            <label for="birthday">Date de naissance</label>
+                            <div class="ui calendar" id="calendarYearFirst">
+                                <div class="ui input left icon">
+                                    <i class="calendar icon"></i>
+                                    <input type="text" name="birthday" placeholder="Date/Time">
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="field">
                                 <button type="submit" class="huge ui icon button">
                                     <i class="sign in icon"></i> S'inscrire
@@ -87,4 +109,5 @@
             </div>
         </div>
     </div>
+
 @endsection

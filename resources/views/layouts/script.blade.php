@@ -1,4 +1,5 @@
 <script src="{{asset('jquery/jquery-3.2.1.min.js')}}"></script>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="{{ asset('js/app.js') }}"></script>
 @if(env('APP_DEBUG') == 1)
@@ -48,12 +49,29 @@
 @else
     <script src="{{asset('semantic-ui/semantic.min.js')}}"></script>
 @endif
+<script src="{{asset('semantic-ui/calendar.min.js')}}"></script>
 
 <script>
     $('#MenuButtonSideBar').click(function() {
         $('.ui.sidebar')
             .sidebar('toggle')
         ;
+    });
+</script>
+
+<script>
+    $('#calendarYearFirst').calendar({
+        startMode: 'year',
+        type: 'date',
+        formatter: {
+            date: function (date, settings) {
+                if (!date) return '';
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return year + '-' + month + '-' + day;
+            }
+        }
     });
 </script>
 

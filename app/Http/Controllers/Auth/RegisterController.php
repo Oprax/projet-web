@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Status;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +46,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -60,14 +62,20 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
+
     protected function create(array $data)
     {
+        $status_id = Status::where('name', $data['status'])->first()->id;
         return User::create([
             'name' => $data['name'],
             'forename' => $data['forename'],
             'avatar' => "images/avatar/default-avatar.png",
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'status_id' => $status_id,
+            'role_id' => 1,
+            'birthday' => $data['birthday'],
+            'is_valid' => false,
         ]);
     }
 }

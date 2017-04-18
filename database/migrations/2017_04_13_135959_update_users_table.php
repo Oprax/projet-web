@@ -22,7 +22,7 @@ class UpdateUsersTable extends Migration
             $table->integer('role_id')->unsigned();
             $table->foreign('role_id')
                 ->references('id')->on('roles');
-            $table->integer('association_id')->unsigned();
+            $table->integer('association_id')->unsigned()->nullable();
             $table->foreign('association_id')
                 ->references('id')->on('associations');
             $table->dateTime('birthday');
