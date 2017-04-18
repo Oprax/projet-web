@@ -85,7 +85,7 @@
         <!-- Site content !-->
         <div class="container">
             <div class="ui grid">
-                @if(!Request::is('/'))
+                @if(! (Request::is('/') || !Request::is('/user')))
                     <div class="twelve wide column">
                         @yield('content')
                     </div>
