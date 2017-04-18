@@ -12,7 +12,7 @@ class shop_products extends Model
     protected $slug;
 
 
-    public $fillable = ['name', 'price','category_id', 'slug', 'quantities'];
+    public $fillable = ['name', 'price','category_id', 'slug', 'quantities', 'product_id'];
 
     public function category() {
         return $this->belongsTo('App\Model\Shop\shop_categories');
@@ -23,7 +23,7 @@ class shop_products extends Model
     }
 
     public function pictures() {
-        return $this->hasMany('App\ShopPicture');
+        return $this->hasMany('App\Model\Shop\shop_picture', 'product_id');
     }
 
     public function comments() {

@@ -2,19 +2,27 @@
 
 @section('content')
 
-    
+    <style>
 
-    <style>body{
-        }</style>
+    </style>
 
     <h1>{{ $product->name }}</h1>
     <p>{{ $product->category }}</p>
 
+
+
+
     <div class="ui two column grid">
         <div class="column">
-            <div class="image">
-                {{ Html::image("images/shop/test.png") }}
-            </div>
+
+                        <div class="three wide column computer only"></div>
+                        <div class="carousel sixteen wide phone ten wide computer column ">
+                            @foreach($product->pictures as $image)
+
+                                {{ Html::image("$image->url") }}
+
+                            @endforeach
+                        </div>
         </div>
         <div class="column">
             <div class="column">
@@ -34,7 +42,8 @@
                     </div>
                 </div>
                 <div class="ui one column grid">
-                    <div class="column"><a href="#"> Ajouter au panier </a></div>
+
+                    <div class="ui button"><a href="#"> Ajouter au panier </a></div>
                 </div>
             </div>
         </div>

@@ -64,6 +64,20 @@
     </script>
 @endif
 
+@if(Request::is('shop*'))
+<script src="{{ asset('slick/slick.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $('.carousel').slick({
+            autoplay: false,
+            dots: true,
+            infinite: true,
+            arrows: true
+        })
+    })
+</script>
+@endif
+
 <script>
     $('#MenuButtonSideBar').click(function() {
         $('.ui.sidebar')
