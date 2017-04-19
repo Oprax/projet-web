@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
             'status_id' => $status_a1->id,
             'role_id' => $role_bde->id,
             'password' => bcrypt('azeaze'),
-            'email' => 'romain.muller@vicesi.fr',
+            'email' => 'romain.muller@viacesi.fr',
             'name' => 'Muller',
             'forename' => 'Romain'
         ]);
@@ -51,7 +51,7 @@ class UsersTableSeeder extends Seeder
             'status_id' => $status_tut->id,
             'role_id' => $role_cesi->id,
             'password' => bcrypt('azeaze'),
-            'email' => 'jf.dollinger@vicesi.fr',
+            'email' => 'jf.dollinger@viacesi.fr',
             'name' => 'Dollinger',
             'forename' => 'Jean-François'
         ]);
@@ -64,7 +64,7 @@ class UsersTableSeeder extends Seeder
             'status_id' => $status_a3->id,
             'role_id' => $role_student->id,
             'password' => bcrypt('azeaze'),
-            'email' => 'arno.birchler@vicesi.fr',
+            'email' => 'arno.birchler@viacesi.fr',
             'name' => 'Birchler',
             'forename' => 'Arno'
         ]);
