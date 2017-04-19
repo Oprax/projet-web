@@ -88,6 +88,20 @@
                                 </div>
                             @endif
                         </div>
+                        <div class="required field">
+                            <label for="association">Association</label>
+                            <select class="ui fluid dropdown" name="association" id="association" required>
+                                <option value="">Association</option>
+                                @foreach ($Association as $assoc)
+                                    <option {{old('association') === $assoc->name ? 'selected="selected"' : ''}}>{{ $assoc->name }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('association'))
+                                <div class="ui error message">
+                                    <strong>{{ $errors->first('association') }}</strong>
+                                </div>
+                            @endif
+                        </div>
 
                         <div class="required field">
                             <label for="birthday">Date de naissance</label>
