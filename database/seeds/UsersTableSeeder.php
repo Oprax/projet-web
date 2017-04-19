@@ -30,20 +30,43 @@ class UsersTableSeeder extends Seeder
         $role_cesi = Role::all()->where('name', 'cesi')->first();
         $role_student = Role::all()->where('name', 'student')->first();
 
+        /*
+         * User BDE
+         */
         factory(User::class)->create([
             'association_id' => $assoc_bde->id,
             'status_id' => $status_a1->id,
-            'role_id' => $role_bde->id
+            'role_id' => $role_bde->id,
+            'password' => bcrypt('azeaze'),
+            'email' => 'romain.muller@vicesi.fr',
+            'name' => 'Muller',
+            'forename' => 'Romain'
         ]);
+
+        /*
+         * User Cesi
+         */
         factory(User::class)->create([
             'association_id' => $assoc_cesi->id,
             'status_id' => $status_tut->id,
-            'role_id' => $role_cesi->id
+            'role_id' => $role_cesi->id,
+            'password' => bcrypt('azeaze'),
+            'email' => 'jf.dollinger@vicesi.fr',
+            'name' => 'Dollinger',
+            'forename' => 'Jean-François'
         ]);
+
+        /*
+         * User normal (student)
+         */
         factory(User::class)->create([
             'association_id' => $assoc_enk->id,
             'status_id' => $status_a3->id,
-            'role_id' => $role_student->id
+            'role_id' => $role_student->id,
+            'password' => bcrypt('azeaze'),
+            'email' => 'arno.birchler@vicesi.fr',
+            'name' => 'Birchler',
+            'forename' => 'Arno'
         ]);
     }
 }

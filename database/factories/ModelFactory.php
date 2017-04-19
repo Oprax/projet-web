@@ -35,6 +35,7 @@ $factory->define(App\Activity::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'date' => $faker->dateTimeThisMonth('now'),
         'lieu' => $faker->city,
+        'description' => $faker->sentences(5, true),
         'like' => $faker->numberBetween(0, 50),
         'photo' => $faker->imageUrl(600, 400, 'sports'),
     ];
@@ -52,6 +53,12 @@ $factory->define(App\Photo::class, function (Faker\Generator $faker) {
     return [
         'path' => $faker->imageUrl(),
         'like' => $faker->numberBetween(0, 50),
+    ];
+});
+
+$factory->define(App\Comment::class, function (Faker\Generator $faker) {
+    return [
+        'content' => $faker->sentences(5, true)
     ];
 });
 
