@@ -27,10 +27,10 @@
             <img src="{{ asset('images/logo-bde.png') }}" alt="Logo du bde eXia Strasbourg">
         </div>
         <div class="item">
-            <div class="text">Parc Club des Tanneries,
-            2 Allée des Foulons,
-            67380 Strasbourg Lingolsheim
-            03 88 10 35 60
+            <div class="text">Parc Club des Tanneries,<br>
+            2 Allée des Foulons,<br>
+            67380 Strasbourg Lingolsheim<br>
+            03 88 10 35 60<br>
             </div>
         </div>
         <div class="hidden-md hidden-lg hidden-sm">

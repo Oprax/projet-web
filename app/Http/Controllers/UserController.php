@@ -8,7 +8,7 @@ use App\Status;
 use App\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends EventHandlerController
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
 
-       return view('pages/user/index', ['Users' => User::get()]);
+       return $this->view('pages/user/index', ['Users' => User::get()]);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('pages/user/show', ['User' => User::find($user->id)->with('subscribes')->first()]);
+        return $this->view('pages/user/show', ['User' => User::find($user->id)->with('subscribes')->first()]);
     }
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('pages/user/edit', ['User' => $user,
+        return $this->view('pages/user/edit', ['User' => $user,
             'Status' => Status::get(),
             'Role' => Role::get(),
             'Association' => Association::get()
