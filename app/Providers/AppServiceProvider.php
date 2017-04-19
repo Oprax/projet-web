@@ -36,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'App\Gestion\Shop\ICookieBasketGestion',
+            'App\Gestion\Shop\CookieBasketGestion'
+        );
+
+        $this->app->bind(
             'App\Model\Shop\shop_productsRepositoryInterface',
             'App\Model\Shop\shop_productsRepository'
         );

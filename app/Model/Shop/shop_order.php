@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Model\Shop;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ShopOrder extends Model
+class shop_order extends Model
 {
     protected $fillable = [
         'date', 'adresse', 'zip_code', 'city', 'country', 'quantities', 'price'

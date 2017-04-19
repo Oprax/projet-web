@@ -1,49 +1,35 @@
 @extends('layouts/app')
 
 @section('content')
-    <h1>Ajouter un produit à la boutique</h1>
+    <h1>Adresse de livraison</h1>
 
 
     {!! Form::open(['route' => 'shop_basket_confirm_address']) !!}
 
     <form class="ui form">
         <div class="field">
-            <label>Nom</label>
-            <input type="text" name="name" placeholder="Nom du produit" class="form-control">
+            <label>Pays</label>
+            <input type="text" name="country" placeholder="France" class="form-control">
         </div>
         <br>
         <div class="field">
-            <label>Description</label>
-            <textarea name="description" placeholder="Description du produit" class="form-control"></textarea>
+            <label>Adresse</label>
+            <input type="text" name="address" placeholder="1 rue de la mairie" class="form-control">
         </div>
         <br>
         <div class="field">
-            <label>Catégorie</label>
-            <input type="text" name="new_cat" placeholder="Nom de la nouvelle catégorie" class="form-control">
+            <label>Code Postale</label>
+            <input type="number" name="codePostale" placeholder="67 380" class="form-control">
         </div>
         <br>
         <div class="field">
-            <label>Prix</label>
-            <input type="text" name="price" placeholder="Prix du produit" class="form-control">
+            <label>Ville</label>
+            <input type="text" name="city" placeholder="Lingolsheim" class="form-control">
         </div>
         <br>
-        <div class="field">
-            <label>Quantités disponible</label>
-            <input type="number" name="quantity" placeholder="Quantité restante du produit" class="form-control">
-            <input type="checkbox" name="quantityIlimity">
-            <label>Quantités ilimités</label>
-        </div>
-        <br>
-        <div class="field">
-            <label>Photos</label>
-            <br>
-            <button class="ui button" type="button" id="addimage">Ajouter une photo</button>
-
-        </div>
-
 
         <br>
-        <button class="ui button" type="submit">Ajouter le produit</button>
+        <button class="ui button" type="submit">Acheter</button>
     </form>
 
 

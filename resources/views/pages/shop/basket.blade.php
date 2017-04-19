@@ -26,6 +26,7 @@
             <tbody>
             @php($index = 0)
             @php($totalttc = array())
+            @php($totalqtt = array())
 
             @foreach($products as $key => $product)
                     <tr class="">
@@ -77,6 +78,7 @@
                         <td class="Quantité">
                             @if(isset($baskets[$index][3]))
                                 {{ $baskets[$index][3] }}
+                                @php(array_push($totalqtt, $baskets[$index][3]))
                             @else
                                 <i class="icon close"></i>
                             @endif
@@ -110,7 +112,17 @@
             </tr></tfoot>
         </table>
     </div>
+    <a class="header" href="{{ route('shop_basket_confirm_address') }}" >Valider mon panier </a>
 
-    <a class="header" href="{{ route('shop_basket_confirm_address', ['products' => $products, 'baskets' => $baskets]) }}" >Valider mon panier </a>
+
+    {!! Form::open(['route' => 'shop_basket_confirm']) !!}
+        <input type="text" class="hidden" name="price_total" value="{{ array_sum($totalttc) }}">
+        <input type="text" class="hidden" name="quantity_total" value="{{ array_sum($totalqtt) }}">
+
+    <button class="ui button" type="submit">Valider mon panier 2</button>
+
+
+    {!! Form::close() !!}
+
 
 @endsection

@@ -29,6 +29,7 @@ Route::group(['prefix' => 'shop'], function(){
 
     Route::get('/basket/confirm/address', ['as' => 'shop_basket_confirm_address', 'uses' => 'ShopController@confirm_address']);
     Route::post('/basket/confirm/address', ['as' => 'shop_basket_confirm_address', 'uses' => 'ShopController@postConfirm_address']);
+    Route::post('/basket/confirm', ['as' => 'shop_basket_confirm', 'uses' => 'ShopController@postConfirmBasket']);
 
 
     //Tous les produits d'une catégorie
