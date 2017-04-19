@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Activity;
+use App\Model\Shop\shop_products;
+use App\ShopProduct;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -60,7 +62,11 @@ class EventHandlerController extends Controller
         $Current = Activity::whereDate('date', '=', Carbon::today()->toDateString())->get();
         $Past = Activity::whereDate('date','<', Carbon::today()->toDateString())->limit(5)->get();
         $params += compact('Future', 'Current', 'Past');
-
+        /*
+         * Prepare information for right bar
+         */
+        $Products = shop_products::with('pictures')->orderBy('created_at', 'asc')->limit(3)->get();
+        $params += compact('Products');
         return view($view,$params);
     }
 }
