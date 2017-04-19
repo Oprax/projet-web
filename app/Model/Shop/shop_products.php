@@ -23,7 +23,7 @@ class shop_products extends Model
     }
 
     public function pictures() {
-        return $this->hasMany('App\Model\Shop\shop_picture', 'product_id');
+        return $this->hasMany('App\Model\Shop\shop_pictures', 'product_id');
     }
 
     public function comments() {

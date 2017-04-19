@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Model\Shop\shop_colors;
+use App\Model\Shop\shop_picture;
+use App\Model\Shop\shop_pictures;
 use App\Model\Shop\shop_productsRepository;
 use App\Model\Shop\shop_comments;
 use App\Model\Shop\shop_sizes;
@@ -36,11 +38,35 @@ class ShopController extends Controller
     
 
     public function store (Request $request, shop_productsRepositoryInterface $shopRepository){
+        //echo $request->image1;
+        dd($request->file('image1'));
         $product = $shopRepository->save($request->only('name', 'price', 'quantityIlimity', 'quantity', 'description', 'new_cat'));
-       // $product = $shopRepository->save([$request->input('name'), $request->input('price')]);
+
+
+        $i = 1;
+        $image = 'image'.$i;
+
+
+        while ($request->$image != null){
+            $shop_image = new shop_pictures();
+            $shop_image->url=$request->$image;
+            $shop_image->alt=get_extension_funcs($request->$image);
+            $shop_image->product_id = $product->id;
+            $shop_image->save();
+
+
+            $image = 'image'.$i;
+
+            $nameimage = $shop_image->id+1;
+            $request->file('image'.$i)->move(
+                base_path() . '/public/images/shop/', $nameimage
+            );
+            $i++;
+        }
         
-        // return redirect()->route('product.views'); avec id du nouvel article
-        return redirect()->route('shop_home');
+        //return redirect()->route('shop_home');
+        return redirect()->route('shop_product', ['category' => $product->category->name, 'product' => $product->slug]);
+
     }
 
     public function view (Request $request, ICategoryGestion $categoryGestion){
@@ -93,9 +119,23 @@ class ShopController extends Controller
         return redirect()->route('shop_home');
     }
 
-    public function add_badsket(Request $request){
-        //dd($request);
+    public function add_basket(Request $request){
+
+        
+        //setcookie("TestCookie", "yes", time()+3600);
+
 
         return redirect()->route('shop_product', ['category' => $request->category_name, 'product' => $request->product_slug]);
+    }
+
+    public function getbasket(Request $request, ICategoryGestion $categoryGestion){
+
+
+
+        echo'<br><br>';
+        print_r($_COOKIE["basket"]);
+
+
+        return view('pages/shop/basket', ['categories' => $categoryGestion->getCategories()]);
     }
 }

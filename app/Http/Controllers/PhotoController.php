@@ -17,7 +17,7 @@ class PhotoController extends Controller
      */
     public function index(Activity $activity)
     {
-        $photos = Photo::all()->where('activity_id', $activity->id)->all();
+        $photos = Photo::query()->where('activity_id', $activity->id)->get();
         return view('pages.photo.index', [
             'activity' => $activity,
             'photos' => $photos
@@ -54,9 +54,12 @@ class PhotoController extends Controller
      * @param \App\Activity $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Photo $photo, Activity $activity)
+    public function show(Activity $activity, Photo $photo)
     {
-        return view('pages.photo.show', ['activity' => $activity]);
+        return view('pages.photo.show', [
+            'activity' => $activity,
+            'photo' => $photo
+        ]);
     }
 
     /**

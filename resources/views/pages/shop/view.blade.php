@@ -24,7 +24,7 @@
                             @endforeach
                         </div>
         </div>
-        {!! Form::open(['route' => 'shop_add_badsket']) !!}
+        {!! Form::open(['route' => 'shop_add_basket']) !!}
 
         @php
         if(!empty($sizes) and !empty($colors)){
@@ -68,7 +68,7 @@
                     <input type="text" class="hidden" name="product_slug" value="{{ $product->slug }}">
                     <input type="text" class="hidden" name="category_name" value="{{ $product->category }}">
 
-                    <button class="ui button" type="submit">Ajouter au panier</button>
+                    <button class="ui button" type="submit" >Ajouter au panier</button>
                 </div>
             </div>
         </div>
