@@ -2,7 +2,7 @@ body
 {
     font-family: Arial;
     font-size: 12px;
-    background-color: lightgray;
+    background-color: white;
     color: black;
 }
 
@@ -29,21 +29,24 @@ body
     height: 330px
 }
 
-#ActivitésF
+#ActivitésF, #ActivitésC, #ActivitésP
 {
     padding-left: 15px
 }
 
-#ActivitésC
+.ui.segment
 {
-    padding-left: 15px
+    font-family: Arial;
+    font-size: 12px;
+    border: 1px solid lightgray;
+    border-radius: 15px;
 }
 
-#ActivitésP
+.twelve.wide.column
 {
-    padding-left: 15px
+    border: 1px solid lightgray;
+    border-radius: 15px;
 }
 
-div.fc-day-grid-container.fc-scroller {
-    height: 240px;
-}
+
+
