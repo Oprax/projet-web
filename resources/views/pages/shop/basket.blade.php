@@ -24,7 +24,9 @@
                 <th class="right aligned">Total TTC</th>
             </tr></thead>
             <tbody>
-            @php($index = 0 )
+            @php($index = 0)
+            @php($totalttc = array())
+
             @foreach($products as $key => $product)
                     <tr class="">
                         <td class="ui link">
@@ -39,10 +41,9 @@
                             </a>
                         </td>
 
-
                         <td>
                             <div class="content">
-                                {{ $product->name }}
+                                    {{ $product->name }}
                             </div>
                         </td>
                         <td id="taille">
@@ -82,7 +83,9 @@
                         </td>
                         <td class="right aligned">
                             @if(isset($product->price) AND isset($baskets[$index][3]))
-                                {{ $product->price . ' €'}}
+
+                                {{ $product->price * $baskets[$index][3] . ' €'}}
+                                @php(array_push($totalttc, $product->price * $baskets[$index][3]))
                             @else
                                 <i class="icon close"></i>
                             @endif
@@ -92,8 +95,22 @@
                 @php($index ++)
             @endforeach
             </tbody>
+            <tfoot><tr>
+                <th><h4>Total</h4></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+                <th>
+                    <h4>{{ array_sum($totalttc) }} €</h4>
+                </th>
+
+            </tr></tfoot>
         </table>
     </div>
 
+    <a class="header" href="{{ route('shop_basket_confirm_address', ['products' => $products, 'baskets' => $baskets]) }}" >Valider mon panier </a>
 
 @endsection
