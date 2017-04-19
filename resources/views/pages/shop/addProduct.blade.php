@@ -34,6 +34,15 @@
             <label>Quantités ilimités</label>
         </div>
         <br>
+        <div class="field">
+            <label>Photos</label>
+            <br>
+            <button class="ui button" type="button" id="addimage">Ajouter une photo</button>
+
+        </div>
+
+
+        <br>
         <button class="ui button" type="submit">Ajouter le produit</button>
     </form>
 

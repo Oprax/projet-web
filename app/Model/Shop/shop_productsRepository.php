@@ -25,11 +25,13 @@ class shop_productsRepository implements shop_productsRepositoryInterface{
     public function save($product)
     {
         //dd($product);
-
         // dd($product['name']);
         $this->shop_products->name = $product['name'];
         $this->shop_products->slug = str_slug($product['name'], '-');
         $this->shop_products->price = $product['price'];
+        $this->shop_products->color = 0;
+        $this->shop_products->size = 0;
+
         if($product['quantityIlimity']){
             $this->shop_products->quantities = null;
         }else{
@@ -51,5 +53,32 @@ class shop_productsRepository implements shop_productsRepositoryInterface{
         }
 
         $this->shop_products->save();
+
+        return $this->shop_products;
+    }
+    
+    public function getProducts5perCategory(){
+        $categories = DB::table('shop_categories')->get();
+
+        foreach ($categories as $key => $category){
+            //$products = shop_products::all()->where('category_id', $category->id)->groupBy('update_at')->take(5);
+            //$this->shop_products = DB::table('shop_products')->get()->where('category_id', $category->id)->groupBy('update_at')->take(5);
+            $products[$key] = shop_products::all()->where('category_id', $category->id)->take(5);
+        }
+
+
+        return $products;
+    }
+
+    public function getProductsperCategory($category){
+
+        $category_obj = shop_categories::all()->where('name', $category)->first();
+
+        // $products = shop_products::with('category')->get()->where('category', $category);
+
+        $products = shop_products::with('category')->get()->where('category_id', $category_obj->id);
+
+
+        return $products;
     }
 }

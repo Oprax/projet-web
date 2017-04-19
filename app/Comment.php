@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CommentsActivities extends Model
+class Comment extends Model
 {
     protected $fillable = [
-        'content'
+        'content', 'commentable_type', 'commentable_id', 'user_id'
     ];
 
-    public function activity() {
-        return $this->belongsTo('App\Activity');
-    }
+    protected $dates = [
+        'created_at', 'updated_at'
+    ];
 
     public function user() {
         return $this->belongsTo('App\User');

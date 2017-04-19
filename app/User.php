@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Validator;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','forename', 'avatar', 'email', 'password', 'birthday', 'status_id', 'role_id', 'association_id', 'is_valid'
+    ];
+
+    protected $dates = [
+        'birthday', 'created_at', 'updated_at'
+    ];
+
+    protected $casts = [
+        'is_valid' => 'boolean'
     ];
 
     /**
@@ -27,12 +36,47 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $rules = array(
+        'name' => 'required|string',
+        'forename' => 'required|string',
+        'avatar' => 'nullable|file|mimes:jpeg,bmp,png',
+        'email' => 'required|email',
+        'password' => 'nullable|string',
+        'password-confirm' => 'nullable|string',
+        'status' => 'required|string',
+        'role' => 'required|string',
+        'association' => 'required|string',
+        'birthday' => 'required|date',
+    );
+
+    private $errors;
+
+    public function validate($data)
+    {
+        $v = Validator::make($data, $this->rules);
+        if ($v->fails())
+        {
+            $this->errors = $v->messages()->messages();
+            return false;
+        }
+        return true;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
+    }
+
     public function isCesi() {
-        return $this->role === 'cesi';
+        return $this->role->name === 'cesi';
     }
 
     public function isBDE() {
-        return $this->role === 'BDE';
+        return $this->role->name === 'BDE';
+    }
+
+    public function isCesiBDE(){
+        return $this->isCesi() or $this->isBDE();
     }
 
     public function role() {
@@ -59,11 +103,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Sounding');
     }
 
-    public function comments_activities() {
-        return $this->hasMany('App\CommentsActivities');
-    }
-
-    public function comments_photos() {
-        return $this->hasMany('App\CommentsPhotos');
+    public function comments_product() {
+        return $this->hasMany('App\Model\Shop\shop_comments');
     }
 }

@@ -1,0 +1,52 @@
+body
+{
+    font-family: Arial;
+    font-size: 12px;
+    background-color: white;
+    color: black;
+}
+
+#Boutique, #Activités, #Accueil, #Menubuttonsidebar, #barremenu
+{
+    background-color: darkred;
+}
+
+#dropdown
+{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#avatar-navbar
+{
+    height:25px;
+    width: 25px;
+    margin-right: 5px;
+}
+
+#calendar1
+{
+    height: 330px
+}
+
+#ActivitésF, #ActivitésC, #ActivitésP
+{
+    padding-left: 15px
+}
+
+.ui.segment
+{
+    font-family: Arial;
+    font-size: 12px;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+}
+
+.twelve.wide.column
+{
+    border: 1px solid lightgray;
+    border-radius: 15px;
+}
+
+
+

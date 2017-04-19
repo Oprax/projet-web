@@ -10,6 +10,14 @@ class Photo extends Model
         'path', 'like'
     ];
 
+    protected $dates = [
+        'created_at', 'updated_at'
+    ];
+
+    protected $casts = [
+        'like' => 'integer'
+    ];
+
     public function user() {
         return $this->belongsTo('App\User');
     }
@@ -18,7 +26,8 @@ class Photo extends Model
         return $this->belongsTo('App\Activity');
     }
 
-    public function comments_photos() {
-        return $this->hasMany('App\CommentsPhotos');
+    public function getCommentsAttribute() {
+        return Comment::where('commentable_type', 'Photo')
+            ->where('commentable_id', $this->id)->get();
     }
 }

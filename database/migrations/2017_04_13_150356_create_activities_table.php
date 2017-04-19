@@ -19,6 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->string('name');
             $table->dateTime('date');
             $table->string('lieu');
+            $table->text('description');
             $table->boolean('is_proposal');
             $table->boolean('is_accept');
             $table->string('photo');
