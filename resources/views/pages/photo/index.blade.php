@@ -17,23 +17,30 @@
             </a>
             <div class="content">
                 <div class="description">
+                    @if($photo->comment)
                     <div class="ui comments">
                         <h3 class="ui dividing header">Dernier commentaire :</h3>
                         <div class="comment">
-                            <a href="#" class="avatar">
-                                <img src="https://lorempixel.com/150/150/people/">
+                            <a href="{{ route('user.show', $photo->comment->user_id) }}" class="avatar">
+                                <img src="{{ $photo->comment->user->avatar }}">
                             </a>
                             <div class="content">
-                                <a class="author">Matt</a>
+                                <a class="author" href="{{ route('user.show', $photo->comment->user_id) }}">
+                                    {{ $photo->comment->user->name }}
+                                    {{ $photo->comment->user->forename }}
+                                </a>
                                 <div class="metadata">
-                                    <span class="date">Today at 5:42PM</span>
+                                <span class="date" title="{{ $photo->comment->created_at->format('d/m/Y H:i:s') }}">
+                                    {{ $photo->comment->created_at->diffForHumans(\Carbon\Carbon::now()) }}
+                                </span>
                                 </div>
                                 <div class="text">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
+                                    {{ $photo->comment->content }}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="extra content">
                     <span class="right floated">
@@ -41,7 +48,7 @@
                         {{ $photo->like }} J'aime
                     </span>
                     <i class="comments up icon"></i>
-                    3 commentaires
+                    {{ $photo->comments->count() }} commentaires
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-    Route::group(['prefix' => 'activity'], function(){
+    Route::group(['prefix' => 'activity'], function() {
         Route::get('future', 'ActivityController@future')->name('activity.future');
         Route::get('current', 'ActivityController@current')->name('activity.current');
         Route::get('past', 'ActivityController@past')->name('activity.past');
@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::get('/home', function () {
+    return redirect()->route('home');
+});
 
 require_once('routes-shop.php');
 
