@@ -4,7 +4,7 @@
     <div>&nbsp;</div>
     <div class="ui cards">
     @foreach($photos as $photo)
-        <div class="card">
+        <div class="ui link card">
             <div class="content">
                 <div class="right floated meta" title="{{ $photo->created_at }}">>
                     {{ \Carbon\Carbon::parse($photo->created_at)->diffForHumans(\Carbon\Carbon::now()) }}
@@ -12,9 +12,9 @@
                 <img src="{{ $photo->user->avatar }}" class="ui avatar image">
                 <a href="{{ route('user.show', $photo->user_id) }}">{{ $photo->user->forename }} {{ $photo->user->name }}</a>
             </div>
-            <div class="image">
+            <a class="image" href="{{ route('activity.photos.show', [$activity->id, $photo->id]) }}">
                 <img src="{{ $photo->path }}">
-            </div>
+            </a>
             <div class="content">
                 <div class="description">
                     <div class="ui comments">

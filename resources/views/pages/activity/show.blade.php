@@ -3,25 +3,17 @@
 
 @section('content')
     <div>&nbsp;</div>
-    <h1 class="ui header">Activity 5</h1>
+    <h1 class="ui header">{{ $activity->name }}</h1>
     <div class="ui grid">
         <div class="four wide column">
             <div class="carousel">
+                @foreach($activity->photos as $photo)
                 <div class="ui card">
                     <div class="image">
-                        <img src="https://lorempixel.com/200/200/sports/">
+                        <img src="{{ $photo->path }}">
                     </div>
                 </div>
-                <div class="ui card">
-                    <div class="image">
-                        <img src="https://lorempixel.com/200/200/sports/">
-                    </div>
-                </div>
-                <div class="ui card">
-                    <div class="image">
-                        <img src="https://lorempixel.com/200/200/sports/">
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
         <div class="two wide column">
@@ -88,16 +80,16 @@
         </div>
     </div>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aperiam asperiores consequuntur, dolore dolorum eveniet fugiat id ipsam iste iusto minima modi nemo nobis, officia, quas quos reprehenderit sint tempora?
+        {{ $activity->description }}
     </p>
     <div class="ui stackable grid">
         <div class="four wide column ui center">
             <i class="thumbs up icon"></i>
-            5 J'aime
+            <span data-activity="{{ $activity->id }}">{{ $activity->like }} J'aime</span>
         </div>
         <div class="four wide column ui center">
             <i class="comments up icon"></i>
-            10 commentaires
+            {{ $activity->comments->count() }} commentaires
         </div>
         <div class="two wide column ui center">
             <button class="ui icon button">
@@ -109,65 +101,32 @@
             16 participants
         </div>
     </div>
+    @if($activity->comments)
     <div class="ui comments">
         <h3 class="ui dividing header">Commentaire de l'activité :</h3>
+        @foreach($activity->comments as $comment)
         <div class="comment">
-            <a href="#" class="avatar">
-                <img src="https://lorempixel.com/150/150/people/">
+            <a href="{{ route('user.show', $comment->user_id) }}" class="avatar">
+                <img src="{{ $comment->user->avatar }}">
             </a>
             <div class="content">
-                <a class="author">Matt</a>
+                <a class="author" href="{{ route('user.show', $comment->user_id) }}">
+                    {{ $comment->user->name }}
+                    {{ $comment->user->forename }}
+                </a>
                 <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
+                    <span class="date" title="{{ $comment->created_at->format('d/m/Y H:i:s') }}">
+                        {{ $comment->created_at->diffForHumans(\Carbon\Carbon::now()) }}
+                    </span>
                 </div>
                 <div class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
+                    {{ $comment->content }}
                 </div>
             </div>
         </div>
-        <div class="comment">
-            <a href="#" class="avatar">
-                <img src="https://lorempixel.com/150/150/people/">
-            </a>
-            <div class="content">
-                <a class="author">Matt</a>
-                <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                </div>
-            </div>
-        </div>
-        <div class="comment">
-            <a href="#" class="avatar">
-                <img src="https://lorempixel.com/150/150/people/">
-            </a>
-            <div class="content">
-                <a class="author">Matt</a>
-                <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                </div>
-            </div>
-        </div>
-        <div class="comment">
-            <a href="#" class="avatar">
-                <img src="https://lorempixel.com/150/150/people/">
-            </a>
-            <div class="content">
-                <a class="author">Matt</a>
-                <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
+    @endif
     <script>
         window.onload = function () {
           $(document).ready(function(){

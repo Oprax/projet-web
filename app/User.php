@@ -18,6 +18,14 @@ class User extends Authenticatable
         'name','forename', 'avatar', 'email', 'password', 'birthday', 'status_id', 'role_id', 'is_valid'
     ];
 
+    protected $dates = [
+        'birthday', 'created_at', 'updated_at'
+    ];
+
+    protected $casts = [
+        'is_valid' => 'boolean'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -28,23 +36,15 @@ class User extends Authenticatable
     ];
 
     public function isCesi() {
-        return $this->role === 'cesi';
+        return $this->role->name === 'cesi';
     }
 
     public function isBDE() {
-        return $this->role === 'BDE';
+        return $this->role->name === 'BDE';
     }
 
     public function isCesiBDE(){
-        if($this->role === 'BDE') {
-            return true;
-        }
-        elseif($this->role === 'cesi'){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return $this->isCesi() or $this->isBDE();
     }
 
     public function role() {
@@ -69,14 +69,6 @@ class User extends Authenticatable
 
     public function soundings() {
         return $this->hasMany('App\Sounding');
-    }
-
-    public function comments_activities() {
-        return $this->hasMany('App\CommentsActivities');
-    }
-
-    public function comments_photos() {
-        return $this->hasMany('App\CommentsPhotos');
     }
 
     public function comments_product() {
