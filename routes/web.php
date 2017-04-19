@@ -12,7 +12,7 @@
 */
 
 
-Route::group([/*'middleware' => 'auth'*/], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
     Route::group(['prefix' => 'activity'], function(){
         Route::get('future', 'ActivityController@future')->name('activity.future');
