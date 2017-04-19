@@ -78,6 +78,8 @@
         })
     })
 </script>
+<script src="{{ asset('js/addproduct.js') }}"></script>
+<script src="{{ asset('js/addbasket.js') }}"></script>
 @endif
 
 <script>
