@@ -12,7 +12,6 @@ use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class EventHandlerController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct()
     {
