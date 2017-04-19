@@ -15,12 +15,16 @@ class PhotosTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::all()->first();
-        $activity = Activity::all()->first();
+        $users = User::all();
+        $activities = Activity::all();
 
-        factory(Photo::class)->create([
-            'user_id' => $user->id,
-            'activity_id' => $activity->id
+        $photos = factory(Photo::class, $activities->count())->make([
+            'user_id' => $users->random()->id
         ]);
+        for ($i = 0; $i < $photos->count(); $i++)
+        {
+            $photos[$i]->activity_id = $activities[$i]->id;
+            $photos[$i]->save();
+        }
     }
 }

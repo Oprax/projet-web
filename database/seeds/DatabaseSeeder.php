@@ -56,5 +56,6 @@ class DatabaseSeeder extends Seeder
         $this->call(\Database\Seeds\UsersTableSeeder::class);
         $this->call(\Database\Seeds\ActivitiesTableSeeder::class);
         $this->call(\Database\Seeds\PhotosTableSeeder::class);
+        $this->call(CommentsTableSeeder::class);
     }
 }

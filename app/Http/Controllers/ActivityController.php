@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Activity;
+use App\Comment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ActivityController extends EventHandlerController
@@ -14,7 +16,32 @@ class ActivityController extends EventHandlerController
      */
     public function index()
     {
-        return $this->view('pages.activity.index');
+        $activities = Activity::accepted()->orderBy('date')->get();
+        $act_past = collect([]);
+        $act_curr = collect([]);
+        $act_fut = collect([]);
+        foreach ($activities as $activity)
+        {
+            $activity->comment_count = $activity->comments->count();
+            $activity->comment = $activity->comments->sortBy('created_at')->first();
+            $d = Carbon::parse($activity->date);
+            if ($d->isToday())
+            {
+                $act_curr->push($activity);
+            }
+            elseif ($d->isFuture())
+            {
+                $act_fut->push($activity);
+            }
+            elseif ($d->isPast())
+            {
+                $act_past->push($activity);
+            }
+        }
+        $act_fut = $act_fut->take(3);
+        $act_past = $act_past->take(3);
+        return $this->view('pages.activity.index',
+            compact('act_past', 'act_fut', 'act_curr'));
     }
 
     /**
@@ -46,7 +73,7 @@ class ActivityController extends EventHandlerController
      */
     public function show(Activity $activity)
     {
-        return $this->view('pages.activity.show');
+        return $this->view('pages.activity.show', compact('activity'));
     }
 
     /**
@@ -83,15 +110,32 @@ class ActivityController extends EventHandlerController
         //
     }
 
+    private function lastComment() {
+        return function ($activity) {
+            $activity->comment_count = $activity->comments->count();
+            $activity->comment = $activity->comments->sortBy('created_at')->first();
+            return $activity;
+        };
+    }
+
     public function future(){
-        return $this->view('pages.activity.future');
+        $activities = Activity::accepted()->whereDate('date', '>', Carbon::today())->get();
+        $activities = $activities->map($this->lastComment());
+        $title = 'Activités à venir !';
+        return $this->view('pages.activity.time', compact('activities', 'title'));
     }
 
     public function current(){
-        return $this->view('pages.activity.current');
+        $activities = Activity::accepted()->whereDate('date', '=', Carbon::today())->get();
+        $activities = $activities->map($this->lastComment());
+        $title = 'Activités en cours !';
+        return $this->view('pages.activity.time', compact('activities', 'title'));
     }
 
     public function past(){
-        return $this->view('pages.activity.past');
+        $activities = Activity::accepted()->whereDate('date', '<', Carbon::today())->get();
+        $activities = $activities->map($this->lastComment());
+        $title = 'Activités passés !';
+        return $this->view('pages.activity.time', compact('activities', 'title'));
     }
 }

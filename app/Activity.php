@@ -10,6 +10,17 @@ class Activity extends Model
         'name', 'date', 'lieu', 'like', 'is_proposal', 'is_accept', 'can_subscribe', 'photo'
     ];
 
+    protected $dates = [
+        'date', 'created_at', 'updated_at'
+    ];
+
+    protected $casts = [
+        'is_proposal' => 'boolean',
+        'is_accept' => 'boolean',
+        'can_subscribe' => 'boolean',
+        'like' => 'integer'
+    ];
+
     public function association() {
         return $this->belongsTo('App\Association');
     }
@@ -26,8 +37,16 @@ class Activity extends Model
         return $this->hasMany('App\Photo');
     }
 
-    public function comments_activities() {
-        return $this->hasMany('App\CommentsActivities');
+    public function getCommentsAttribute() {
+        return Comment::where('commentable_type', 'Activity')
+            ->where('commentable_id', $this->id)->get();
     }
 
+    static function accepted() {
+        return self::where('is_accept', true);
+    }
+
+    static function proposal() {
+        return self::where('is_proposal', true);
+    }
 }

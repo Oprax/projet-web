@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'activity'], function(){
         Route::get('future', 'ActivityController@future')->name('activity.future');
         Route::get('current', 'ActivityController@current')->name('activity.current');
-        Route::get('past', '\App\Http\Controllers\ActivityController@past')->name('activity.past');
+        Route::get('past', 'ActivityController@past')->name('activity.past');
     });
     Route::resource('activity', 'ActivityController');
     Route::resource('activity.photos', 'PhotoController');
