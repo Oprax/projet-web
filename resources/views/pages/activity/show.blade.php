@@ -3,7 +3,29 @@
 
 @section('content')
     <div>&nbsp;</div>
-    <h1 class="ui header">{{ $activity->name }}</h1>
+    <div class="ui grid">
+        <div class="ten wide column">
+            <h1 class="ui header">{{ $activity->name }}</h1>
+        </div>
+        <div class="six wide column">
+            <div class="ui grid">
+                <div class="eight wide column">
+                    @can ('update', $activity)
+                        <a href="{{route('activity.edit', $activity)}}">
+                            <button class="ui orange icon button"><i class="edit icon"></i>Editer</button>
+                        </a>
+                    @endcan
+                </div>
+                <div class="eight wide column">
+                    @can('delete', $activity)
+                        {!! Form::open(['route' => ['activity.destroy', $activity], 'method' => 'DELETE']) !!}
+                        <button class="ui red icon button" type="submit"><i class="delete icon"></i>Supprimer</button>
+                        {!! Form::close() !!}
+                    @endcan
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="ui grid">
         <div class="four wide column">
             <div class="carousel">

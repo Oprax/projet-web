@@ -8,6 +8,11 @@
             <div class="panel-body">
                 <form class="ui big form {{$errors ? ' error' : ''}}"  role="form" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
+                    @if ($errors->has('invalid'))
+                        <div class="ui error message">
+                            <strong>{{ $errors->first('invalid') }}</strong>
+                        </div>
+                    @endif
                     <div class="required field{{ $errors->has('email') ? ' error' : '' }}">
                         <label for="email">E-Mail</label>
 

@@ -2,10 +2,14 @@
 
 @section('content')
 <div>&nbsp;</div>
+
+
+
 <div class="ui stackable grid">
      <div class="sixteen wide mobile six wide computer column">
         <img class="ui centered medium circular image" src="{{asset($User->avatar)}}" alt="">
      </div>
+
     <div class="sixteen wide mobile five wide computer column">
         <h1>{{$User->name}} {{$User->forename}}</h1>
         <h2>{{$User->status->name}}</h2>
@@ -22,22 +26,28 @@
                     {{$User->email}}
                 </div>
             </div>
+
+
             <div class="item">
                 <i class="birthday icon"></i>
                 <div class="content">
                     {{Carbon\Carbon::parse($User->birthday)->format('d/m/Y')}}
                 </div>
             </div>
+
+
             <div class="item">
                 <i class="users icon"></i>
                 <div class="content">
-                    {{$User->association->name}}
+                    @if(! empty($User->association))
+                        {{$User->association->name}}
+                    @endif
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+
 
 <div class="ui top attached tabular menu">
     <a class="item" data-tab="activites">Mes Activités</a>

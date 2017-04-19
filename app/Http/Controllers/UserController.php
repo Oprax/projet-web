@@ -21,8 +21,8 @@ class UserController extends EventHandlerController
      */
     public function index()
     {
-
-       return $this->view('pages/user/index', ['Users' => User::get()]);
+        $this->authorize('view', User::class);
+        return $this->view('pages/user/index', ['Users' => User::get()]);
     }
 
     /**
@@ -33,7 +33,8 @@ class UserController extends EventHandlerController
      */
     public function show(User $user)
     {
-        return $this->view('pages/user/show', ['User' => User::find($user->id)->with('subscribes')->first()]);
+        $this->authorize('view', $user);
+        return $this->view('pages/user/show', ['User' => User::with('subscribes')->find($user->id)]);
     }
 
     /**
@@ -44,6 +45,7 @@ class UserController extends EventHandlerController
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return $this->view('pages/user/edit', ['User' => $user,
             'Status' => Status::get(),
             'Role' => Role::get(),
@@ -60,6 +62,7 @@ class UserController extends EventHandlerController
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
         if($request->input('approved')) {
             $user->update(['is_valid' => true]);
             return redirect(route('user.index'));
@@ -79,12 +82,14 @@ class UserController extends EventHandlerController
      */
     public function destroy(User $user)
     {
+        $this->authorize('destroy', $user);
         $user->subscribes()->delete();
         $user->delete();
         return redirect(route('user.index'));
     }
 
     public function store(Request $request){
+        $this->authorize('update', Auth::user());
          $u = new User();
          if($u->validate(Input::all())){
              $user = User::find($request['user']);
