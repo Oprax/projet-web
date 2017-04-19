@@ -1,4 +1,4 @@
-<script src="{{asset('jquery/jquery-3.2.1.min.js')}}"></script>
+
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="{{ asset('js/app.js') }}"></script>
@@ -50,6 +50,8 @@
     <script src="{{asset('semantic-ui/semantic.min.js')}}"></script>
 @endif
 <script src="{{asset('semantic-ui/calendar.min.js')}}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 <script src="{{ asset('slick/slick.js') }}"></script>
 
 @if(Request::is('/'))

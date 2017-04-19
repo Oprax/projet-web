@@ -7,7 +7,7 @@ use App\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
-class PhotoController extends Controller
+class PhotoController extends EventHandlerController
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class PhotoController extends Controller
     public function index(Activity $activity)
     {
         $photos = Photo::query()->where('activity_id', $activity->id)->get();
-        return view('pages.photo.index', [
+        return $this->view('pages.photo.index', [
             'activity' => $activity,
             'photos' => $photos
         ]);
@@ -32,7 +32,7 @@ class PhotoController extends Controller
      */
     public function create(Activity $activity)
     {
-        return view('pages.photo.create', ['activity' => $activity]);
+        return $this->view('pages.photo.create', ['activity' => $activity]);
     }
 
     /**
@@ -56,7 +56,7 @@ class PhotoController extends Controller
      */
     public function show(Activity $activity, Photo $photo)
     {
-        return view('pages.photo.show', [
+        return $this->view('pages.photo.show', [
             'activity' => $activity,
             'photo' => $photo
         ]);

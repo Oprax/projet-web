@@ -1,5 +1,6 @@
-<div class="item">
-    Calendrier
+<div class="item" style="height: 330px"> <!--Also change the height of calendar to 240px (fc-day-grid-container fc-scroller-->
+    {!! $calendar->calendar() !!}
+    {!! $calendar->script() !!}
 </div>
 <div class="item">
     <a class="header" href="{{route('activity.index')}}">

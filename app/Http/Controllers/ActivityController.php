@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use Illuminate\Http\Request;
 
-class ActivityController extends Controller
+class ActivityController extends EventHandlerController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return view('pages.activity.index');
+        return $this->view('pages.activity.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        return view('pages.activity.create');
+        return $this->view('pages.activity.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        return view('pages.activity.show');
+        return $this->view('pages.activity.show');
     }
 
     /**
@@ -84,14 +84,14 @@ class ActivityController extends Controller
     }
 
     public function future(){
-        return view('pages.activity.future');
+        return $this->view('pages.activity.future');
     }
 
     public function current(){
-        return view('pages.activity.current');
+        return $this->view('pages.activity.current');
     }
 
     public function past(){
-        return view('pages.activity.past');
+        return $this->view('pages.activity.past');
     }
 }
