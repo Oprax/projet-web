@@ -56,19 +56,19 @@
     </div>
 
     <div class="pushed">
-        <div class="ui massive fixed inverted menu">
+        <div class="ui massive fixed inverted menu" id="barremenu">
             <div class="ui container">
                 <a href="{{route('home')}}" class="header item">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <a id="MenuButtonSideBar" class="item"><i class="bars icon"></i></a>
-                <a href="{{ route('home') }}" class="item hidden-xs">Accueil</a>
-                <a href="{{ route('activity.index') }}" class="item hidden-xs">Activités</a>
-                <a href="{{ route('shop_home') }}" class="item hidden-xs">Boutique</a>
+                <a id="Accueil" href="{{ route('home') }}" class="item hidden-xs">Accueil</a>
+                <a id="Activités" href="{{ route('activity.index') }}" class="item hidden-xs">Activités</a>
+                <a id="Boutique" href="{{ route('shop_home') }}" class="item hidden-xs">Boutique</a>
                 <div class="right menu hidden-xs">
 
-                    <div class="ui simple dropdown item" style="padding-top: 0px; padding-bottom: 0px;">
-                        <img style="height:25px; width: 25px; margin-right: 5px" id="avatar-navbar" class="ui mini circular image" src="{{asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}">
+                    <div id="dropdown" class="ui simple dropdown item">
+                        <img id="avatar-navbar" class="ui mini circular image" src="{{asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}">
                         {{\Illuminate\Support\Facades\Auth::user()->name}} {{\Illuminate\Support\Facades\Auth::user()->forename}}<i class="dropdown icon"></i>
                         <div class="menu">
                             <a class="item" href="{{route('user.show', ['user' => \Illuminate\Support\Facades\Auth::id()])}}">Mon compte</a>

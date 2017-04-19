@@ -1,4 +1,4 @@
-<div class="item" style="height: 330px"> <!--Also change the height of calendar to 240px (fc-day-grid-container fc-scroller-->
+<div id="calendar1" class="item"> <!--Also change the height of calendar to 240px (fc-day-grid-container fc-scroller-->
     {!! $calendar->calendar() !!}
     {!! $calendar->script() !!}
 </div>

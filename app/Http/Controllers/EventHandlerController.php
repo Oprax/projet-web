@@ -26,6 +26,7 @@ class EventHandlerController extends Controller
         $blue = "#00F";
         $red = "#F00";
         $activities = Activity::where('is_accept', 1)->get();
+        $calendar=null;
         foreach ($activities as $activity) {
             $eventDate = new \DateTime($activity->date);
             $midnight = $eventDate;
@@ -46,7 +47,9 @@ class EventHandlerController extends Controller
             $calendar = Calendar::addEvent($event, ['color' => $color]); //add an array with addEvents
         }
 
-        $calendar->setOptions([ //set fullcalendar options
+
+        //$calendar = Calendar::addEvents($events) //add an array with addEvents
+        $calendar = Calendar::setOptions([ //set fullcalendar options
             'firstDay' => 1
         ]);
         $params += compact('calendar');

@@ -1,0 +1,49 @@
+body
+{
+    font-family: Arial;
+    font-size: 12px;
+    background-color: lightgray;
+    color: black;
+}
+
+#Boutique, #Activités, #Accueil, #Menubuttonsidebar, #barremenu
+{
+    background-color: darkred;
+}
+
+#dropdown
+{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#avatar-navbar
+{
+    height:25px;
+    width: 25px;
+    margin-right: 5px;
+}
+
+#calendar1
+{
+    height: 330px
+}
+
+#ActivitésF
+{
+    padding-left: 15px
+}
+
+#ActivitésC
+{
+    padding-left: 15px
+}
+
+#ActivitésP
+{
+    padding-left: 15px
+}
+
+div.fc-day-grid-container.fc-scroller {
+    height: 240px;
+}
