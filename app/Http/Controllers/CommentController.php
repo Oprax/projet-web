@@ -73,10 +73,10 @@ class CommentController extends Controller
     {
         $v = Validator::make($request->all(), $this->store_rule);
         if ($v->fails()) {
-            return response()->json(['errors' => $v->errors()->toArray()], 400);
+            return back()->withInput()->withErrors($v->errors());
         }
-        $comment = Comment::create($request->all());
-        return response()->json($comment->toArray());
+        Comment::create($request->all());
+        return back();
     }
 
     /**

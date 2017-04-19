@@ -90,6 +90,33 @@
         @endforeach
     </div>
     @endif
+    <form action="{{ route('comments.store') }}" method="post" class="ui form">
+        @if($errors)
+            <div class="ui error message">
+                <div class="header">
+                    Une erreur est survenue !
+                </div>
+                <ul class="list">
+                    @foreach($errors as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        {{ csrf_field() }}
+        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+        <input type="hidden" name="commentable_id" value="{{ $activity->id }}">
+        <input type="hidden" name="commentable_type" value="Activity">
+        <div class="field">
+            <label for="content">Votre commentaire : </label>
+            <textarea id="content" name="content"></textarea>
+        </div>
+        <div class="field">
+            <button type="submit" class="ui button primary">
+                Poster
+            </button>
+        </div>
+    </form>
     <script>
         window.onload = function () {
           $(document).ready(function(){
