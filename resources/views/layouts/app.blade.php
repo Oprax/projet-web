@@ -34,17 +34,27 @@
             </div>
         </div>
         <div class="hidden-md hidden-lg hidden-sm">
-            <div class="item">
-                <a href="{{route('home')}}"></a> Accueil
-            </div>
-            <div class="item">
-                <a href="{{route('activity.index')}}"></a> Activités
-            </div>
-            <div class="item">
-                <a href="{{ route('shop_home') }}"> Boutique</a>
-            </div>
-            <div class="item">
-                Mon Compte
+            <a href="{{route('home')}}" class="item">
+                Accueil
+            </a>
+            <a href="{{route('activity.index')}}" class="item">
+                Activités
+            </a>
+            <a href="{{ route('shop_home') }}" class="item">
+                Boutique
+            </a>
+            <a id="dropdown-user-sidebar" class="item">
+                <img id="avatar-navbar" class="ui avatar image" src="{{asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}">
+                {{\Illuminate\Support\Facades\Auth::user()->name}} {{\Illuminate\Support\Facades\Auth::user()->forename}}
+                <i class="dropdown icon"></i>
+            </a>
+            <div id="account-dropdown-sidebar" class="item hidden">
+                <a href="{{route('user.show', ['user' => \Illuminate\Support\Facades\Auth::id()])}}" class="item"><i class="user icon"></i>Mon Compte</a>
+                <a href="{{route('user.edit', ['user' => \Illuminate\Support\Facades\Auth::id()])}}" class="item"><i class="edit icon"></i>Editer mon compte</a>
+                <a href="{{route('logout')}}" class="item"><i class="sign out icon"></i>Déconnexion</a>
+                @if(Auth::user()->isCesiBDE())
+                    <a class="item" href="{{route('user.index')}}"><i class="users icon"></i>Gestion des utilisateurs</a>
+                @endif
             </div>
         </div>
         @if (Request::is('shop*'))
@@ -70,11 +80,13 @@
                         <img style="height:25px; width: 25px; margin-right: 5px" id="avatar-navbar" class="ui mini circular image" src="{{asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}">
                         {{\Illuminate\Support\Facades\Auth::user()->name}} {{\Illuminate\Support\Facades\Auth::user()->forename}}<i class="dropdown icon"></i>
                         <div class="menu">
-                            <a class="item" href="{{route('user.show', ['user' => \Illuminate\Support\Facades\Auth::id()])}}">Mon compte</a>
-                            <a class="item" href="{{route('user.edit', ['user' => \Illuminate\Support\Facades\Auth::id()])}}">Editer mon compte</a>
-                            <a class="item" href="{{route('logout')}}">Déconnexion</a>
-                            <div class="ui divider"></div>
-                            <a class="item" href="{{route('user.index')}}">Gestion des utilisateurs</a>
+                            <a class="item" href="{{route('user.show', ['user' => \Illuminate\Support\Facades\Auth::id()])}}"><i class="user icon"></i>Mon compte</a>
+                            <a class="item" href="{{route('user.edit', ['user' => \Illuminate\Support\Facades\Auth::id()])}}"><i class="edit icon"></i>Editer mon compte</a>
+                            <a class="item" href="{{route('logout')}}"><i class="sign out icon"></i>Déconnexion</a>
+                            @if(Auth::user()->isCesiBDE())
+                                <div class="ui divider"></div>
+                                <a class="item" href="{{route('user.index')}}"><i class="users icon"></i>Gestion des utilisateurs</a>
+                            @endif
                         </div>
                     </div>
                 </div>
