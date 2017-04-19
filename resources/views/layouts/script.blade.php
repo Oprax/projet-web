@@ -113,10 +113,26 @@
         });
 
         $('.ui.dropdown').dropdown();
+        $('.ui.dropdown.item').dropdown();
     });
 
 
     $('.menu .item').tab();
+
+    $('#dropdown-user-sidebar').click(function(event){
+        event.stopPropagation();
+        if( $('#account-dropdown-sidebar').hasClass('hidden')){
+            $('#account-dropdown-sidebar').removeClass('hidden');
+        }
+        else {
+            $('#account-dropdown-sidebar').addClass('hidden');
+        }
+    });
+    $(window).click(function(){
+        if ( ! $('#account-dropdown-sidebar').hasClass('hidden') ) {
+            $('#account-dropdown-sidebar').addClass('hidden');
+        }
+    });
 </script>
 
 
