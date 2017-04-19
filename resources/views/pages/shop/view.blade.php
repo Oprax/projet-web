@@ -54,20 +54,20 @@
 
                     @if(!empty($sizes))
                         <div class="column">
-
                                 {{  Form::select('sizes', $sizes, null, array('class' => 'form-control')) }}
                         </div>
                     @endif
 
                     <div class="column">
-                        <h4>Prix : {{ $product->price }} €</h4>
+                        {{  Form::select('quantite', $quantite = array(1,2,3,4,5,6,7,8,9), null, array('class' => 'form-control')) }}
                     </div>
                 </div>
-                <div class="ui one column grid">
+                <div class="ui two column grid">
                     <input type="text" class="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="text" class="hidden" name="product_slug" value="{{ $product->slug }}">
                     <input type="text" class="hidden" name="category_name" value="{{ $product->category }}">
 
+                    <h4>Prix : {{ $product->price }} €</h4>
                     <button class="ui button" type="submit" >Ajouter au panier</button>
                 </div>
             </div>

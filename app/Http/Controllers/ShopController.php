@@ -121,21 +121,40 @@ class ShopController extends Controller
 
     public function add_basket(Request $request){
 
-        
-        //setcookie("TestCookie", "yes", time()+3600);
+        if(isset($_COOKIE['basket'])){
+            $basket = unserialize($_COOKIE['basket']);
+        }else{
+            $basket = array();
+        }
+
+
+        if(isset($request->quantite)){
+            $quantite = $request->quantite+1;
+        }
+
+        $arrayy = array($request->product_id, $request->sizes, $request->colors, $quantite);
+        array_push($basket, $arrayy);
+
+
+        $tab_seria = serialize($basket);
+        setcookie("basket", $tab_seria, time()+24*60*30);
 
 
         return redirect()->route('shop_product', ['category' => $request->category_name, 'product' => $request->product_slug]);
     }
 
     public function getbasket(Request $request, ICategoryGestion $categoryGestion){
-
-
-
         echo'<br><br>';
-        print_r($_COOKIE["basket"]);
+        if(isset($_COOKIE['basket'])){
+            $basket = unserialize($_COOKIE['basket']);
+        }
 
+        $id_product_bask = array();
+        foreach ($basket as $bak){
+            array_push($id_product_bask, $bak[0]);
+        }
+        $products = shop_products::get()->whereIn('id', $id_product_bask);
 
-        return view('pages/shop/basket', ['categories' => $categoryGestion->getCategories()]);
+        return view('pages/shop/basket', ['categories' => $categoryGestion->getCategories(), 'baskets' => $basket, 'products' => $products]);
     }
 }
