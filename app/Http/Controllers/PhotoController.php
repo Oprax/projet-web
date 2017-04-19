@@ -17,7 +17,12 @@ class PhotoController extends EventHandlerController
      */
     public function index(Activity $activity)
     {
-        $photos = Photo::query()->where('activity_id', $activity->id)->get();
+        $photos = Photo::where('activity_id', $activity->id)->get();
+        $photos = $photos->map(function ($photo) {
+            $photo->comment_count = $photo->comments->count();
+            $photo->comment = $photo->comments->sortBy('created_at')->first();
+            return $photo;
+        });
         return $this->view('pages.photo.index', [
             'activity' => $activity,
             'photos' => $photos

@@ -20,6 +20,7 @@
             </button>
         </div>
     </div>
+    <div id="app"><comments type="Photo" fid="{{ $photo->id }}"></comments></div>
     <div class="ui comments">
         <h3 class="ui dividing header">Dernier commentaire de la photo :</h3>
         <div class="comment">
