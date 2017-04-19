@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Shop\shop_order;
 use App\Model\Shop\shop_colors;
-use App\Model\Shop\shop_picture;
 use App\Model\Shop\shop_pictures;
 use App\Model\Shop\shop_productsRepository;
 use App\Model\Shop\shop_comments;
 use App\Model\Shop\shop_sizes;
 use Illuminate\Http\Request;
 use App\Gestion\Shop\ICategoryGestion;
+use App\Gestion\Shop\ICookieBasketGestion;
 use App\Model\Shop\shop_productsRepositoryInterface;
 use App\Model\Shop\shop_products;
 use App\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 
 class ShopController extends Controller
@@ -184,12 +186,40 @@ class ShopController extends Controller
         return view('pages/shop/basket', ['categories' => $categoryGestion->getCategories(), 'baskets' => $basket, 'products' => $products]);
     }
 
-    public function confirm_address(Request $request){
+    public function confirm_address(Request $request, ICategoryGestion $categoryGestion){
 
-        echo 'ok';
+
+        return view('pages/shop/basketConfimAddress', ['categories' => $categoryGestion->getCategories()]);
     }
 
-    public function postConfirm_address(Request $request){
+    public function postConfirm_address(Request $request, ICookieBasketGestion $cookieBasketGestion){
+        $baskets = $cookieBasketGestion->getBasket();
 
+        $products = $cookieBasketGestion->getproducts();
+
+        $order = new shop_order();
+        $order->country = $request->country;
+        $order->adresse = $request->address;
+        $order->zip_code = $request->codePostale;
+        $order->city = $request->city;
+
+        $order->quantities = $baskets[4];
+        $order->price = $baskets[5];
+        $order->user_id = Auth::user()->id;
+
+        $order->save();
+
+        return redirect()->route('user.show', Auth::user());
+    }
+
+    public function postConfirmBasket(Request $request, ICookieBasketGestion $cookieBasketGestion){
+        $baskets = $cookieBasketGestion->getBasket();
+
+        $baskets[4]= $request->quantity_total;
+        $baskets[5]= $request->price_total;
+
+        $cookieBasketGestion->setBasket($baskets);
+
+        return redirect()->route('shop_basket_confirm_address');
     }
 }
