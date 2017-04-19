@@ -18,15 +18,16 @@ class UserPolicy
      * Determine whether the user can view the user.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $user
+     * @param  \App\User  $userAccess
      * @return mixed
      */
     public function view(User $user, User $userAccess = null)
     {
+        return true;
         if($userAccess == null){
-            return false;
+            return $user->isCesiBDE();
         }
-        else {
+        else{
             return true;
         }
     }
@@ -46,7 +47,7 @@ class UserPolicy
      * Determine whether the user can update the user.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $user
+     * @param  \App\User  $userAccess
      * @return mixed
      */
     public function update(User $user, User $userAccess)

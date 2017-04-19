@@ -21,8 +21,8 @@ class UserController extends EventHandlerController
      */
     public function index()
     {
-        $this->authorize('view');
-       return $this->view('pages/user/index', ['Users' => User::get()]);
+        $this->authorize('view', User::class);
+        return $this->view('pages/user/index', ['Users' => User::get()]);
     }
 
     /**

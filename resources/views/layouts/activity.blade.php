@@ -8,7 +8,29 @@
             </div>
         </div>
         <div class="twelve wide column">
-            <h2 class="ui header"><a href="{{ route('activity.show', $act) }}">{{ $act->name }}</a></h2>
+            <div class="ui grid">
+                <div class="ten wide column">
+                    <h2 class="ui header"><a href="{{ route('activity.show', $act) }}">{{ $act->name }}</a></h2>
+                </div>
+                <div class="six wide column">
+                    <div class="ui grid">
+                        <div class="seven wide column">
+                            @can ('update', $act)
+                                <a href="{{route('activity.edit', $act)}}">
+                                    <button class="ui orange icon button"><i class="edit icon"></i>Editer</button>
+                                </a>
+                            @endcan
+                        </div>
+                        <div class="nine wide column">
+                            @can('delete', $act)
+                                {!! Form::open(['route' => ['activity.destroy', $act], 'method' => 'DELETE']) !!}
+                                <button class="ui red icon button" type="submit"><i class="delete icon"></i>Supprimer</button>
+                                {!! Form::close() !!}
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+            </div>
             <p>
                 {{ $act->description }}
             </p>
