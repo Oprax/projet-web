@@ -20,50 +20,7 @@
             </button>
         </div>
     </div>
-    <div id="app"><comments type="Photo" fid="{{ $photo->id }}"></comments></div>
-    <div class="ui comments">
-        <h3 class="ui dividing header">Dernier commentaire de la photo :</h3>
-        <div class="comment">
-            <a href="#" class="avatar">
-                <img src="https://lorempixel.com/150/150/people/">
-            </a>
-            <div class="content">
-                <a class="author">Matt</a>
-                <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                </div>
-            </div>
-        </div>
-        <div class="comment">
-            <a href="#" class="avatar">
-                <img src="https://lorempixel.com/150/150/people/">
-            </a>
-            <div class="content">
-                <a class="author">Matt</a>
-                <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                </div>
-            </div>
-        </div>
-        <div class="comment">
-            <a href="#" class="avatar">
-                <img src="https://lorempixel.com/150/150/people/">
-            </a>
-            <div class="content">
-                <a class="author">Matt</a>
-                <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                </div>
-            </div>
-        </div>
+    <div id="app">
+        <comments type="Photo" fid="{{ $photo->id }}"></comments>
     </div>
 @endsection

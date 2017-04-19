@@ -8,75 +8,16 @@
         <div class="four wide column">
             <div class="carousel">
                 @foreach($activity->photos as $photo)
-                <div class="ui card">
+                <a class="ui card" href="{{ route('activity.photos.show', [$activity, $photo]) }}" data-photo="{{ $photo->id }}">
                     <div class="image">
                         <img src="{{ $photo->path }}">
                     </div>
-                </div>
+                </a>
                 @endforeach
             </div>
         </div>
-        <div class="two wide column">
-            <div>
-                <i class="thumbs up icon"></i>
-                5 J'aime
-            </div>
-            <div>
-                <i class="comments up icon"></i>
-                10 commentaires
-            </div>
-            <div>
-                <button class="ui icon button">
-                    <i class="share alternate icon"></i>
-                </button>
-            </div>
-        </div>
-        <div class="ten wide column">
-            <div class="ui comments">
-                <h3 class="ui dividing header">Dernier commentaire de la photo :</h3>
-                <div class="comment">
-                    <a href="#" class="avatar">
-                        <img src="https://lorempixel.com/150/150/people/">
-                    </a>
-                    <div class="content">
-                        <a class="author">Matt</a>
-                        <div class="metadata">
-                            <span class="date">Today at 5:42PM</span>
-                        </div>
-                        <div class="text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <a href="#" class="avatar">
-                        <img src="https://lorempixel.com/150/150/people/">
-                    </a>
-                    <div class="content">
-                        <a class="author">Matt</a>
-                        <div class="metadata">
-                            <span class="date">Today at 5:42PM</span>
-                        </div>
-                        <div class="text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <a href="#" class="avatar">
-                        <img src="https://lorempixel.com/150/150/people/">
-                    </a>
-                    <div class="content">
-                        <a class="author">Matt</a>
-                        <div class="metadata">
-                            <span class="date">Today at 5:42PM</span>
-                        </div>
-                        <div class="text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque cupiditate debitis enim expedita facere illo illum natus odio porro, quia quibusdam quo, quos repudiandae temporibus tenetur veniam vero?
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="twelve wide column" id="app">
+            <comments type="Photo" fid="{{ $activity->photos->last()->id }}"></comments>
         </div>
     </div>
     <p>
@@ -135,6 +76,14 @@
               dots: true,
               infinite: true,
               arrows: false
+            })
+            $('.carousel').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+              var fid = $('.slick-active').attr('data-photo');
+              $('#app').html('<comments type="Photo" fid="' + fid + '"></comments>')
+              const app = new Vue({
+                el: '#app',
+                productionTip: false
+              });
             })
           })
         }
