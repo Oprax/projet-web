@@ -10,7 +10,7 @@
                 {{ $product->name }}
             </div>
             <div class="ui grid">
-                <img class="ui  centered medium image" src="{{asset($product->pictures->first()->url)}}">
+                <img class="ui  centered medium image" src="">
             </div>
             <div class="ui center aligned grid">
                 <div class="ui circular segment">
