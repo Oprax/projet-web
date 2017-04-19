@@ -13,6 +13,8 @@ use App\Gestion\Shop\ICategoryGestion;
 use App\Model\Shop\shop_productsRepositoryInterface;
 use App\Model\Shop\shop_products;
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
+
 
 class ShopController extends Controller
 {
@@ -120,7 +122,6 @@ class ShopController extends Controller
     }
 
     public function add_basket(Request $request){
-
         if(isset($_COOKIE['basket'])){
             $basket = unserialize($_COOKIE['basket']);
         }else{
@@ -131,9 +132,26 @@ class ShopController extends Controller
         if(isset($request->quantite)){
             $quantite = $request->quantite+1;
         }
+        $string = null;
+        $new = true;
+        foreach ($basket as $key => $bask){
+            $string = $string.' '.$bask[0];
 
-        $arrayy = array($request->product_id, $request->sizes, $request->colors, $quantite);
-        array_push($basket, $arrayy);
+
+            if($request->product_id == $bask[0]){
+                $basket[$key][3] = $bask[3]+$quantite;
+
+                //dd($basket[$key][3]);
+                echo '<br> pas ok <br>';
+                $new =false;
+                $string = $string.'<br><br>';
+            }
+        }
+
+        if($new){
+            $arrayy = array($request->product_id, $request->sizes, $request->colors, $quantite);
+            array_push($basket, $arrayy);
+        }
 
 
         $tab_seria = serialize($basket);
@@ -149,12 +167,29 @@ class ShopController extends Controller
             $basket = unserialize($_COOKIE['basket']);
         }
 
+
         $id_product_bask = array();
         foreach ($basket as $bak){
             array_push($id_product_bask, $bak[0]);
         }
-        $products = shop_products::get()->whereIn('id', $id_product_bask);
+
+
+        //$products = shop_products::get()->whereIn('id', $id_product_bask);
+        $products = shop_products::whereIn('id', $id_product_bask)
+            //->orderByRaw('FIELD(id, "23", "24", "1")')
+            ->orderByRaw('FIELD(id, '.implode(",", $id_product_bask).')')
+            // implode(" ,", [23,24,1]).')')
+            ->get();
 
         return view('pages/shop/basket', ['categories' => $categoryGestion->getCategories(), 'baskets' => $basket, 'products' => $products]);
+    }
+
+    public function confirm_address(Request $request){
+
+        echo 'ok';
+    }
+
+    public function postConfirm_address(Request $request){
+
     }
 }
