@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Seeder;
 use \Illuminate\Support\Facades\DB;
 
@@ -52,8 +53,8 @@ class DatabaseSeeder extends Seeder
             'cat_parent' => $id_vai
         ]);
 
-        $this->call(UsersTableSeeder::class);
-        $this->call(ActivitiesTableSeeder::class);
-        $this->call(PhotosTableSeeder::class);
+        $this->call(\Database\Seeds\UsersTableSeeder::class);
+        $this->call(\Database\Seeds\ActivitiesTableSeeder::class);
+        $this->call(\Database\Seeds\PhotosTableSeeder::class);
     }
 }

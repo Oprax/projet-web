@@ -1,6 +1,10 @@
 <?php
 
+namespace Database\Seeds;
 use Illuminate\Database\Seeder;
+use App\User;
+use App\Activity;
+use App\Photo;
 
 class PhotosTableSeeder extends Seeder
 {
@@ -11,10 +15,10 @@ class PhotosTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = App\User::all()->first();
-        $activity = App\Activity::all()->first();
+        $user = User::all()->first();
+        $activity = Activity::all()->first();
 
-        factory(App\Photo::class)->create([
+        factory(Photo::class)->create([
             'user_id' => $user->id,
             'activity_id' => $activity->id
         ]);

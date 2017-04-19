@@ -1,5 +1,9 @@
 <?php
 
+namespace Database\Seeds;
+
+use App\Association;
+use App\Activity;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,8 +16,8 @@ class ActivitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        $assoc_bde = App\Association::all()->where('name', 'BDE')->first();
-        factory(App\Activity::class)->create([
+        $assoc_bde = Association::all()->where('name', 'BDE')->first();
+        factory(Activity::class)->create([
             'is_proposal' => false,
             'is_accept' => true,
             'can_subscribe' => false,
