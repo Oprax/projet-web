@@ -50,9 +50,9 @@
     <script src="{{asset('semantic-ui/semantic.min.js')}}"></script>
 @endif
 <script src="{{asset('semantic-ui/calendar.min.js')}}"></script>
+<script src="{{ asset('slick/slick.js') }}"></script>
 
 @if(Request::is('/'))
-    <script src="{{ asset('slick/slick.js') }}"></script>
     <script>
         $(document).ready(function () {
           $('.carousel').slick({
@@ -67,7 +67,6 @@
 @endif
 
 @if(Request::is('shop*'))
-<script src="{{ asset('slick/slick.js') }}"></script>
 <script>
     $(document).ready(function () {
         $('.carousel').slick({
@@ -104,5 +103,19 @@
             }
         }
     });
+
+    $(document).ready(function(){
+        $('.right.menu.open').on("click",function(e){
+            e.preventDefault();
+            $('.ui.vertical.menu').toggle();
+        });
+
+        $('.ui.dropdown').dropdown();
+    });
+
+
+    $('.menu .item').tab();
 </script>
+
+
 
