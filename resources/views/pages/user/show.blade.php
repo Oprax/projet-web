@@ -4,7 +4,7 @@
 <div>&nbsp;</div>
 <div class="ui stackable grid">
      <div class="sixteen wide mobile six wide computer column">
-         <img class="ui centered medium circular image" src="{{asset($User->avatar)}}" alt="">
+        <img class="ui centered medium circular image" src="{{asset($User->avatar)}}" alt="">
      </div>
     <div class="sixteen wide mobile five wide computer column">
         <h1>{{$User->name}} {{$User->forename}}</h1>
@@ -31,7 +31,7 @@
             <div class="item">
                 <i class="users icon"></i>
                 <div class="content">
-                    {{$User->association}}
+                    {{$User->association->name}}
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
         <div class="four wide column">
             <div class="ui card">
                 <div class="content">
-                    <div class="header">{{$User->subscribes->first()->activity->name}}</div>
+                    <div class="header"></div>
                 </div>
                 <div class="image">
                     <img src="https://semantic-ui.com/images/avatar/large/helen.jpg">

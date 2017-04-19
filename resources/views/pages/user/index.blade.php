@@ -2,8 +2,9 @@
 
 @section('content')
 <div>&nbsp;</div>
+<h1>Gestions des utilisateurs</h1>
 <div class="ui grid">
-    <div class="sixteen wide phone sixteen wide computer column ">
+    <button class="sixteen wide phone sixteen wide computer column ">
         <table class="ui very basic collapsing celled table">
             <thead>
             <tr><th>Utilisateurs</th>
@@ -49,22 +50,20 @@
                     @if ($user->is_valid)
                         <i class="large green checkmark icon"></i>
                     @else
-                        <i class="large red icon close"></i><div class="ui small button">Approuver</div>
+                        {!! Form::open(['route' => ['user.update',$user], 'method' => 'PUT']) !!}
+                            <input type="hidden" name="approved" value="true">
+                            <button class="ui small button" type="submit">Approuver</button>
+                        {!! Form::close() !!}
+                        <i class="large red icon close"></i>
                     @endif
                 </td>
                 <td>
                     <a href="{{route('user.edit', ['user' => $user->id])}}">
-                    <button class="ui labeled icon button">
-                        <i class="large edit icon"></i>
-                        Editer
-                    </button>
+                        <button class="ui labeled icon button"><i class="large edit icon"></i>Editer</button>
                     </a>
-                    <a href="{{route('user.destroy', ['user' => $user->id])}}">
-                    <button class="ui labeled icon button">
-                        <i class="large erase icon"></i>
-                        Supprimer
-                    </button>
-                    </a>
+                    {!! Form::open(['route' => ['user.destroy', $user], 'method' => 'DELETE']) !!}
+                        <button class="ui labeled icon button" type="submit"><i class="large erase icon"></i>Supprimer</button>
+                    {!! Form::close() !!}
                 </td>
             </tr>
             @endforeach
@@ -73,9 +72,10 @@
             <tr>
                 <th></th>
                 <th colspan="5">
-                    <div class="ui right floated small primary  button">
-                        Approuver Tous
-                    </div>
+                    {!! Form::open(['route' => ['user.update', $user], 'method' => 'PUT']) !!}
+                        <input type="hidden" name="approved_all" value="true">
+                        <button class="ui right floated small primary button" type="submit">Approuver Tous</button>
+                    {!! Form::close() !!}
                 </th>
             </tr>
             </tfoot>

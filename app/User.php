@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Validator;
 
 class User extends Authenticatable
 {
@@ -34,6 +35,37 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $rules = array(
+        'name' => 'required|string',
+        'forename' => 'required|string',
+        'avatar' => 'nullable|file|mimes:jpeg,bmp,png',
+        'email' => 'required|email',
+        'password' => 'nullable|string',
+        'password-confirm' => 'nullable|string',
+        'status' => 'required|string',
+        'role' => 'required|string',
+        'association' => 'required|string',
+        'birthday' => 'required|date',
+    );
+
+    private $errors;
+
+    public function validate($data)
+    {
+        $v = Validator::make($data, $this->rules);
+        if ($v->fails())
+        {
+            $this->errors = $v->messages()->messages();
+            return false;
+        }
+        return true;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
+    }
 
     public function isCesi() {
         return $this->role->name === 'cesi';

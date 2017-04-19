@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Association;
 use App\Role;
 use App\Status;
+use App\Subscribe;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends EventHandlerController
 {
@@ -56,7 +60,15 @@ class UserController extends EventHandlerController
      */
     public function update(Request $request, User $user)
     {
-        //
+        if($request->input('approved')) {
+            $user->update(['is_valid' => true]);
+            return redirect(route('user.index'));
+        }
+        elseif($request->input('approved_all')) {
+            User::where('is_valid', '0')->update(['is_valid' => 1]);
+            return redirect(route('user.index'));
+        }
+
     }
 
     /**
@@ -67,6 +79,33 @@ class UserController extends EventHandlerController
      */
     public function destroy(User $user)
     {
-        //
+        $user->subscribes()->delete();
+        $user->delete();
+        return redirect(route('user.index'));
+    }
+
+    public function store(Request $request){
+         $u = new User();
+         if($u->validate(Input::all())){
+             $user = User::find($request['user']);
+             $user->name = $request['name'];
+             $user->forename = $request['forename'];
+             $user->email = $request['email'];
+             $user->password = bcrypt($request['password']);
+             $user->status_id = Status::where('name',$request['status'])->first()->id;
+             $user->role_id = Role::where('name',$request['role'])->first()->id;
+             $user->association_id = Association::where('name', $request['association'])->first()->id;
+             $user->birthday = $request['birthday'];
+
+             if(! empty($request['avatar'])) {
+                $user->avatar = $request['avatar'];
+             }
+             $user->save();
+             return redirect(route('user.edit', $user));
+         }
+         else{
+
+             return redirect(route('user.edit', $request['user']))->withErrors($u->errors())->withInput(Input::all());
+         }
     }
 }

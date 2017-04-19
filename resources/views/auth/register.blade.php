@@ -79,10 +79,14 @@
                             <select class="ui fluid dropdown" name="status" id="status" required>
                                 <option value="">Status</option>
                                 @foreach ($Status as $status)
-                                <option value="{{ $status->name }}">{{ $status->name }}</option>
+                                <option {{old('status') === $status->name ? 'selected="selected"' : ''}}>{{ $status->name }}</option>
                                 @endforeach
-
                             </select>
+                            @if ($errors->has('status'))
+                                <div class="ui error message">
+                                    <strong>{{ $errors->first('status') }}</strong>
+                                </div>
+                            @endif
                         </div>
 
                         <div class="required field">
@@ -90,10 +94,14 @@
                             <div class="ui calendar" id="calendarYearFirst">
                                 <div class="ui input left icon">
                                     <i class="calendar icon"></i>
-                                    <input type="text" name="birthday" placeholder="Date/Time">
+                                    <input type="text" name="birthday" placeholder="Date/Time" value="{{old('birthday')}}">
                                 </div>
                             </div>
-
+                            @if ($errors->has('birthday'))
+                                <div class="ui error message">
+                                    <strong>{{ $errors->first('birthday') }}</strong>
+                                </div>
+                            @endif
                         </div>
 
                         <div class="field">

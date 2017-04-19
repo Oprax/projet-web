@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Role;
 use App\Status;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -59,6 +60,9 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'forename' => 'required|string',
+            'status' => 'required|string',
+            'birthday' => 'required|date',
         ]);
     }
 
@@ -71,17 +75,16 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        $status_id = Status::where('name', $data['status'])->first()->id;
-        return User::create([
-            'name' => $data['name'],
-            'forename' => $data['forename'],
-            'avatar' => "images/avatar/default-avatar.png",
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'status_id' => $status_id,
-            'role_id' => 1,
-            'birthday' => $data['birthday'],
-            'is_valid' => false,
-        ]);
+            return User::create([
+                'name' => $data['name'],
+                'forename' => $data['forename'],
+                'avatar' => "images/avatar/default-avatar.png",
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'status_id' => Status::where('name', $data['status'])->first()->id,
+                'role_id' => Role::where('name', 'student')->first()->id,
+                'birthday' => $data['birthday'],
+                'is_valid' => false,
+            ]);
     }
 }
