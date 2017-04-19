@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Activity;
+use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -19,7 +20,9 @@ class EventHandlerController extends Controller
     }
 
     public function view($view,$params = array()){
-        $events = [];
+        /*
+         * Setting up the calendar
+         */
         $blue = "#00F";
         $red = "#F00";
         $activities = Activity::where('is_accept', 1)->get();
@@ -43,12 +46,18 @@ class EventHandlerController extends Controller
             $calendar = Calendar::addEvent($event, ['color' => $color]); //add an array with addEvents
         }
 
-
-        //$calendar = Calendar::addEvents($events) //add an array with addEvents
         $calendar->setOptions([ //set fullcalendar options
             'firstDay' => 1
         ]);
         $params += compact('calendar');
+        /*
+         * Prepare informations for sidebar
+         */
+        $Future = Activity::whereDate('date','>', Carbon::today()->toDateString())->limit(5)->get();
+        $Current = Activity::whereDate('date', '=', Carbon::today()->toDateString())->get();
+        $Past = Activity::whereDate('date','<', Carbon::today()->toDateString())->limit(5)->get();
+        $params += compact('Future', 'Current', 'Past');
+
         return view($view,$params);
     }
 }

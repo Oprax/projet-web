@@ -6,22 +6,35 @@
     <a class="header" href="{{route('activity.index')}}">
         Activités
     </a>
+    @if(!empty($Future))
     <div class="menu">
         <a href="{{route('activity.future')}}" class="item">Futur</a>
         <div class="menu" style="padding-left: 15px">
-            <a href="" class="item">Activité 9</a>
+            @foreach($Future as $future)
+                <a href="{{route('activity.show', $future)}}" class="item">{{$future->name}}</a>
+            @endforeach
         </div>
     </div>
+    @endif
+    @if (! empty($Current))
     <div class="menu">
         <a href="{{route('activity.current')}}" class="item">Courante</a>
         <div class="menu" style="padding-left: 15px">
-            <a href="" class="item">Activité 5</a>
+            @foreach($Current as $current)
+                <a href="{{route('activity.show', $current)}}" class="item">{{$current->name}}</a>
+            @endforeach
         </div>
     </div>
+    @endif
+
+    @if(!empty($Past))
     <div class="menu">
         <a href="{{route('activity.past')}}" class="item">Passé</a>
         <div class="menu" style="padding-left: 15px">
-            <a href="" class="item">Activité 4</a>
+            @foreach ($Past as $past)
+                <a href="{{route('activity.show', $past)}}" class="item">{{$past->name}}</a>
+            @endforeach
         </div>
     </div>
+    @endif
 </div>
