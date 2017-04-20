@@ -90,7 +90,19 @@
             $('#account-dropdown-sidebar').addClass('hidden');
         }
     });
+    $('#dropdown-activity-sidebar').click(function(event){
+        event.stopPropagation();
+        if( $('#time-dropdown-sidebar').hasClass('hidden')){
+            $('#time-dropdown-sidebar').removeClass('hidden');
+        }
+        else {
+            $('#time-dropdown-sidebar').addClass('hidden');
+        }
+    });
     $(window).click(function(){
+        if ( ! $('#time-dropdown-sidebar').hasClass('hidden') ) {
+            $('#time-dropdown-sidebar').addClass('hidden');
+        }
         if ( ! $('#account-dropdown-sidebar').hasClass('hidden') ) {
             $('#account-dropdown-sidebar').addClass('hidden');
         }

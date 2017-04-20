@@ -11,7 +11,7 @@
             </div>
             <div class="ui grid">
                 <img class="ui  centered medium image" src="@if(isset($product->pictures[0]))
-                {{ $product->pictures[0]->url }}
+                {{ asset($product->pictures[0]->url) }}
                 @else
                 {{'images/shop/image_default.png' }}
                 @endif">
