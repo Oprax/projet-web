@@ -4,7 +4,7 @@ body
     font-size: 12px;
     background-color: white;
     color: black;
-    margin-top: 30px;
+    margin-top: 60px;
 
 }
 
@@ -94,29 +94,44 @@ body
 
 }
 
-#raccourcis
+
+#name h2
 {
-    background-color: gray;
-    border: 1px solid black;
+    font-style: italic;
 }
+
+#extra, #extra1
+{
+    background-color: darkred;
+}
+
+#extra h4, #extra1 h5
+{
+    color: white;
+    font-weight: bold;
+}
+
 
 #raccourcis a
 {
     font-family: Arial;
     font-weight: bold;
-    color: white;
 }
 
 #griduser
 {
     border: 1px solid black;
-    background-color: darkred;
 }
 
 #raccourcis
 {
     font-family: Arial;
     font-weight: bold;
+}
+
+#name
+{
+    background-color: darkred;
 }
 
 
@@ -128,7 +143,7 @@ body
     font-weight: bold;
     color: white;
     padding-left: 5px;
-    margin-top: 30px;
+    margin-top: 23px;
 }
 
 #basket a
@@ -166,10 +181,10 @@ body
     width: 150px;
 }
 
- #textlogin
- {
-     margin-right: 50px;
- }
+#textlogin
+{
+    margin-right: 50px;
+}
 
 #panier, #catact
 {
@@ -179,6 +194,7 @@ body
     font-family: Arial;
     font-weight: bold;
     padding-left: 8px;
+    margin-top: 23px;
 
 }
 
@@ -215,4 +231,11 @@ body
     font-family: Arial;
 
 }
+
+#prixtotal
+{
+    font-style: italic;
+}
+
+
 

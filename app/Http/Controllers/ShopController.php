@@ -128,15 +128,15 @@ class ShopController extends Controller
         return redirect()->route('shop_home');
     }
 
-    public function getupdateproduct(Request $request, ICategoryGestion $categoryGestion){
+    public function getupdateproduct(Request $request, ICategoryGestion $categoryGestion, ICookieBasketGestion $cookieBasketGestion){
 
         $product = shop_products::find($request->product_id);
 
         if(isset($categoryGestion)){
             $categories = shop_categories::pluck('name', 'id');//if product->size ok
-            return view('pages/shop/updateProduct', ['categories' => $categoryGestion->getCategories(), 'categoriesselect' => $categories, 'product' => $product]);
+            return view('pages/shop/updateProduct', ['categories' => $categoryGestion->getCategories(), 'categoriesselect' => $categories, 'product' => $product, 'baskets' => $cookieBasketGestion->getBasket(), 'productsbasket' => $cookieBasketGestion->getproducts()]);
         }else{
-            return view('pages/shop/updateProduct', ['categories' => $categoryGestion->getCategories(), 'product' => $product]);
+            return view('pages/shop/updateProduct', ['categories' => $categoryGestion->getCategories(), 'product' => $product, 'baskets' => $cookieBasketGestion->getBasket(), 'productsbasket' => $cookieBasketGestion->getproducts()]);
         }
     }
 

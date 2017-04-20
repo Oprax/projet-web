@@ -4,7 +4,7 @@
 
         <h3 id="catact">{{ $cat_act }}</h3>
 
-        <div class="ui link five cards" style="padding-top: 0; padding-bottom: 0; margin-top: 0; ">
+        <div class="ui link five stackable cards" >
             @foreach($products as $key2 => $product)
 
                 <div class="card">
