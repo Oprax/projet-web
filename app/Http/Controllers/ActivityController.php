@@ -84,7 +84,8 @@ class ActivityController extends EventHandlerController
      */
     public function edit(Activity $activity)
     {
-        //
+        $activity = Activity::with('photos')->where('id', $activity->id)->first();
+        return $this->view('pages.activity.edit', compact('activity'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Association;
+use App\Model\Shop\shop_order;
 use App\Role;
 use App\Status;
 use App\Subscribe;
@@ -34,7 +35,10 @@ class UserController extends EventHandlerController
     public function show(User $user)
     {
         $this->authorize('view', $user);
-        return $this->view('pages/user/show', ['User' => User::with('subscribes')->find($user->id)]);
+        return $this->view('pages/user/show', [
+            'User' => User::with('subscribes')->find($user->id),
+            'Orders' => shop_order::where('user_id', $user->id)->get(),
+        ]);
     }
 
     /**
