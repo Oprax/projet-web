@@ -2,12 +2,9 @@
 
 @section('content')
 
-    <style>
 
-    </style>
-
-    <h1>{{ $product->name }}</h1>
-    <p>{{ $product->category }}</p>
+    <h1 id="produitachat">{{ $product->name}}</h1>
+    <p id="catproduit">{{ $product->category }}</p>
 
 
 
@@ -39,7 +36,7 @@
 
         <div class="column">
             <div class="column">
-                <p>{{ $product->description }}</p>
+                <p id="descriptionprod">{{ $product->description }}</p>
             </div>
             <div class="column">
                 <br>

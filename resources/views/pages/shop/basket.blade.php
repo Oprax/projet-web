@@ -2,9 +2,7 @@
 
 @section('content')
 
-    <style>
 
-    </style>
 
     <h1>Panier</h1>
 

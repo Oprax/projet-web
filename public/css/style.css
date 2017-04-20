@@ -4,6 +4,7 @@ body
     font-size: 12px;
     background-color: white;
     color: black;
+    margin-top: 30px;
 
 }
 
@@ -72,9 +73,9 @@ body
     font-family: Arial;
 }
 
-#thumbs, #textthumbs
+#productside, #productside h4
 {
-    color: #2bbbff;
+    font-family: Arial;
 }
 
 #Activitéscours a, #Activitésvenir a, #Activitéspassé a, #segmentA h1
@@ -122,6 +123,8 @@ body
     font-family: Arial;
     font-weight: bold;
     color: white;
+    margin-top: 20px;
+    padding-left: 5px;
 }
 
 #basket a
@@ -131,8 +134,77 @@ body
     font-weight: bold;
 }
 
-#basket
+#basket, #Boutiqueside
 {
     background-color: darkred;
     margin-left: 30px;
+    margin-top: 10px;
+    padding-left: 5px;
+}
+
+
+#Boutiqueside h2
+{
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+#logo
+{
+    height: 100px;
+    width: 100px;
+    margin-left: 200px;
+    margin-top: 10px;
+}
+
+#logoexia
+{
+    height: 100px;
+    width: 150px;
+    margin-top: 10px;
+}
+
+ #textlogin
+ {
+     margin-right: 50px;
+ }
+
+#panier, #catact
+{
+    background-color: darkred;
+    border:1px solid black;
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+    padding-left: 8px;
+
+}
+
+#buyproduct
+{
+    margin-bottom: 3px;
+}
+
+#produitachat
+{
+    margin-top: 30px;
+    background-color: darkred;
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+#catproduit
+{
+    font-family: Arial;
+    font-size: 15px;
+    border: 1px solid black;
+    background-color: gray;
+}
+
+#descriptionprod
+{
+    margin-top: 20px;
 }

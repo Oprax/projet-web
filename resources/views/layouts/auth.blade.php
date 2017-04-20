@@ -26,15 +26,15 @@
     <div class="container">
         <div class="ui grid">
             <div class="five wide computer eight wide tablet column">
-                <img class="ui fluid image" src="{{ asset('images/logo-bde.png') }}" alt="Logo du bde eXia Strasbourg">
+                <img id="logo" class="ui fluid image" src="{{ asset('images/logo-bde.png') }}" alt="Logo du bde eXia Strasbourg">
             </div>
             <div class="six wide column computer only ">
-                <div class="text-center">
+                <div id="textlogin" class="text-center">
                     <h1>Bienvenue sur le site du BDE de l'eXia Strasbourg</h1>
                 </div>
             </div>
             <div class="five wide computer eight wide tablet column">
-                <img class="ui fluid image" src="{{ asset('images/logoexia.jpg') }}" alt="Logo du bde eXia Strasbourg">
+                <img id="logoexia" class="ui fluid image" src="{{ asset('images/logoexia.jpg') }}" alt="Logo du bde eXia Strasbourg">
             </div>
             <div class="sixteen wide column tablet only mobile only">
                 <div class="text-center">
