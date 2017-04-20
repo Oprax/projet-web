@@ -23,4 +23,20 @@ Now we need run migration with `php artisan migrate` and you can run a server wi
 # 2. Deploy 
  
 On server run the `update.sh` in the `$HOME` directory.
+
+# 3. Selenium Test
+
+Please download Selenum 2.x [server](https://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar)
+
+Run it with java : 
+```bash
+java -jar selenium-server-standalone-2.53.1.jar
+```
+
+On root directory project (after a `composer update`) you can run behat :
+```bash
+vendor/bin/behat
+```
+
+Enjoy !
  
