@@ -61,7 +61,12 @@
             </button>
         </div>
         <div class="four wide column ui center">
+            @if($activity->can_subscribe)
             <subscribe fid="{{ $activity->id }}" uid="{{ Auth::user()->id }}"></subscribe>
+            @else
+                <i class="users icon"></i>
+                {{ $activity->subscribes->count() }} participants
+            @endif
         </div>
         <div class="three wide column ui center">
             <a href="{{ route('activity.photos.index', $activity) }}" class="ui primary button">
