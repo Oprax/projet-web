@@ -25,6 +25,8 @@ class ActivitiesTableSeeder extends Seeder
             'association_id' => $assoc_bde->id
         ]);
         $activities[0]->date = Carbon::now();
+        $activities[0]->name = 'LAN';
+        $activities[0]->can_subscribe = true;
         $activities[1]->date = Carbon::now()->addMonth(3);
         $activities[2]->date = Carbon::now()->subMonth(3);
         foreach ($activities as $activity) {
