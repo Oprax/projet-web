@@ -2,9 +2,6 @@
 
 @section('content')
 
-    <style>
-
-    </style>
 
     <h2>Commande du {{ $order->created_at }}</h2>
 

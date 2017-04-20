@@ -24,8 +24,6 @@ class shop_productsRepository implements shop_productsRepositoryInterface{
 
     public function save($product)
     {
-        //dd($product);
-        // dd($product['name']);
         $this->shop_products->name = $product['name'];
         $this->shop_products->slug = str_slug($product['name'], '-');
         $this->shop_products->price = $product['price'];

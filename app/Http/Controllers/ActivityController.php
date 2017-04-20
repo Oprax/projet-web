@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Activity;
+use App\Association;
 use App\Comment;
+use App\Photo;
+use App\Subscribe;
 use Carbon\Carbon;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ActivityController extends EventHandlerController
 {
@@ -51,7 +57,8 @@ class ActivityController extends EventHandlerController
      */
     public function create()
     {
-        return $this->view('pages.activity.create');
+        $Associations = Association::get();
+        return $this->view('pages.activity.create', compact('Associations'));
     }
 
     /**
@@ -62,7 +69,36 @@ class ActivityController extends EventHandlerController
      */
     public function store(Request $request)
     {
-        //
+        $file = $request->file('pics');
+
+        $destinationFolder = 'images/activity/';
+        $photo = null;
+        if(isset($file)){
+
+            $filename = 0 .  '-' . Carbon::now()->timestamp .'.' . pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $destinationPath = $destinationFolder . $filename;
+
+            try {
+                $file->move($destinationFolder, $filename);
+                $photo = $destinationPath;
+            }
+            catch (\Exception $e){
+                return redirect()->route('activity.index')->withErrors(['pics' => $e]);
+            }
+
+        }else{
+            return redirect()->route('activity.index')->withErrors(['pics' => 'Fichier non selectionné']);
+        }
+        $request['photo'] = $photo;
+        $request['is_accept'] = ($request->input('is_accept') == 'on') ? true : false;
+        $request['is_proposal'] = ($request->input('is_proposal') == 'on') ? true : false;
+        $request['can_subscribe'] = ($request->input('can_subscribe') == 'on') ? true : false;
+
+        $request['date'] = Carbon::createFromFormat('F j, Y g:i a', $request->input('date'));
+        $request['like'] = 0;
+        $request['association_id'] = Association::where('name', $request->input('association'))->first()->id;
+        $activity = Activity::create($request->all());
+        return redirect()->route('activity.show', $activity);
     }
 
     /**
@@ -84,7 +120,8 @@ class ActivityController extends EventHandlerController
      */
     public function edit(Activity $activity)
     {
-        //
+        $activity = Activity::with('photos')->where('id', $activity->id)->first();
+        return $this->view('pages.activity.edit', compact('activity'));
     }
 
     /**
@@ -96,7 +133,52 @@ class ActivityController extends EventHandlerController
      */
     public function update(Request $request, Activity $activity)
     {
-        //
+        if(!empty($request->file('pics'))){
+
+            $file = $request->file('pics');
+
+            $destinationFolder = 'images/activity/';
+
+            if(isset($file)){
+
+                    $filename = $activity->id .  '-' . Carbon::now()->timestamp .'.' . pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                    $destinationPath = $destinationFolder . $filename;
+                    $toDelete=$activity->photo;
+
+                    try {
+
+                        $file->move($destinationFolder, $filename);
+                        $activity->photo = $destinationPath;
+                        $activity->save();
+                        Storage::delete(asset($toDelete));
+                        unlink($toDelete);
+
+                    }
+                    catch (\Exception $e){
+                        return redirect()->route('activity.edit',$activity)->withErrors(['pics' => $e]);
+                    }
+
+                    return redirect()->route('activity.edit', $activity);
+            }else{
+                return redirect()->route('activity.edit', $activity)->withErrors(['pics' => 'Fichier non selectionné']);
+            }
+        }
+        else{
+
+            $is_accept = ($request->input('is_accept') == 'on') ? true : false;
+            $is_proposal = ($request->input('is_proposal') == 'on') ? true : false;
+            $can_subscribe = ($request->input('can_subscribe') == 'on') ? true : false;
+            $activity->update([
+                'name' => $request->input('name'),
+                'date' => Carbon::createFromFormat('F j, Y g:i a', $request->input('date')),
+                'lieu' => $request->input('lieu'),
+                'description' => $request->input('description'),
+                'is_accept' => $is_accept,
+                'is_proposal' => $is_proposal,
+                'can_subscribe' => $can_subscribe
+            ]);
+            return redirect()->route('activity.show', $activity);
+        }
     }
 
     /**
@@ -107,7 +189,31 @@ class ActivityController extends EventHandlerController
      */
     public function destroy(Activity $activity)
     {
-        //
+        $photos = Activity::with('photos')->find($activity->id)->photos;
+        foreach($photos as $photo){
+            foreach ($photo->comments as $comment){
+                $comment->delete();//Comment of photo
+            }
+            foreach($photo->likes as $like){
+                $like->delete();//Like of Photo
+            }
+            $photo->delete();//Photo
+        }
+        foreach ($activity->comments as $comment){
+            $comment->delete();
+        }
+        foreach ($activity->likes as $like) {
+            $like->delete();
+        }
+        foreach ($activity->soundings as $sounding){
+            $sounding->delete();
+        }
+        foreach ($activity->subscribes as $subscribe){
+            $subscribe->delete();
+        }
+        $activity->delete();// activity
+        return redirect()->route('activity.index');
+
     }
 
     private function lastComment() {

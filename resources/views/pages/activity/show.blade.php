@@ -4,48 +4,64 @@
 @section('content')
     <div>&nbsp;</div>
     <div class="ui grid">
-        <div class="ten wide column">
+        <div class="eight wide column">
             <h1 class="ui header">{{ $activity->name }}</h1>
         </div>
-        <div class="six wide column">
+        <div class="eight wide column">
             <div class="ui grid">
-                <div class="eight wide column">
+                <div class="five wide column">
                     @can ('update', $activity)
                         <a href="{{route('activity.edit', $activity)}}">
                             <button class="ui orange icon button"><i class="edit icon"></i>Editer</button>
                         </a>
                     @endcan
                 </div>
-                <div class="eight wide column">
+                <div class="six wide column">
                     @can('delete', $activity)
                         {!! Form::open(['route' => ['activity.destroy', $activity], 'method' => 'DELETE']) !!}
-                        <button class="ui red icon button" type="submit"><i class="delete icon"></i>Supprimer</button>
+                            <button class="ui red icon button" type="submit"><i class="delete icon"></i>Supprimer</button>
                         {!! Form::close() !!}
                     @endcan
+                </div>
+                <div class="five wide column">
+                    {!! Form::open(['route' => ['activity.photos.store', $activity], 'method' => 'POST', 'files' => true]) !!}
+                        <button type="button" class="ui green icon button" onclick="document.getElementById('pic-file').click();"><i class="add icon"></i>Ajouter des photos</button>
+                        <input id="pic-file" type="file" name="pics[]" multiple accept="image/*" style="display: none" onchange="document.getElementById('pic-submit').click()">
+                        <input id="pic-submit" type="submit" hidden>
+                        @if ($errors->has('pics'))
+                            <div class="ui error message">
+                                <strong>{{ $errors->first('pics') }}</strong>
+                            </div>
+                        @endif
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
-    <div class="ui grid">
-        <div class="four wide column">
-            <div class="carousel">
-                @foreach($activity->photos as $photo)
-                <a class="ui card" href="{{ route('activity.photos.show', [$activity, $photo]) }}" data-photo="{{ $photo->id }}">
-                    <div class="image">
-                        <img src="{{ $photo->path }}">
-                    </div>
-                </a>
-                @endforeach
+    @if(!empty($activity->photos->first()))
+         <div class="ui grid">
+            <div class="four wide column">
+                <div class="carousel">
+                    @foreach($activity->photos as $photo)
+                    <a class="ui card" href="{{ route('activity.photos.show', [$activity, $photo]) }}" data-photo="{{ $photo->id }}">
+                        <div class="image">
+                            <img src="{{ asset($photo->path) }}">
+                        </div>
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+            <div class="twelve wide column" id="comments-zone">
+                <comments type="Photo" fid="{{ $activity->photos->last()->id }}"></comments>
             </div>
         </div>
-        <div class="twelve wide column">
-            <comments type="Photo" fid="{{ $activity->photos->last()->id }}"></comments>
-        </div>
+    @endif
+    <div class="ui segment">
+        <p>
+            {{ $activity->description }}
+        </p>
     </div>
-    <p>
-        {{ $activity->description }}
-    </p>
-    <div class="ui stackable grid">
+    <div class="ui stackable grid" id="app">
         <div class="three wide column ui center">
             <like likes="{{ $activity->likes->count() }}" likable-id="{{ $activity->id }}" user-id="{{ Auth::user()->id }}" type="Activity"></like>
         </div>
@@ -59,8 +75,12 @@
             </button>
         </div>
         <div class="four wide column ui center">
-            <i class="users icon"></i>
-            16 participants
+            @if($activity->can_subscribe)
+            <subscribe fid="{{ $activity->id }}" uid="{{ Auth::user()->id }}"></subscribe>
+            @else
+                <i class="users icon"></i>
+                {{ $activity->subscribes->count() }} participants
+            @endif
         </div>
         <div class="three wide column ui center">
             <a href="{{ route('activity.photos.index', $activity) }}" class="ui primary button">
@@ -131,11 +151,15 @@
               infinite: true,
               arrows: false
             })
+            const app = new Vue({
+              el: '#comments-zone',
+              productionTip: false
+            });
             $('.carousel').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
               var fid = $('.slick-active').attr('data-photo');
-              $('#app').html('<comments type="Photo" fid="' + fid + '"></comments>')
+              $('#comments-zone').html('<comments type="Photo" fid="' + fid + '"></comments>')
               const app = new Vue({
-                el: '#app',
+                el: '#comments-zone',
                 productionTip: false
               });
             })

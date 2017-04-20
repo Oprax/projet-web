@@ -24,9 +24,14 @@ class LoginController extends Controller
     use AuthenticatesUsers;
     public function login(Request $request)
     {
-        if(! User::where('email', $request->input('email'))->first()->is_valid){
+        if (empty(User::where('email', $request->input('email'))->first()))
+        {
+            return redirect('auth/login')->withErrors(['invalid' => "Ce compte n'existe pas"]);
+        }
+        if (!User::where('email', $request->input('email'))->first()->is_valid) {
             return redirect('auth/login')->withErrors(['invalid' => "Votre compte n'a pas été validé"]);
         }
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle

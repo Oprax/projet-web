@@ -5,5 +5,10 @@
 <link rel="stylesheet" href="{{ asset('slick/slick.css') }}">
 <link rel="stylesheet" href="{{ asset('slick/slick-theme.css') }}">
 
-
+<!-- Semantic UI monkey path -->
+<style>
+    .ui.animated.button .hidden.content {
+        display: block !important;
+    }
+</style>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>

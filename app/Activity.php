@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     protected $fillable = [
-        'name', 'date', 'lieu', 'like', 'is_proposal', 'is_accept', 'can_subscribe', 'photo'
+        'name', 'date', 'lieu', 'like', 'is_proposal', 'is_accept', 'can_subscribe', 'photo', 'description', 'association_id'
     ];
 
     protected $dates = [
@@ -45,6 +45,10 @@ class Activity extends Model
     public function getLikesAttribute() {
         return Like::where('likable_type', 'Activity')
             ->where('likable_id', $this->id)->get();
+    }
+
+    public function getSubscribesAttribute() {
+        return Subscribe::where('activity_id', $this->id)->get();
     }
 
     static function accepted() {

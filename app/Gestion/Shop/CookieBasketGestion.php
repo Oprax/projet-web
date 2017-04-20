@@ -36,13 +36,19 @@ class CookieBasketGestion implements ICookieBasketGestion
         $id_product_bask = array();
         $id_product_bask = $this->getArrayId($id_product_bask, $this->getBasket());
 
-        $products = shop_products::whereIn('id', $id_product_bask)
-            //->orderByRaw('FIELD(id, "23", "24", "1")')
-            ->orderByRaw('FIELD(id, '.implode(",", $id_product_bask).')')
-            // implode(" ,", [23,24,1]).')')
-            ->get();
 
-        return $products;
+        if($id_product_bask != []){
+            $products = shop_products::with('pictures')->whereIn('id', $id_product_bask)
+                //->orderByRaw('FIELD(id, "23", "24", "1")')
+                ->orderByRaw('FIELD(id, '.implode(",", $id_product_bask).')')
+                // implode(" ,", [23,24,1]).')')
+                ->get();
+
+            return $products;
+        }
+        else{
+            return $products = null;
+        }
     }
 
     public function setBasket($baskets){

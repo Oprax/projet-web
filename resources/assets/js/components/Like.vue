@@ -1,7 +1,7 @@
 <template>
     <span v-on:click="toggle()" style="cursor: pointer;">
         <i :class="is_like ? 'thumbs up green icon' : 'thumbs up icon'"></i>
-        {{ likes }} J'aime
+        {{ likes_count }} J'aime
     </span>
 </template>
 
@@ -26,6 +26,7 @@
         return {
           'is_like': false,
           'is_created': false,
+          'likes_count': this.likes,
           'lid': 0
         }
       },
@@ -36,7 +37,7 @@
             axios.delete('/api/likes/' + this.lid)
               .then(function () {
                 that.is_like = false;
-                that.likes--;
+                that.likes_count--;
               });
           } else {
             axios.post('/api/likes', {
@@ -47,7 +48,7 @@
                 if (response.status === 200) {
                   that.lid = response.data.id;
                   that.is_like = true;
-                  that.likes++;
+                  that.likes_count++;
                 }
               });
           }
