@@ -96,7 +96,7 @@
 
         <!-- Site content !-->
         <div class="container">
-            <div class="ui grid">
+            <div class="ui stackable grid">
                 @if(!(Request::is('/') || Request::is('/user')))
                     <div class="twelve wide column">
                         @yield('content')
