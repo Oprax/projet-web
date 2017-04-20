@@ -58,22 +58,6 @@ class ShopController extends Controller
         $image = 'image'.$i;
 
 
-        /*while ($request->$image != null){
-            $shop_image = new shop_pictures();
-            $shop_image->url=$request->$image;
-            $shop_image->alt=get_extension_funcs($request->$image);
-            $shop_image->product_id = $product->id;
-            $shop_image->save();
-
-
-            //$image = 'image'.$i;
-            $nameimage = $shop_image->id+1;
-
-
-
-            $i++;
-        }*/
-
 
         $files = Input::file('images');
         // Making counting of uploaded images
@@ -82,40 +66,45 @@ class ShopController extends Controller
         $uploadcount = 0;
         $destinationPath = 'images/shop';
 
-        foreach($files as $file) {
-            $shop_image = new shop_pictures();
-            $shop_image->url=$file->getClientOriginalName();
-            $shop_image->alt=pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $shop_image->product_id = $product->id;
-            $shop_image->save();
+        if(isset($files)){
+            foreach($files as $file) {
+                $shop_image = new shop_pictures();
+                $shop_image->url=$file->getClientOriginalName();
+                $shop_image->alt=pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $shop_image->product_id = $product->id;
+                $shop_image->save();
 
 
-            $shop_image->url=$destinationPath.'/'.$shop_image->id.'.'.pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $shop_image->save();
+                $shop_image->url=$destinationPath.'/'.$shop_image->id.'.'.pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $shop_image->save();
 
 
-            //$rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
-            //$validator = Validator::make(array('file'=> $file), $rules);
-            //if($validator->passes()){
+                //$rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+                //$validator = Validator::make(array('file'=> $file), $rules);
+                //if($validator->passes()){
 
 
 
 
-            $filename = $shop_image->id.'.'.pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $filename = $shop_image->id.'.'.pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
                 $upload_success = $file->move($destinationPath, $filename);
                 $uploadcount ++;
-            //}
+                //}
 
 
-        }
-        if($uploadcount == $file_count){
-            //return Redirect::to('upload');
+            }
+            if($uploadcount == $file_count){
+                //return Redirect::to('upload');
+                return redirect()->route('shop_product', ['category' => $product->category->name, 'product' => $product->slug]);
+            }
+            else {
+                //return Redirect::to('upload')->withInput()->withErrors($validator);
+                dd('erreur uploads');
+            }
+        }else{
             return redirect()->route('shop_product', ['category' => $product->category->name, 'product' => $product->slug]);
         }
-        else {
-            //return Redirect::to('upload')->withInput()->withErrors($validator);
-            dd('erreur uploads');
-        }
+
 
 
     }
