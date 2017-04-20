@@ -1,0 +1,10 @@
+default:
+  suites:
+    default:
+      contexts: [FeatureContext]
+  extensions:
+      Behat\MinkExtension:
+        sessions:
+          default:
+            selenium2: ~
+        base_url: 'https://bde.oprax.fr'
