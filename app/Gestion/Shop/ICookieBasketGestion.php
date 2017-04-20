@@ -15,4 +15,6 @@ interface ICookieBasketGestion
     public function getArrayId($id_product_bask = array(), $baskets);
     public function getproducts();
     public function setBasket($baskets);
+    public function deleteBasket();
+
 }

@@ -104,6 +104,9 @@
                 <div class="field">
                     <br>
                     <input type="text" class="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="text" class="hidden" name="category_name" value="{{ $product->category }}">
+                    <input type="text" class="hidden" name="product_slug" value="{{ $product->slug }}">
+
                     <textarea type="text" name="content" placeholder="Ajouter un commentaire" class="form-control"></textarea>
                 </div>
                 <br>

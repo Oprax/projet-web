@@ -4,11 +4,13 @@ body
     font-size: 12px;
     background-color: white;
     color: black;
+
 }
 
 #Boutique, #Activités, #Accueil, #Menubuttonsidebar, #barremenu
 {
     background-color: darkred;
+    font-weight: bold;
 }
 
 #dropdown
@@ -26,27 +28,111 @@ body
 
 #calendar1
 {
-    height: 330px
+    height: 330px;
 }
 
-#ActivitésF, #ActivitésC, #ActivitésP
+#ActivitésF a, #ActivitésC a, #ActivitésP a
 {
-    padding-left: 15px
+    padding-left: 15px;
 }
 
-.ui.segment
+#segment
 {
     font-family: Arial;
     font-size: 12px;
-    border: 1px solid lightgray;
+    border: 1px solid black;
     border-radius: 15px;
+    margin-top: 2%;
+    background-color: darkred;
+    color: white;
+    font-weight: bold;
 }
 
-.twelve.wide.column
+
+#grids, #greed
 {
-    border: 1px solid lightgray;
+    border: 1px solid black;
     border-radius: 15px;
+    margin-top: 15px;
+    margin-right: 5px;
+    background-color: darkred;
+    color: white;
+    font-weight: bold;
 }
 
+#header, #header2
+{
+    margin-top: 15px;
 
+}
 
+#header a, #header2 a
+{
+    color: black;
+    font-family: Arial;
+}
+
+#thumbs, #textthumbs
+{
+    color: #2bbbff;
+}
+
+#Activitéscours a, #Activitésvenir a, #Activitéspassé a, #segmentA h1
+{
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+#segmentF, #segmentC, #segmentP, #segmentC1, #segmentA
+{
+    background-color: darkred;
+    border:1px solid black;
+}
+
+#association, #email, #role, #birthday, #name h1, #name h2
+{
+    font-family: Arial;
+    font-weight: bold;
+    color: white;
+
+}
+
+#griduser
+{
+    border: 1px solid black;
+    background-color: darkred;
+}
+
+#raccourcis
+{
+    font-family: Arial;
+    font-weight: bold;
+}
+
+#compteV
+{
+    margin-top: 10px;
+}
+
+#test h3
+{
+    border: 1px solid black;
+    background-color: darkred;
+    font-family: Arial;
+    font-weight: bold;
+    color: white;
+}
+
+#basket a
+{
+    font-family: Arial;
+    color: white;
+    font-weight: bold;
+}
+
+#basket
+{
+    background-color: darkred;
+    margin-left: 30px;
+}

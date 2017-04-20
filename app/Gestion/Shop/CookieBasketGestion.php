@@ -17,6 +17,8 @@ class CookieBasketGestion implements ICookieBasketGestion
     public function getBasket(){
         if(isset($_COOKIE['basket'])){
             $baskets = unserialize($_COOKIE['basket']);
+        }else{
+            $baskets=array();
         }
 
         return $baskets;
@@ -44,12 +46,14 @@ class CookieBasketGestion implements ICookieBasketGestion
     }
 
     public function setBasket($baskets){
-        if(isset($_COOKIE['basket'])){
-            $basket = unserialize($_COOKIE['basket']);
-        }else{
-            $basket = array();
-        }
+
         $tab_seria = serialize($baskets);
         setcookie("basket", $tab_seria, time()+24*60*30);
+    }
+
+    public function deleteBasket(){
+        //unset($_COOKIE['basket']);
+        
+        setcookie("basket", "", -1);
     }
 }

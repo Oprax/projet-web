@@ -5,24 +5,24 @@
 
 
 
-<div class="ui stackable grid">
+<div id="griduser" class="ui stackable grid">
      <div class="sixteen wide mobile six wide computer column">
         <img class="ui centered medium circular image" src="{{asset($User->avatar)}}" alt="">
      </div>
 
-    <div class="sixteen wide mobile five wide computer column">
+    <div id="name" class="sixteen wide mobile five wide computer column">
         <h1>{{$User->name}} {{$User->forename}}</h1>
         <h2>{{$User->status->name}}</h2>
         <div class="ui list">
             <div class="item">
                 <i class="student icon"></i>
-                <div class="content">
+                <div id="role" class="content">
                     {{$User->role->name}}
                 </div>
             </div>
             <div class="item">
                 <i class="mail icon"></i>
-                <div class="content">
+                <div id="email" class="content">
                     {{$User->email}}
                 </div>
             </div>
@@ -30,7 +30,7 @@
 
             <div class="item">
                 <i class="birthday icon"></i>
-                <div class="content">
+                <div id="birthday" class="content">
                     {{Carbon\Carbon::parse($User->birthday)->format('d/m/Y')}}
                 </div>
             </div>
@@ -38,7 +38,7 @@
 
             <div class="item">
                 <i class="users icon"></i>
-                <div class="content">
+                <div id="association" class="content">
                     @if(! empty($User->association))
                         {{$User->association->name}}
                     @endif
@@ -49,7 +49,7 @@
 </div>
 
 
-<div class="ui top attached tabular menu">
+<div id="raccourcis" class="ui top attached tabular menu">
     <a class="item" data-tab="activites">Mes Activités</a>
     <a class="item" data-tab="commandes">Mes Commandes</a>
 </div>
