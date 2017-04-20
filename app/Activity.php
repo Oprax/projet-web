@@ -47,6 +47,10 @@ class Activity extends Model
             ->where('likable_id', $this->id)->get();
     }
 
+    public function getSubscribesAttribute() {
+        return Subscribe::where('activity_id', $this->id)->get();
+    }
+
     static function accepted() {
         return self::where('is_accept', true);
     }

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscribe extends Model
 {
+    protected $fillable = [
+        'user_id', 'activity_id'
+    ];
+
     public $timestamps = false;
 
     public function user() {
