@@ -51,7 +51,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="twelve wide column">
+            <div class="twelve wide column" id="comments-zone">
                 <comments type="Photo" fid="{{ $activity->photos->last()->id }}"></comments>
             </div>
         </div>
@@ -61,7 +61,7 @@
             {{ $activity->description }}
         </p>
     </div>
-    <div class="ui stackable grid">
+    <div class="ui stackable grid" id="app">
         <div class="three wide column ui center">
             <like likes="{{ $activity->likes->count() }}" likable-id="{{ $activity->id }}" user-id="{{ Auth::user()->id }}" type="Activity"></like>
         </div>
@@ -151,11 +151,15 @@
               infinite: true,
               arrows: false
             })
+            const app = new Vue({
+              el: '#comments-zone',
+              productionTip: false
+            });
             $('.carousel').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
               var fid = $('.slick-active').attr('data-photo');
-              $('#app').html('<comments type="Photo" fid="' + fid + '"></comments>')
+              $('#comments-zone').html('<comments type="Photo" fid="' + fid + '"></comments>')
               const app = new Vue({
-                el: '#app',
+                el: '#comments-zone',
                 productionTip: false
               });
             })

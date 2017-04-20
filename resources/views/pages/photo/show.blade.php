@@ -7,7 +7,7 @@
     </div>
     <div>&nbsp;</div>
     <div class="ui stackable grid">
-        <div class="four wide column ui center">
+        <div class="four wide column ui center" id="app">
             <like likes="{{ $photo->likes->count() }}" likable-id="{{ $photo->id }}" user-id="{{ Auth::user()->id }}" type="Photo"></like>
         </div>
         <div class="four wide column ui center">

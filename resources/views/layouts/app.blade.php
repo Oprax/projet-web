@@ -38,7 +38,7 @@
                 Accueil
             </a>
             <a href="{{route('activity.index')}}" class="item">
-                Activités
+                Activites
             </a>
             <a href="{{ route('shop_home') }}" class="item">
                 Boutique
@@ -51,7 +51,7 @@
             <div id="account-dropdown-sidebar" class="item hidden">
                 <a href="{{route('user.show', ['user' => \Illuminate\Support\Facades\Auth::id()])}}" class="item"><i class="user icon"></i>Mon Compte</a>
                 <a href="{{route('user.edit', ['user' => \Illuminate\Support\Facades\Auth::id()])}}" class="item"><i class="edit icon"></i>Editer mon compte</a>
-                <a href="{{route('logout')}}" class="item"><i class="sign out icon"></i>Déconnexion</a>
+                <a href="{{route('logout')}}" class="item"><i class="sign out icon"></i>Deconnexion</a>
                 @if(Auth::user()->isCesiBDE())
                     <a class="item" href="{{route('user.index')}}"><i class="users icon"></i>Gestion des utilisateurs</a>
                 @endif
@@ -98,7 +98,7 @@
         <div class="container">
             <div class="ui grid">
                 @if(!(Request::is('/') || Request::is('/user')))
-                    <div class="twelve wide column" id="app">
+                    <div class="twelve wide column">
                         @yield('content')
                     </div>
 

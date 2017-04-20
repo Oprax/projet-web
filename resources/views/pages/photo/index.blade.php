@@ -48,7 +48,7 @@
                     @endif
                 </div>
                 <div class="extra content">
-                    <span class="right floated">
+                    <span class="right floated" id="app">
                         <like likes="{{ $photo->likes->count() }}" likable-id="{{ $photo->id }}" user-id="{{ Auth::user()->id }}" type="Photo"></like>
                     </span>
                     <i class="comments up icon"></i>
