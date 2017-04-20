@@ -56,18 +56,18 @@
                 <div class="four wide column">
                     <div class="ui card">
                         <div class="content">
-                            <div class="header">Produit 1</div>
+                            <div class="header">{{ $product->name }}</div>
                         </div>
                         <div class="image">
-                            <img src="https://semantic-ui.com/images/avatar/large/helen.jpg">
+                            <img src="{{asset($pictureProduct->url)}}">
                         </div>
                     </div>
                 </div>
                 <div class="twelve wide column">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam, dolorem eum excepturi explicabo harum id inventore ipsum iste maiores natus nemo odit qui quisquam ratione suscipit tempora vel, velit.
+                        {{$product->description}}
                     </p>
-                    {{ '10' }}&nbsp;<i class="euro icon"></i>
+                    {{ $product->price }}&nbsp;<i class="euro icon"></i>
                 </div>
             </div>
         </div>
