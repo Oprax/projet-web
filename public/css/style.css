@@ -4,11 +4,13 @@ body
     font-size: 12px;
     background-color: white;
     color: black;
+
 }
 
 #Boutique, #Activités, #Accueil, #Menubuttonsidebar, #barremenu
 {
     background-color: darkred;
+    font-weight: bold;
 }
 
 #dropdown
@@ -34,19 +36,48 @@ body
     padding-left: 15px
 }
 
-.ui.segment
+#segment
 {
     font-family: Arial;
     font-size: 12px;
-    border: 1px solid lightgray;
+    border: 1px solid black;
     border-radius: 15px;
+    margin-top: 2%;
+    background-color: darkred;
+    color: white;
+    font-weight: bold;
 }
 
-.twelve.wide.column
+
+#grids, #greed
 {
-    border: 1px solid lightgray;
+    border: 1px solid black;
     border-radius: 15px;
+    margin-top: 15px;
+    margin-right: 5px;
+    background-color: darkred;
+    color: white;
+    font-weight: bold;
 }
+
+#header, #header2
+{
+    margin-top: 15px;
+
+}
+
+#header a, #header2 a
+{
+    color: black;
+    font-family: Arial;
+}
+
+#thumbs, #textthumbs
+{
+    color: #2bbbff;
+}
+
+
 
 
 

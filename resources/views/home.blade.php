@@ -11,13 +11,13 @@
             <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/4"></div>
         </div>
     </div>
-    <div class="ui segment">
+    <div id="segment" class="ui segment">
         Le Bureau des Elèves est composé de huit membres, élus en deux temps (responsables d’une fonction en fin d’année et vice responsable en début d’année), qui animent et structurent les différentes sections du BDE. Un bureau physique se trouve sur le campus pour les réunions et le matériel.
     </div>
     <div class="ui stackable grid">
         <div class="eight wide column">
-            <h2 class="ui header"><a href="{{ route('activity.index') }}">Activité</a></h2>
-            <div class="ui grid">
+            <h2 id="header" class="ui header"><a href="{{ route('activity.index') }}">Activité</a></h2>
+            <div id="greed" class="ui grid">
                 <div class="four wide column">
                     <div class="ui card">
                         <div class="content">
@@ -51,8 +51,8 @@
             </div>
         </div>
         <div class="eight wide column">
-            <h2 class="ui header"><a href="{{ route('shop_home') }}">Boutique</a></h2>
-            <div class="ui grid">
+            <h2 id="header2" class="ui header"><a href="{{ route('shop_home') }}">Boutique</a></h2>
+            <div id="grids" class="ui grid">
                 <div class="four wide column">
                     <div class="ui card">
                         <div class="content">
