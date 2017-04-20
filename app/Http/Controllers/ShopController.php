@@ -19,11 +19,13 @@ use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Input;
+use Illuminate\Support\Facades\DB;
+
 
 
 class ShopController extends Controller
 {
-    public function index(ICategoryGestion $categoryGestion, shop_productsRepositoryInterface $shopRepository){
+    public function index(ICategoryGestion $categoryGestion){
 
         $products = shop_products::with('category')->with('pictures')->get();
 
@@ -109,6 +111,131 @@ class ShopController extends Controller
 
     }
 
+    public function deleteproduct(Request $request, ICategoryGestion $categoryGestion){
+
+        shop_pictures::where('product_id', $request->product_id)->delete();
+
+        shop_comments::where('product_id', $request->product_id)->delete();
+
+        shop_products::destroy($request->product_id);
+
+        $products = shop_products::get()->where('category_id', $request->category_id);
+
+        if(!isset($products[0])){
+            shop_categories::destroy($request->category_id);
+        }
+
+        return redirect()->route('shop_home');
+    }
+
+    public function getupdateproduct(Request $request, ICategoryGestion $categoryGestion){
+
+        $product = shop_products::find($request->product_id);
+
+        if(isset($categoryGestion)){
+            $categories = shop_categories::pluck('name', 'id');//if product->size ok
+            return view('pages/shop/updateProduct', ['categories' => $categoryGestion->getCategories(), 'categoriesselect' => $categories, 'product' => $product]);
+        }else{
+            return view('pages/shop/updateProduct', ['categories' => $categoryGestion->getCategories(), 'product' => $product]);
+        }
+    }
+
+    public function updateproduct(Request $request, ICategoryGestion $categoryGestion){
+
+        //dd($request);
+        $product = shop_products::find($request->product_id);
+
+
+
+        $product->name = $request->name;
+        $product->slug = str_slug($request->name, '-');
+        $product->price = $request->price;
+        if($request->couleur){
+            $product->color = 1;
+        }else{
+            $product->color = 0;
+        }
+
+        if($request->taille){
+            $product->size = 1;
+        }else{
+            $product->size = 0;
+        }
+
+        if($request->quantityIlimity){
+            $product->quantities = null;
+        }else{
+            $product->quantities = $request->quantity;
+        }
+        $product->description = $request->description;
+
+        if($request['new_cat'] != null){
+            $category = shop_categories::all()->where('name', $request->new_cat)->first();
+            if (!$category){
+                $idcat = DB::table('shop_categories')->insertGetId(
+                    ['name' => $request->new_cat, 'cat_parent' => null]
+                );
+
+                $product->category_id = $idcat;
+            }else{
+                $product->category_id = $category->id;
+            }
+        }elseif($request->categoriesselect != 1 AND isset($request->categoriesselect)){
+            $product->category_id = $request->categoriesselect;
+        }
+
+        $product->save();
+
+
+
+        $files = Input::file('images');
+        // Making counting of uploaded images
+        $file_count = count($files);
+        // start count how many uploaded
+        $uploadcount = 0;
+        $destinationPath = 'images/shop';
+
+        if(isset($files)){
+            foreach($files as $file) {
+                $shop_image = new shop_pictures();
+                $shop_image->url=$file->getClientOriginalName();
+                $shop_image->alt=pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $shop_image->product_id = $product->id;
+                $shop_image->save();
+
+
+                $shop_image->url=$destinationPath.'/'.$shop_image->id.'.'.pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $shop_image->save();
+
+
+                //$rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+                //$validator = Validator::make(array('file'=> $file), $rules);
+                //if($validator->passes()){
+
+
+
+
+                $filename = $shop_image->id.'.'.pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $upload_success = $file->move($destinationPath, $filename);
+                $uploadcount ++;
+                //}
+
+
+            }
+            if($uploadcount == $file_count){
+                //return Redirect::to('upload');
+                return redirect()->route('shop_product', ['category' => $product->category->name, 'product' => $product->slug]);
+            }
+            else {
+                //return Redirect::to('upload')->withInput()->withErrors($validator);
+                dd('erreur uploads');
+            }
+        }else{
+            return redirect()->route('shop_product', ['category' => $product->category->name, 'product' => $product->slug]);
+        }
+        
+    }
+
     public function view (Request $request, ICategoryGestion $categoryGestion){
         //$productcat = $request->category;
         //dd($request);
@@ -156,6 +283,15 @@ class ShopController extends Controller
         $comment->product_id = $request->product_id;
 
         $comment->save();
+
+        return redirect()->route('shop_product', ['category' => $request->category_name, 'product' => $request->product_slug]);
+    }
+
+    public function deletecomment(Request $request){
+        //dd($request->comment_id);
+        shop_comments::destroy($request->comment_id);
+
+
 
         return redirect()->route('shop_product', ['category' => $request->category_name, 'product' => $request->product_slug]);
     }

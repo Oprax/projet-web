@@ -67,11 +67,30 @@
                     <h4>Prix : {{ $product->price }} €</h4>
                     <button class="ui button" type="submit" >Ajouter au panier</button>
                 </div>
+                {!! Form::close() !!}
+                @if(\Illuminate\Support\Facades\Auth::user()->isCesi())
+                    <br>
+                    <br>
+                    <div class="ui two column grid">
+                        {!! Form::open(['route' => ['shop_getupdate_product', $product->category, $product->name], 'method' => 'GET']) !!}
+                            <input type="text" class="hidden" name="product_id" value="{{ $product->id }}">
+
+                        <button class="ui orange icon button" type="submit"><i class="edit icon"></i>Éditer l'article</button>
+                        {!! Form::close() !!}
+
+                        {!! Form::open(['route' => ['shop_delete_product', $product->category_id, $product], 'method' => 'DELETE']) !!}
+                            <input type="text" class="hidden" name="product_id" value="{{ $product->id }}">
+                            <button class="ui red icon button" type="submit"><i class="delete icon"></i>Supprimer l'article</button>
+                        {!! Form::close() !!}
+
+                    </div>
+                @endif
             </div>
         </div>
-        {!! Form::close() !!}
+
 
     </div>
+
 
     <br> <br>
     <h3>Commentaires</h3>
@@ -90,6 +109,16 @@
                     <div class="text">
                         <p>{{ $comment->content }}</p>
                     </div>
+                    @if(\Illuminate\Support\Facades\Auth::user()->isCesi())
+
+                            {!! Form::open(['route' => ['shop_delete_comment', $comment], 'method' => 'DELETE']) !!}
+                            <input type="text" class="hidden" name="category_name" value="{{ $product->category }}">
+                            <input type="text" class="hidden" name="product_slug" value="{{ $product->slug }}">
+
+                            <button class="ui red icon button" type="submit"><i class="delete icon"></i>Supprimer le commentaire</button>
+                            {!! Form::close() !!}
+
+                    @endif
                 </div>
             </div>
             @endforeach
@@ -112,6 +141,8 @@
 
 
                 {!! Form::close() !!}
+
+
         </div>
 
 @endsection
