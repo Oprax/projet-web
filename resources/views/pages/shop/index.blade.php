@@ -21,9 +21,9 @@
 <!--Afficher premiere image dans index -->
                     <div class="image">
                         @if(isset($product->pictures[0]))
-                            {{ Html::image($product->pictures[0]->url) }}
+                            <a href="{{ route('shop_product', ['category' => $category->name, 'product' => $product->slug]) }}" ><img class="ui image" src="{{ asset($product->pictures[0]->url) }}" alt=""></a>
                         @else
-                            {{ Html::image('images/shop/image_default.png') }}
+                            <a href="{{ route('shop_product', ['category' => $category->name, 'product' => $product->slug]) }}" ><img class="ui image" src="{{ asset('images/shop/image_default.png') }}" alt=""></a>
                         @endif
                     </div>
                     <div id="extra1" class="extra" >
