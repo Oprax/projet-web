@@ -42,9 +42,11 @@
             <comments type="Photo" fid="{{ $activity->photos->last()->id }}"></comments>
         </div>
     </div>
+    <div class="ui segment">
     <p>
         {{ $activity->description }}
     </p>
+    </div>
     <div class="ui stackable grid">
         <div class="four wide column ui center">
             <i class="thumbs up icon"></i>

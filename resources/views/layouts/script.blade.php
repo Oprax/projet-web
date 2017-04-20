@@ -63,6 +63,10 @@
             }
         }
     });
+    $('#calendarActivity').calendar({
+        startMode: 'year',
+
+    });
 
     $(document).ready(function(){
         $('.right.menu.open').on("click",function(e){
