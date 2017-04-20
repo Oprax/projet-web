@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use App\Comment;
 use App\Photo;
+use App\Subscribe;
 use Carbon\Carbon;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
@@ -157,7 +158,31 @@ class ActivityController extends EventHandlerController
      */
     public function destroy(Activity $activity)
     {
-        //
+        $photos = Activity::with('photos')->find($activity->id)->photos;
+        foreach($photos as $photo){
+            foreach ($photo->comments as $comment){
+                $comment->delete();//Comment of photo
+            }
+            foreach($photo->likes as $like){
+                $like->delete();//Like of Photo
+            }
+            $photo->delete();//Photo
+        }
+        foreach ($activity->comments as $comment){
+            $comment->delete();
+        }
+        foreach ($activity->likes as $like) {
+            $like->delete();
+        }
+        foreach ($activity->soundings as $sounding){
+            $sounding->delete();
+        }
+        foreach ($activity->subscribes as $subscribe){
+            $subscribe->delete();
+        }
+        $activity->delete();// activity
+        return redirect()->route('activity.index');
+
     }
 
     private function lastComment() {

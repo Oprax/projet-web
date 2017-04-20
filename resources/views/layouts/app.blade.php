@@ -93,16 +93,7 @@
             </div>
         </div>
 
-        <div class="ui container">
-            <div class="following bar">
-                <div class="ui large inverted secondary network menu">
-                    <div class="ui text menu item">
-                        <div class="header item">BDE eXia</div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
         <!-- Site content !-->
         <div class="container">
             <div class="ui grid">
@@ -112,6 +103,7 @@
                     </div>
 
                     <div class="four wide column">
+                        <div>&nbsp;</div>
                         @if (Request::is('shop*'))
                             @include('layouts/side/right-bar-shop')
                         @else
