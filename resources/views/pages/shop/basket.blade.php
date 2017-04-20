@@ -7,7 +7,9 @@
     <h1>Panier</h1>
 
     @if(isset($productsbasket))
-        <button class="ui button" type="button" id="delpanier" >Supprimer panier</button>
+        {!! Form::open(['route' => ['shop_delete_baskets'], 'method' => 'DELETE']) !!}
+            <button class="ui red icon button" type="submit"><i class="delete icon"></i>Vider mon panier</button>
+        {!! Form::close() !!}
 
         <div class="ui top attached tabular menu">
             <a class="item active" data-tab="commandes">Mes articles</a>
@@ -119,7 +121,7 @@
         <input type="text" class="hidden" name="price_total" value="{{ array_sum($totalttc) }}">
         <input type="text" class="hidden" name="quantity_total" value="{{ array_sum($totalqtt) }}">
 
-        <button class="ui button" type="submit">Valider mon panier 2</button>
+        <button class="ui green icon button" type="submit" ><i class="add icon"></i> Valider mon panier</button>
 
 
         {!! Form::close() !!}
