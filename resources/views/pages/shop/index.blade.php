@@ -10,7 +10,7 @@
         <br>
         @php($number = 0)
 
-        <a href="{{ route('shop_products_categories', ['category' => $category->name]) }}"> {{ $category->name }}</a>
+        <a href="{{ route('shop_products_categories', ['category' => $category->name]) }}"><h3> {{ $category->name }}</h3></a>
         <div class="ui link five cards" style="padding-top: 0; padding-bottom: 0; margin-top: 0; ">
             @foreach($products as $key2 => $product)
 
@@ -18,13 +18,15 @@
                     @php($number++)
                 <div class="card">
                     <div class="extra" style="padding-top: 0; padding-bottom: 0; margin-top: 0; ">
-                        <a class="header" href="{{ route('shop_product', ['category' => $category->name, 'product' => $product->slug]) }}" >{{ str_limit($product->name, 15) }}</a>
+                        <a class="header" href="{{ route('shop_product', ['category' => $category->name, 'product' => $product->slug]) }}" ><h5>{{ str_limit($product->name, 15) }}</h5></a>
                     </div>
 <!--Afficher premiere image dans index -->
                     <div class="image">
-                            {{ Html::image('images/shop/test.png') }}
-
-
+                        @if(isset($product->pictures[0]))
+                            {{ Html::image($product->pictures[0]->url) }}
+                        @else
+                            {{ Html::image('images/shop/image_default.png') }}
+                        @endif
                     </div>
                     <div class="extra" style="padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0;">
                         {{ $product->price }} €
