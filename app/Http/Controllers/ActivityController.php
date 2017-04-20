@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Activity;
+use App\Association;
 use App\Comment;
 use App\Photo;
 use App\Subscribe;
@@ -56,7 +57,8 @@ class ActivityController extends EventHandlerController
      */
     public function create()
     {
-        return $this->view('pages.activity.create');
+        $Associations = Association::get();
+        return $this->view('pages.activity.create', compact('Associations'));
     }
 
     /**
@@ -67,7 +69,36 @@ class ActivityController extends EventHandlerController
      */
     public function store(Request $request)
     {
-        //
+        $file = $request->file('pics');
+
+        $destinationFolder = 'images/activity/';
+        $photo = null;
+        if(isset($file)){
+
+            $filename = 0 .  '-' . Carbon::now()->timestamp .'.' . pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $destinationPath = $destinationFolder . $filename;
+
+            try {
+                $file->move($destinationFolder, $filename);
+                $photo = $destinationPath;
+            }
+            catch (\Exception $e){
+                return redirect()->route('activity.index')->withErrors(['pics' => $e]);
+            }
+
+        }else{
+            return redirect()->route('activity.index')->withErrors(['pics' => 'Fichier non selectionné']);
+        }
+        $request['photo'] = $photo;
+        $request['is_accept'] = ($request->input('is_accept') == 'on') ? true : false;
+        $request['is_proposal'] = ($request->input('is_proposal') == 'on') ? true : false;
+        $request['can_subscribe'] = ($request->input('can_subscribe') == 'on') ? true : false;
+
+        $request['date'] = Carbon::createFromFormat('F j, Y g:i a', $request->input('date'));
+        $request['like'] = 0;
+        $request['association_id'] = Association::where('name', $request->input('association'))->first()->id;
+        $activity = Activity::create($request->all());
+        return redirect()->route('activity.show', $activity);
     }
 
     /**

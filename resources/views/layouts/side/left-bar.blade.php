@@ -38,4 +38,7 @@
         </div>
     </div>
     @endif
+    <div class="menu">
+        <a href="{{route('activity.create')}}" class="item">Proposé une activité</a>
+    </div>
 </div>

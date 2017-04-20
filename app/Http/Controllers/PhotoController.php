@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Activity;
 use App\Photo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class PhotoController extends EventHandlerController
 {
@@ -49,7 +51,47 @@ class PhotoController extends EventHandlerController
      */
     public function store(Request $request, Activity $activity)
     {
-        //
+
+        $files = $request->file('pics');
+        // Making counting of uploaded images
+        $file_count = count($files);
+        // start count how many uploaded
+        $uploadcount = 0;
+        $destinationFolder = 'images/activity/photos/';
+
+        if(isset($files)){
+            foreach($files as $file) {
+
+                $photo = Photo::create([
+                    'activity_id' => $activity->id,
+                    'user_id' => Auth::user()->id,
+                    'path' => '',
+                    'like' => 0
+                ]);
+
+                $filename = $photo->id . '-' .Carbon::now()->timestamp .'.' . pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $destinationPath = $destinationFolder . $filename;
+
+                try {
+                    $file->move($destinationFolder, $filename);
+                    $photo->path = $destinationPath;
+                    $photo->save();
+                    $uploadcount++;
+                }
+                catch (\Exception $e){
+                    return redirect()->route('activity.show')->withErrors(['pics' => $e]);
+                }
+            }
+            if($uploadcount == $file_count){
+                //return Redirect::to('upload');
+                return redirect()->route('activity.show', $activity);
+            }
+            else {
+                return redirect('activity.show', $activity)->withErrors(['pics' => 'Upload incomplet']);
+            }
+        }else{
+            return redirect()->route('activity.show', $activity)->withErrors(['pics' => 'No File Selected']);
+        }
     }
 
     /**

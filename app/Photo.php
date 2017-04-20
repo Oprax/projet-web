@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Photo extends Model
 {
     protected $fillable = [
-        'path', 'like'
+        'path', 'like', 'activity_id', 'user_id'
     ];
 
     protected $dates = [
