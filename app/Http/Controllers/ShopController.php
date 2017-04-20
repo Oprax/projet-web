@@ -40,13 +40,13 @@ class ShopController extends Controller
         return view('pages/shop/categoryindex', ['categories' => $categoryGestion->getCategories(), 'products' => $products, 'cat_act' => $request->category, 'baskets' => $cookieBasketGestion->getBasket(), 'productsbasket' => $cookieBasketGestion->getproducts()]);
     }
 
-    public function getaddProduct(ICategoryGestion $categoryGestion){
+    public function getaddProduct(ICategoryGestion $categoryGestion, ICookieBasketGestion $cookieBasketGestion){
 
         if(isset($categoryGestion)){
             $categories = shop_categories::pluck('name', 'id');//if product->size ok
-            return view('pages/shop/addProduct', ['categories' => $categoryGestion->getCategories(), 'categoriesselect' => $categories]);
+            return view('pages/shop/addProduct', ['categories' => $categoryGestion->getCategories(), 'categoriesselect' => $categories, 'baskets' => $cookieBasketGestion->getBasket(), 'productsbasket' => $cookieBasketGestion->getproducts()]);
         }else{
-            return view('pages/shop/addProduct', ['categories' => $categoryGestion->getCategories()]);
+            return view('pages/shop/addProduct', ['categories' => $categoryGestion->getCategories(), 'baskets' => $cookieBasketGestion->getBasket(), 'productsbasket' => $cookieBasketGestion->getproducts()]);
         }
     }
     
@@ -367,10 +367,10 @@ class ShopController extends Controller
         return view('pages/shop/basket', ['categories' => $categoryGestion->getCategories(), 'baskets' => $basket, 'products' => $products, 'productsbasket'=>$cookieBasketGestion->getproducts()]);
     }
 
-    public function confirm_address(Request $request, ICategoryGestion $categoryGestion){
+    public function confirm_address(Request $request, ICategoryGestion $categoryGestion, ICookieBasketGestion $cookieBasketGestion){
 
 
-        return view('pages/shop/basketConfimAddress', ['categories' => $categoryGestion->getCategories()]);
+        return view('pages/shop/basketConfimAddress', ['categories' => $categoryGestion->getCategories(), 'productsbasket'=>$cookieBasketGestion->getproducts(), 'baskets' => $cookieBasketGestion->getBasket()]);
     }
 
     public function postConfirm_address(Request $request, ICookieBasketGestion $cookieBasketGestion){
@@ -419,8 +419,12 @@ class ShopController extends Controller
             }
 
         }
+        //$baskets = array();
+        $tab_seria = serialize($baskets);
+        setcookie("basket", $tab_seria, time()-1);
 
-        $cookieBasketGestion->deleteBasket();
+        //$cookieBasketGestion->deleteBasket();
+        //dd($cookieBasketGestion->getBasket());
         return redirect()->route('user.show', Auth::user());
     }
 
@@ -442,10 +446,16 @@ class ShopController extends Controller
         return redirect()->route('shop_basket_confirm_address');
     }
 
-    public function getorderid(Request $request, ICategoryGestion $categoryGestion){
+    public function delete_baskets(ICookieBasketGestion $cookieBasketGestion){
+        $cookieBasketGestion->deleteBasket();
+
+        return redirect()->route('shop_home');
+    }
+
+    public function getorderid(Request $request, ICategoryGestion $categoryGestion, ICookieBasketGestion $cookieBasketGestion){
         $products = shop_product_order::with('product')->where('order_id', $request->order_id)->get();
         $order = shop_order::find($request->order_id)->first();
         //dd($products);
-        return view('pages/shop/order', ['categories' => $categoryGestion->getCategories(), 'products' => $products, 'order' => $order]);
+        return view('pages/shop/order', ['categories' => $categoryGestion->getCategories(), 'products' => $products, 'order' => $order, 'productsbasket' => $cookieBasketGestion->getproducts(), 'baskets' => $cookieBasketGestion->getBasket()]);
     }
 }
