@@ -46,7 +46,7 @@
         {{ $activity->description }}
     </p>
     <div class="ui stackable grid">
-        <div class="four wide column ui center">
+        <div class="three wide column ui center">
             <like likes="{{ $activity->likes->count() }}" likable-id="{{ $activity->id }}" user-id="{{ Auth::user()->id }}" type="Activity"></like>
         </div>
         <div class="four wide column ui center">
@@ -62,7 +62,13 @@
             <i class="users icon"></i>
             16 participants
         </div>
+        <div class="three wide column ui center">
+            <a href="{{ route('activity.photos.index', $activity) }}" class="ui primary button">
+                Photos
+            </a>
+        </div>
     </div>
+
     @if($activity->comments)
     <div class="ui comments">
         <h3 class="ui dividing header">Commentaire de l'activité :</h3>
