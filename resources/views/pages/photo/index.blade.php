@@ -44,8 +44,7 @@
                 </div>
                 <div class="extra content">
                     <span class="right floated">
-                        <i class="thumbs up icon"></i>
-                        {{ $photo->like }} J'aime
+                        <like likes="{{ $photo->likes->count() }}" likable-id="{{ $photo->id }}" user-id="{{ Auth::user()->id }}" type="Photo"></like>
                     </span>
                     <i class="comments up icon"></i>
                     {{ $photo->comments->count() }} commentaires
