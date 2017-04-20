@@ -3,7 +3,6 @@
 @section('content')
 
     @foreach($categories as $key => $category)
-        <br>
         @php($number = 0)
 
         <a id="shoproduit" href="{{ route('shop_products_categories', ['category' => $category->name]) }}"><h3> {{ $category->name }}</h3></a>

@@ -25,12 +25,12 @@ use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
-    public function index(ICategoryGestion $categoryGestion){
+    public function index(ICategoryGestion $categoryGestion, ICookieBasketGestion $cookieBasketGestion){
 
         $products = shop_products::with('category')->with('pictures')->get();
 
         //$products = $shopRepository->getProducts5perCategory();
-        return view('pages/shop/index', ['categories' => $categoryGestion->getCategories(), 'products' => $products]);
+        return view('pages/shop/index', ['categories' => $categoryGestion->getCategories(), 'products' => $products, 'products' => $cookieBasketGestion->getproducts()]);
     }
 
     public function categoryindex(ICategoryGestion $categoryGestion, shop_productsRepositoryInterface $shopRepository, Request $request){
@@ -236,7 +236,7 @@ class ShopController extends Controller
         
     }
 
-    public function view (Request $request, ICategoryGestion $categoryGestion){
+    public function view (Request $request, ICategoryGestion $categoryGestion, ICookieBasketGestion $cookieBasketGestion){
         //$productcat = $request->category;
         //dd($request);
         $product = shop_products::with('pictures')->get()->where('slug', $request->slugproduct)->first();
@@ -260,7 +260,7 @@ class ShopController extends Controller
 
         if ($product AND !empty($sizes) AND !empty($colors)){
 
-            return view('pages/shop/view', ['categories' => $categoryGestion->getCategories(), 'product' => $product, 'comments' => $comments, 'sizes' => $sizes, 'colors' => $colors]);
+            return view('pages/shop/view', ['categories' => $categoryGestion->getCategories(), 'product' => $product, 'comments' => $comments, 'sizes' => $sizes, 'colors' => $colors, 'products' => $cookieBasketGestion->getproducts()]);
 
         }elseif ($product AND !empty($sizes)){
 
@@ -339,7 +339,7 @@ class ShopController extends Controller
         return redirect()->route('shop_product', ['category' => $request->category_name, 'product' => $request->product_slug]);
     }
 
-    public function getbasket(Request $request, ICategoryGestion $categoryGestion){
+    public function getbasket(Request $request, ICategoryGestion $categoryGestion, ICookieBasketGestion $cookieBasketGestion){
         echo'<br><br>';
         if(isset($_COOKIE['basket'])){
             $basket = unserialize($_COOKIE['basket']);
@@ -364,7 +364,7 @@ class ShopController extends Controller
 
         //dd($basket);
 
-        return view('pages/shop/basket', ['categories' => $categoryGestion->getCategories(), 'baskets' => $basket, 'products' => $products]);
+        return view('pages/shop/basket', ['categories' => $categoryGestion->getCategories(), 'baskets' => $basket, 'products' => $products, 'products'=>$cookieBasketGestion->getproducts()]);
     }
 
     public function confirm_address(Request $request, ICategoryGestion $categoryGestion){

@@ -93,16 +93,7 @@
             </div>
         </div>
 
-        <div class="ui container">
-            <div class="following bar">
-                <div class="ui large inverted secondary network menu">
-                    <div class="ui text menu item">
-                        <div class="header item">BDE eXia</div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
         <!-- Site content !-->
         <div class="container">
             <div class="ui grid">
@@ -112,6 +103,7 @@
                     </div>
 
                     <div class="four wide column">
+                        <div>&nbsp;</div>
                         @if (Request::is('shop*'))
                             @include('layouts/side/right-bar-shop')
                         @else
@@ -126,7 +118,12 @@
             </div>
         </div>
     </div>
-
+    <div>&nbsp;</div>
+    <div class="ui container ui segment ui center">
+        OVH SAS &bull;
+        Siège social : 2 rue Kellermann - 59100 Roubaix - France. &bull;
+        Directeur de la publication : Octave KLABA
+    </div>
     @include('layouts/script')
 </body>
 </html>

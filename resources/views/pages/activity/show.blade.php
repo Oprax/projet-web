@@ -61,8 +61,7 @@
             </button>
         </div>
         <div class="four wide column ui center">
-            <i class="users icon"></i>
-            16 participants
+            <subscribe fid="{{ $activity->id }}" uid="{{ Auth::user()->id }}"></subscribe>
         </div>
         <div class="three wide column ui center">
             <a href="{{ route('activity.photos.index', $activity) }}" class="ui primary button">
