@@ -158,16 +158,30 @@ class ActivityController extends EventHandlerController
      */
     public function destroy(Activity $activity)
     {
-        // Comment Photo
-        //Comment::where('commentable_type', 'Photo')->
-        // Like Photo
-        // Photo
-
-        // Comment activity
-        // Like activity
-        // Soundings activity
-        // subscribe activity
-        // activity
+        $photos = Activity::with('photos')->find($activity->id)->photos;
+        foreach($photos as $photo){
+            foreach ($photo->comments as $comment){
+                $comment->delete();//Comment of photo
+            }
+            foreach($photo->likes as $like){
+                $like->delete();//Like of Photo
+            }
+            $photo->delete();//Photo
+        }
+        foreach ($activity->comments as $comment){
+            $comment->delete();
+        }
+        foreach ($activity->likes as $like) {
+            $like->delete();
+        }
+        foreach ($activity->soundings as $sounding){
+            $sounding->delete();
+        }
+        foreach ($activity->subscribes as $subscribe){
+            $subscribe->delete();
+        }
+        $activity->delete();// activity
+        return redirect()->route('activity.index');
 
     }
 
