@@ -9,7 +9,7 @@
 
 
 
-    <div class="ui two column grid">
+    <div class="ui two column stackable grid">
         <div class="column">
 
                         <div class="three wide column computer only"></div>
@@ -21,7 +21,6 @@
                             @endforeach
                         </div>
         </div>
-        {!! Form::open(['route' => 'shop_add_basket']) !!}
 
         @php
         if(!empty($sizes) and !empty($colors)){
@@ -35,6 +34,8 @@
         @endphp
 
         <div class="column">
+            {!! Form::open(['route' => 'shop_add_basket']) !!}
+
             <div class="column">
                 <p id="descriptionprod">{{ $product->description }}</p>
             </div>

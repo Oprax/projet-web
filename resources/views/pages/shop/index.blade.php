@@ -9,7 +9,7 @@
 
         <br>
 
-        <div class="ui link five cards">
+        <div class="ui link five stackable cards">
             @foreach($products as $key2 => $product)
 
                 @if($product->category->name == $category->name AND $number < 5)
