@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Activity;
 use App\Comment;
+use App\Photo;
 use Carbon\Carbon;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ActivityController extends EventHandlerController
 {
@@ -97,7 +101,52 @@ class ActivityController extends EventHandlerController
      */
     public function update(Request $request, Activity $activity)
     {
-        //
+        if(!empty($request->file('pics'))){
+
+            $file = $request->file('pics');
+
+            $destinationFolder = 'images/activity/';
+
+            if(isset($file)){
+
+                    $filename = $activity->id .  '-' . Carbon::now()->timestamp .'.' . pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                    $destinationPath = $destinationFolder . $filename;
+                    $toDelete=$activity->photo;
+
+                    try {
+
+                        $file->move($destinationFolder, $filename);
+                        $activity->photo = $destinationPath;
+                        $activity->save();
+                        Storage::delete(asset($toDelete));
+                        unlink($toDelete);
+
+                    }
+                    catch (\Exception $e){
+                        return redirect()->route('activity.edit',$activity)->withErrors(['pics' => $e]);
+                    }
+
+                    return redirect()->route('activity.edit', $activity);
+            }else{
+                return redirect()->route('activity.edit', $activity)->withErrors(['pics' => 'Fichier non selectionné']);
+            }
+        }
+        else{
+
+            $is_accept = ($request->input('is_accept') == 'on') ? true : false;
+            $is_proposal = ($request->input('is_proposal') == 'on') ? true : false;
+            $can_subscribe = ($request->input('can_subscribe') == 'on') ? true : false;
+            $activity->update([
+                'name' => $request->input('name'),
+                'date' => Carbon::createFromFormat('F j, Y g:i a', $request->input('date')),
+                'lieu' => $request->input('lieu'),
+                'description' => $request->input('description'),
+                'is_accept' => $is_accept,
+                'is_proposal' => $is_proposal,
+                'can_subscribe' => $can_subscribe
+            ]);
+            return redirect()->route('activity.show', $activity);
+        }
     }
 
     /**
