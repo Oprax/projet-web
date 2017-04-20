@@ -118,7 +118,12 @@
             </div>
         </div>
     </div>
-
+    <div>&nbsp;</div>
+    <div class="ui container ui segment ui center">
+        OVH SAS &bull;
+        Siège social : 2 rue Kellermann - 59100 Roubaix - France. &bull;
+        Directeur de la publication : Octave KLABA
+    </div>
     @include('layouts/script')
 </body>
 </html>
