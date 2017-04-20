@@ -73,7 +73,7 @@
                 </a>
                 <a id="MenuButtonSideBar" class="item"><i class="bars icon"></i></a>
                 <a id="Accueil" href="{{ route('home') }}" class="item hidden-xs">Accueil</a>
-                <a id="Activités" href="{{ route('activity.index') }}" class="item hidden-xs">Activités</a>
+                <a id="Activités" href="{{ route('activity.index') }}" class="item hidden-xs">Activites</a>
                 <a id="Boutique" href="{{ route('shop_home') }}" class="item hidden-xs">Boutique</a>
                 <div class="right menu hidden-xs">
                     <div id="dropdown" class="ui simple dropdown item">
@@ -82,7 +82,7 @@
                         <div class="menu">
                             <a class="item" href="{{route('user.show', ['user' => \Illuminate\Support\Facades\Auth::id()])}}"><i class="user icon"></i>Mon compte</a>
                             <a class="item" href="{{route('user.edit', ['user' => \Illuminate\Support\Facades\Auth::id()])}}"><i class="edit icon"></i>Editer mon compte</a>
-                            <a class="item" href="{{route('logout')}}"><i class="sign out icon"></i>Déconnexion</a>
+                            <a class="item" href="{{route('logout')}}"><i class="sign out icon"></i>Deconnexion</a>
                             @if(Auth::user()->isCesiBDE())
                                 <div class="ui divider"></div>
                                 <a class="item" href="{{route('user.index')}}"><i class="users icon"></i>Gestion des utilisateurs</a>
