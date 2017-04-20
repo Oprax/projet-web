@@ -12,7 +12,7 @@ namespace App\Gestion\Shop;
 interface ICookieBasketGestion
 {
     public function getBasket();
-    public function getArrayId($id_product_bask = array(), $baskets);
+    public function getArrayId($id_product_bask, $baskets);
     public function getproducts();
     public function setBasket($baskets);
     public function deleteBasket();
