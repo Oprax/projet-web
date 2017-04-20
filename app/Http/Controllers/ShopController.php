@@ -452,10 +452,10 @@ class ShopController extends Controller
         return redirect()->route('shop_home');
     }
 
-    public function getorderid(Request $request, ICategoryGestion $categoryGestion){
+    public function getorderid(Request $request, ICategoryGestion $categoryGestion, ICookieBasketGestion $cookieBasketGestion){
         $products = shop_product_order::with('product')->where('order_id', $request->order_id)->get();
         $order = shop_order::find($request->order_id)->first();
         //dd($products);
-        return view('pages/shop/order', ['categories' => $categoryGestion->getCategories(), 'products' => $products, 'order' => $order]);
+        return view('pages/shop/order', ['categories' => $categoryGestion->getCategories(), 'products' => $products, 'order' => $order, 'productsbasket' => $cookieBasketGestion->getproducts(), 'baskets' => $cookieBasketGestion->getBasket()]);
     }
 }
