@@ -3,42 +3,37 @@
     {!! $calendar->script() !!}
 
 </div>
-<div class="item">
-    <a class="header" href="{{route('activity.index')}}">
+    <a id="dropdown-activity-sidebar" class="item">
         Activités
+        <i class="dropdown icon"></i>
     </a>
-    @if(!empty($Future))
-    <div class="menu">
+    <div id="time-dropdown-sidebar" class="item hidden">
+        @if(!empty($Future))
         <a href="{{route('activity.future')}}" class="item">Futur</a>
-        <div id="ActivitésF" class="menu">
+        <div id="ActivitésF" class="item">
             @foreach($Future as $future)
                 <a href="{{route('activity.show', $future)}}" class="item">{{$future->name}}</a>
             @endforeach
         </div>
-    </div>
-    @endif
-    @if (! empty($Current))
-    <div class="menu">
+        @endif
+        @if (! empty($Current))
         <a href="{{route('activity.current')}}" class="item">Courante</a>
-        <div id="ActivitésC" class="menu">
+        <div id="ActivitésC" class="item">
             @foreach($Current as $current)
                 <a href="{{route('activity.show', $current)}}" class="item">{{$current->name}}</a>
             @endforeach
         </div>
-    </div>
-    @endif
+        @endif
 
-    @if(!empty($Past))
-    <div class="menu">
+        @if(!empty($Past))
         <a href="{{route('activity.past')}}" class="item">Passé</a>
-        <div id="ActivitésP" class="menu">
+        <div id="ActivitésP" class="item">
             @foreach ($Past as $past)
                 <a href="{{route('activity.show', $past)}}" class="item">{{$past->name}}</a>
             @endforeach
         </div>
+        @endif
     </div>
-    @endif
-    <div class="menu">
-        <a href="{{route('activity.create')}}" class="item">Proposé une activité</a>
-    </div>
-</div>
+        <a href="{{route('activity.create')}}" class="item">
+            Proposé une activité
+        </a>

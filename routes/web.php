@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('activity', 'ActivityController');
     Route::resource('activity.photos', 'PhotoController');
     Route::resource('user', 'UserController', ['except' => ['create']]);
-    Route::resource('comments', 'CommentController', ['only' => ['store']]);
+    Route::resource('comments', 'CommentController', ['only' => ['store', 'destroy']]);
 });
 
 Route::get('/home', function () {

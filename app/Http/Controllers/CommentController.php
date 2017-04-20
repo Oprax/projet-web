@@ -126,8 +126,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        $data = $comment->toArray();
         $comment->delete();
-        return response()->json($data);
+        return back();
     }
 }

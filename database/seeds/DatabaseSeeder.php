@@ -36,26 +36,39 @@ class DatabaseSeeder extends Seeder
             ['name' => "en'k"],
         ]);
 
-        $id_vet = DB::table('shop_categories')->insertGetId([
-            'name' => 'Vetement'
+        DB::table('shop_sizes')->insert([
+            ['content' => 'Taille'],
+            ['content' => 'XS'],
+            ['content' => 'S'],
+            ['content' => 'M'],
+            ['content' => 'L'],
+            ['content' => 'XL'],
+            ['content' => 'XXL'],
         ]);
-        $id_vai = DB::table('shop_categories')->insertGetId([
-            'name' => 'Vaisselle'
+        DB::table('shop_colors')->insert([
+            ['content' => 'Couleur'],
+            ['content' => 'Rouge'],
+            ['content' => 'Noir'],
+            ['content' => 'Bleu'],
+            ['content' => 'Rose'],
+            ['content' => 'Violet'],
+            ['content' => 'Gris'],
         ]);
 
         DB::table('shop_categories')->insert([
-            'name' => 'pull',
-            'cat_parent' => $id_vet
+            ['name' => 'Choix de la catégorie'],
+            ['name' => 'Pull'],
+            ['name' => 'Stylo'],
         ]);
 
-        DB::table('shop_categories')->insert([
-            'name' => 'mug',
-            'cat_parent' => $id_vai
-        ]);
+
+
 
         $this->call(\Database\Seeds\UsersTableSeeder::class);
         $this->call(\Database\Seeds\ActivitiesTableSeeder::class);
         $this->call(\Database\Seeds\PhotosTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
+        $this->call(ShopProductTableSeeder::class);
+        $this->call(ShopPictureTableSeeder::class);
     }
 }

@@ -25,6 +25,10 @@ class RoleCesi
         }
         return new RedirectResponse(url('/'));*/
 
-        return $next($request);
+        if(\Illuminate\Support\Facades\Auth::user()->isCesi()) {
+            return $next($request);
+        }else{
+            abort(404, 'Page introuvable');
+        }
     }
 }

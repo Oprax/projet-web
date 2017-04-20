@@ -58,8 +58,9 @@ class CookieBasketGestion implements ICookieBasketGestion
     }
 
     public function deleteBasket(){
-        //unset($_COOKIE['basket']);
-        
-        setcookie("basket", "", -1);
+        $baskets = $this->getBasket();
+        $tab_seria = serialize($baskets);
+        setcookie("basket", $tab_seria, time()-1);
+        //dd($baskets);
     }
 }

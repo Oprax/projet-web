@@ -51,7 +51,9 @@
 
 <div id="raccourcis" class="ui top attached tabular menu">
     <a class="item" data-tab="activites">Mes Activités</a>
-    <a class="item" data-tab="commandes">Mes Commandes</a>
+    @if($User->id == Auth::user()->id OR Auth::user()->isCesiBDE())
+        <a class="item" data-tab="commandes">Mes Commandes</a>
+        @endif
 </div>
 <div class="ui bottom attached tab segment" data-tab="activites">
     @foreach($User->subscribes as $activity)
@@ -59,6 +61,7 @@
         @include('layouts/activity')
     @endforeach
 </div>
+@if($User->id == Auth::user()->id OR Auth::user()->isCesiBDE())
 <div class="ui bottom attached tab segment" data-tab="commandes">
     <table class="ui very basic collapsing celled table">
         <thead>
@@ -73,7 +76,7 @@
             @foreach($Orders as $order)
             <tr>
                 <td class="ui link">
-                    <a href="">
+                    <a href="{{route('shop_order_id', $order->id)}}">
                        <div class="content">
                            {{$order->id}}
                        </div>
@@ -112,5 +115,5 @@
         </tbody>
     </table>
 </div>
-
+@endif
 @endsection

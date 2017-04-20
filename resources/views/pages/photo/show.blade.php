@@ -48,9 +48,14 @@
                             {{ $comment->user->forename }}
                         </a>
                         <div class="metadata">
-                    <span class="date" title="{{ $comment->created_at->format('d/m/Y H:i:s') }}">
-                        {{ $comment->created_at->diffForHumans(\Carbon\Carbon::now()) }}
-                    </span>
+                            <span class="date" title="{{ $comment->created_at->format('d/m/Y H:i:s') }}">
+                                {{ $comment->created_at->diffForHumans(\Carbon\Carbon::now()) }}
+                            </span>
+                            @if(Auth::user()->id === $comment->user_id OR Auth::user()->isCesi())
+                                {!! Form::open(['route' => ['comments.destroy', $comment], 'method' => 'DELETE']) !!}
+                                <button class="ui red icon button" type="submit"><i class="delete icon"></i>Supprimer</button>
+                                {!! Form::close() !!}
+                            @endif
                         </div>
                         <div class="text">
                             {{ $comment->content }}

@@ -62,42 +62,21 @@ $factory->define(App\Comment::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\ShopProduct::class, function (Faker\Generator $faker) {
+
+$factory->define(App\Model\Shop\shop_pictures::class, function (Faker\Generator $faker) {
 
     return [
-        'name' => $faker->name,
-        'price' => $faker->randomFloat(2,5, 40),
-        'color' => $faker->colorName,
-        'quantities' => $faker->numberBetween(0, 100)
-    ];
-});
-$factory->define(App\ShopPicture::class, function (Faker\Generator $faker) {
-
-    return [
-        'name' => $faker->name,
         'url' => $faker->imageUrl(),
+        'alt' => $faker->text(15),
     ];
 });
 
-$factory->define(App\ShopOrder::class, function (Faker\Generator $faker) {
-
+$factory->define(\App\Model\Shop\shop_products::class, function(Faker\Generator $faker) {
     return [
-        'city' => $faker->city,
-        'address' => $faker->streetAddress,
-        'zip_code' => $faker->postcode,
-        'quantities'=> $faker->randomDigit(1, 100),
-        'price' => $faker->randomDigit(5),
-
-    ];
-});
-
-$factory->define(App\ShopProductOrder::class, function (Faker\Generator $faker) {
-
-    return [
-        'size' => $faker->randomElements(['S', 'M', 'L', 'XL', 'XXL']),
-        'product' => $faker->name,
-        'price' => $faker->randomFloat(2, 5, 30),
-    ];
+        'quantities' => $faker->numberBetween(1,1000),
+        'description' => $faker->text(255),
+        'price' => $faker->numberBetween(5,45),
+        ];
 });
 
 
