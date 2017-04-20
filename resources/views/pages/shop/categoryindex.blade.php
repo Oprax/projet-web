@@ -2,13 +2,7 @@
 
 @section('content')
 
-<<<<<<< develop
-        <br>
-
-        <h1 id="catact">{{ $cat_act }}</h1>
-=======
         <h3 id="catact">{{ $cat_act }}</h3>
->>>>>>> add must
 
         <div class="ui link five cards" style="padding-top: 0; padding-bottom: 0; margin-top: 0; ">
             @foreach($products as $key2 => $product)
