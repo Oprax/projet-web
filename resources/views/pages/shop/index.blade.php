@@ -2,12 +2,7 @@
 
 @section('content')
 
-    <style>body{
-            padding-top: 10px ;
-        }</style>
-
     @foreach($categories as $key => $category)
-        <br>
         @php($number = 0)
 
         <a id="test" href="{{ route('shop_products_categories', ['category' => $category->name]) }}"><h3> {{ $category->name }}</h3></a>
