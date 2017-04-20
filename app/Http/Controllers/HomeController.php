@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Activity;
 use Illuminate\Http\Request;
 
 class HomeController extends EventHandlerController
@@ -13,6 +14,8 @@ class HomeController extends EventHandlerController
      */
     public function index()
     {
-        return $this->view('home');
+        $activities = Activity::orderBy('date')->get();
+
+        return $this->view('home', compact('activities'));
     }
 }

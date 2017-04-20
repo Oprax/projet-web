@@ -5,10 +5,13 @@
     <div class="ui grid">
         <div class="three wide column computer only"></div>
         <div class="carousel sixteen wide phone ten wide computer column ">
-            <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/1"></div>
-            <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/2"></div>
-            <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/3"></div>
-            <div class="ui center"><img src="http://lorempicsum.com/futurama/800/500/4"></div>
+            @foreach($activities->take(5) as $activity)
+            <div class="ui center">
+                <a href="{{ route('activity.show', $activity) }}">
+                    <img src="{{ $activity->photo }}">
+                </a>
+            </div>
+            @endforeach
         </div>
     </div>
     <div class="ui segment">
@@ -21,25 +24,25 @@
                 <div class="four wide column">
                     <div class="ui card">
                         <div class="content">
-                            <div class="header">Activité 1</div>
+                            <div class="header"><a href="{{ route('activity.show', $activities->first()) }}">{{ $activities->first()->name }}</a></div>
                         </div>
                         <div class="image">
-                            <img src="https://semantic-ui.com/images/avatar/large/helen.jpg">
+                            <img src="{{ $activities->first()->photo }}">
                         </div>
                     </div>
                 </div>
                 <div class="twelve wide column">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam, dolorem eum excepturi explicabo harum id inventore ipsum iste maiores natus nemo odit qui quisquam ratione suscipit tempora vel, velit.
+                        {{ $activities->first()->description }}
                     </p>
                     <div class="ui grid">
                         <div class="four wide column ui center">
                             <i class="thumbs up icon"></i>
-                            5 J'aime
+                            {{ $activities->first()->like }} J'aime
                         </div>
                         <div class="six wide column ui center">
                             <i class="comments up icon"></i>
-                            10 commentaires
+                            {{ $activities->first()->comments->count() }} commentaires
                         </div>
                         <div class="four column ui center">
                             <button class="ui icon button">
