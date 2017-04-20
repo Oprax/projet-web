@@ -8,10 +8,11 @@
 
     <h1>Panier</h1>
 
-    <div class="ui top attached tabular menu">
-        <a class="item active" data-tab="commandes">Mes Commandes</a>
-    </div>
+    <button class="ui button" type="button" id="delpanier" >Supprimer panier</button>
 
+    <div class="ui top attached tabular menu">
+        <a class="item active" data-tab="commandes">Mes articles</a>
+    </div>
     <div class="ui bottom attached tab segment active" data-tab="commandes">
         <table class="ui unstackable celled table">
             <thead>
@@ -112,7 +113,6 @@
             </tr></tfoot>
         </table>
     </div>
-    <a class="header" href="{{ route('shop_basket_confirm_address') }}" >Valider mon panier </a>
 
 
     {!! Form::open(['route' => 'shop_basket_confirm']) !!}

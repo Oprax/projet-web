@@ -30,4 +30,9 @@ class Photo extends Model
         return Comment::where('commentable_type', 'Photo')
             ->where('commentable_id', $this->id)->get();
     }
+
+    public function getLikesAttribute() {
+        return Like::where('likable_type', 'Photo')
+            ->where('likable_id', $this->id)->get();
+    }
 }

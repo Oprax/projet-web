@@ -46,8 +46,7 @@
             </div>
             <div class="ui centered stackable grid">
                 <div class="four wide column ui center">
-                    <i class="thumbs up icon"></i>
-                    <span data-activity="{{ $act->id }}">{{ $act->like }} J'aime</span>
+                    <like likes="{{ $act->likes->count() }}" likable-id="{{ $act->id }}" user-id="{{ Auth::user()->id }}" type="Activity"></like>
                 </div>
                 <div class="six wide column ui center">
                     <i class="comments up icon"></i>

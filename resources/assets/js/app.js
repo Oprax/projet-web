@@ -15,6 +15,7 @@ require('./bootstrap');
 
 if (document.getElementById('app')) {
   Vue.component('comments', require('./components/Comments.vue'));
+  Vue.component('like', require('./components/Like.vue'));
   const app = new Vue({
     el: '#app',
     productionTip: false

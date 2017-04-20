@@ -29,8 +29,17 @@ class shop_productsRepository implements shop_productsRepositoryInterface{
         $this->shop_products->name = $product['name'];
         $this->shop_products->slug = str_slug($product['name'], '-');
         $this->shop_products->price = $product['price'];
-        $this->shop_products->color = 0;
-        $this->shop_products->size = 0;
+        if($product['couleur']){
+            $this->shop_products->color = 1;
+        }else{
+            $this->shop_products->color = 0;
+        }
+        
+        if($product['taille']){
+            $this->shop_products->size = 1;
+        }else{
+            $this->shop_products->size = 0;
+        }
 
         if($product['quantityIlimity']){
             $this->shop_products->quantities = null;
@@ -47,9 +56,11 @@ class shop_productsRepository implements shop_productsRepositoryInterface{
                 );
 
                 $this->shop_products->category_id = $idcat;
+            }else{
+                $this->shop_products->category_id = $category->id;
             }
-            $this->shop_products->category_id = $category->id;
-
+        }elseif($product['categoriesselect'] != 1 AND isset($product['categoriesselect'])){
+            $this->shop_products->category_id = $product['categoriesselect'];
         }
 
         $this->shop_products->save();

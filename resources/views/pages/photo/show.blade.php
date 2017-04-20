@@ -5,14 +5,14 @@
     <div class="ui rounded image">
         <img src="{{ $photo->path }}">
     </div>
+    <div>&nbsp;</div>
     <div class="ui stackable grid">
         <div class="four wide column ui center">
-            <i class="thumbs up icon"></i>
-            {{ $photo->like }} J'aime
+            <like likes="{{ $photo->likes->count() }}" likable-id="{{ $photo->id }}" user-id="{{ Auth::user()->id }}" type="Photo"></like>
         </div>
         <div class="six wide column ui center">
             <i class="comments up icon"></i>
-            10 commentaires
+            {{ $photo->comments->count() }} commentaires
         </div>
         <div class="four column ui center">
             <button class="ui icon button">

@@ -15,7 +15,6 @@ class HomeController extends EventHandlerController
     public function index()
     {
         $activities = Activity::orderBy('date')->get();
-
         return $this->view('home', compact('activities'));
     }
 }
