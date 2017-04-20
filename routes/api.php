@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('comments', 'CommentController', ['only' => ['index', 'show', 'destroy']]);
+Route::resource('likes', 'LikeController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);

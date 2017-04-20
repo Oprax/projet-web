@@ -38,7 +38,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="twelve wide column" id="app">
+        <div class="twelve wide column">
             <comments type="Photo" fid="{{ $activity->photos->last()->id }}"></comments>
         </div>
     </div>
@@ -47,8 +47,7 @@
     </p>
     <div class="ui stackable grid">
         <div class="four wide column ui center">
-            <i class="thumbs up icon"></i>
-            <span data-activity="{{ $activity->id }}">{{ $activity->like }} J'aime</span>
+            <like likes="{{ $activity->likes->count() }}" likable-id="{{ $activity->id }}" user-id="{{ Auth::user()->id }}" type="Activity"></like>
         </div>
         <div class="four wide column ui center">
             <i class="comments up icon"></i>

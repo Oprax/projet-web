@@ -107,7 +107,7 @@
         <div class="container">
             <div class="ui grid">
                 @if(!(Request::is('/') || Request::is('/user')))
-                    <div class="twelve wide column">
+                    <div class="twelve wide column" id="app">
                         @yield('content')
                     </div>
 

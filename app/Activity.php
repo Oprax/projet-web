@@ -42,6 +42,11 @@ class Activity extends Model
             ->where('commentable_id', $this->id)->get();
     }
 
+    public function getLikesAttribute() {
+        return Like::where('likable_type', 'Activity')
+            ->where('likable_id', $this->id)->get();
+    }
+
     static function accepted() {
         return self::where('is_accept', true);
     }
