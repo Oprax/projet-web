@@ -8,7 +8,7 @@
             <img src="{{asset($User->avatar)}}" alt="Avatar de {{$User->name}} {{$User->forename}}">
         </div>
         @if($User->is_valid)
-        <div class="ui four wide computer column center aligned page grid">
+        <div id="compteV" class="ui four wide computer column center aligned page grid">
             <i class="ui huge green checkmark icon"></i>
             <h3>Compte validé</h3>
         </div>
@@ -19,7 +19,7 @@
         </div>
         @endif
     </div>
-    <div class="ui stackable grid">
+    <div id="gridedit" class="ui stackable grid">
 
         <div class="three wide computer only column"></div>
         <div class="sixteen wide tablet ten wide computer column">
