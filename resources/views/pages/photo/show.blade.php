@@ -10,7 +10,7 @@
         <div class="four wide column ui center">
             <like likes="{{ $photo->likes->count() }}" likable-id="{{ $photo->id }}" user-id="{{ Auth::user()->id }}" type="Photo"></like>
         </div>
-        <div class="six wide column ui center">
+        <div class="four wide column ui center">
             <i class="comments up icon"></i>
             {{ $photo->comments->count() }} commentaires
         </div>
@@ -18,6 +18,20 @@
             <button class="ui icon button">
                 <i class="share alternate icon"></i>
             </button>
+        </div>
+        <div class="four wide column">
+            {!! Form::open(['action' => ['PhotoController@destroy',$activity->id, $photo->id], 'method' => 'DELETE', 'class' => 'ui big form error', 'files' => true]) !!}
+
+            <button for="pics" class="ui red icon button" onclick="document.getElementById('pic-submit').click();">
+                <i class="erase icon"></i>
+                Supprimer la photo</button>
+            <input id="pic-submit" type="submit" hidden>
+            @if ($errors->has('pics'))
+                <div class="ui error message">
+                    <strong>{{ $errors->first('pics') }}</strong>
+                </div>
+            @endif
+            {!! Form::close() !!}
         </div>
     </div>
     @if($photo->comments)

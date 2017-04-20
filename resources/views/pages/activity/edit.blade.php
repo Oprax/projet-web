@@ -4,7 +4,7 @@
 
 @section('content')
     <div>&nbsp;</div>
-    <h1 class="ui header">Edition : {{$activity->name}}</h1>
+    <h1 class="ui divided header">Edition : {{$activity->name}}</h1>
 
     <div class="ui centered aligned card">
         <div class="image">

@@ -141,8 +141,15 @@ class PhotoController extends EventHandlerController
      * @param \App\Activity $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Photo $photo, Activity $activity)
+    public function destroy(Activity $activity, Photo $photo)
     {
-        //
+        foreach ($photo->comments as $comment){
+            $comment->delete();//Comment of photo
+        }
+        foreach($photo->likes as $like){
+            $like->delete();//Like of Photo
+        }
+        $photo->delete();//Photo
+        return redirect()->route('activity.photos.index', $activity);
     }
 }
