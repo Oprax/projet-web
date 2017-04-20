@@ -65,7 +65,7 @@
                     <input type="text" class="hidden" name="category_name" value="{{ $product->category }}">
 
                     <h4>Prix : {{ $product->price }} €</h4>
-                    <button class="ui button" type="submit" >Ajouter au panier</button>
+                    <button class="ui green icon button" type="submit" ><i class="add icon"></i> Ajouter au panier</button>
                 </div>
                 {!! Form::close() !!}
                 @if(\Illuminate\Support\Facades\Auth::user()->isCesi())

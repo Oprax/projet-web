@@ -29,7 +29,7 @@
         <br>
 
         <br>
-        <button class="ui button" type="submit">Acheter</button>
+        <button class="ui green icon button" type="submit" ><i class="add icon"></i> Acheter</button>
     </form>
 
 
