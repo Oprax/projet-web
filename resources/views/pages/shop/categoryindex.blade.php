@@ -2,10 +2,6 @@
 
 @section('content')
 
-    <style>body{
-            padding-top: 10px ;
-        }</style>
-
         <br>
 
         <h1 id="catact">{{ $cat_act }}</h1>
