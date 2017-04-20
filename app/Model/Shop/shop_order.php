@@ -15,6 +15,6 @@ class shop_order extends Model
     }
 
     public function shop_product_order() {
-        return $this->hasMany('App\ShopProductOrder');
+        return $this->hasMany('App\Model\Shop\shop_product_order');
     }
 }

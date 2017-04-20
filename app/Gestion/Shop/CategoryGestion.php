@@ -15,7 +15,8 @@ class CategoryGestion implements ICategoryGestion
     public function getCategories(){
         
         $categories = DB::table('shop_categories')->get();
-
+        unset($categories[0]);
+        //$categories = array_values($categories);
         return $categories;
     }
 

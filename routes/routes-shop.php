@@ -24,6 +24,8 @@ Route::group(['prefix' => 'shop'], function(){
 
 
     Route::get('/basket', ['as' => 'shop_basket', 'uses' => 'ShopController@getbasket']);
+    Route::get('/order/{order_id}', ['as' => 'shop_order_id', 'uses' => 'ShopController@getorderid']);
+
 
     Route::post('/basket', ['as' => 'shop_add_basket', 'uses' => 'ShopController@add_basket']);
 

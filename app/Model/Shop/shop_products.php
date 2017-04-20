@@ -19,7 +19,7 @@ class shop_products extends Model
     }
 
     public function product_orders() {
-        return $this->hasMany('App\ShopProductOrder');
+        return $this->hasMany('App\Model\Shop\shop_product_order');
     }
 
     public function pictures() {
