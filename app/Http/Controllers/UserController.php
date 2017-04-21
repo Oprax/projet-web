@@ -100,9 +100,13 @@ class UserController extends EventHandlerController
              $user->name = $request['name'];
              $user->forename = $request['forename'];
              $user->email = $request['email'];
-             $user->password = bcrypt($request['password']);
+             if(!empty($request['password'])) {
+                 $user->password = bcrypt($request['password']);
+             }
              $user->status_id = Status::where('name',$request['status'])->first()->id;
-             $user->role_id = Role::where('name',$request['role'])->first()->id;
+             if(Auth::user()->isCesiBDE()) {
+                 $user->role_id = Role::where('name', $request['role'])->first()->id;
+             }
              $user->association_id = Association::where('name', $request['association'])->first()->id;
              $user->birthday = $request['birthday'];
 
