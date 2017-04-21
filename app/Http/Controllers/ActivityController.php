@@ -72,7 +72,7 @@ class ActivityController extends EventHandlerController
         $file = $request->file('pics');
 
         $destinationFolder = 'images/activity/';
-        $photo = null;
+        $photo = 'images/avatar/default-avatar.png';
         if(isset($file)){
 
             $filename = 0 .  '-' . Carbon::now()->timestamp .'.' . pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
@@ -86,8 +86,6 @@ class ActivityController extends EventHandlerController
                 return redirect()->route('activity.index')->withErrors(['pics' => $e]);
             }
 
-        }else{
-            return redirect()->route('activity.index')->withErrors(['pics' => 'Fichier non selectionné']);
         }
         $request['photo'] = $photo;
         $request['is_accept'] = ($request->input('is_accept') == 'on') ? true : false;

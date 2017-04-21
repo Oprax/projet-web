@@ -84,7 +84,7 @@
                     </div>
                 @endif
             </div>
-            @if (Auth::user()->isBDE())
+            @if (Auth::user()->isCesiBDE())
                 <div class="field">
                     <div class="ui toggle checkbox">
                         <input type="checkbox" name="is_proposal">
@@ -104,7 +104,7 @@
                     </div>
                 </div>
             @else
-                <input type="checkbox" name="is_proposal" checked>
+                <input type="checkbox" name="is_proposal" hidden checked>
             @endif
             <button class="ui button" type="submit">Submit</button>
 
