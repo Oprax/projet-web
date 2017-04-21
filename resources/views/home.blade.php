@@ -56,10 +56,10 @@
                 <div class="four wide column">
                     <div class="ui card">
                         <div class="content">
-                            <div class="header">{{ $product->name }}</div>
+                            <a href="{{route('shop_product', [$product->category_id, $product->slug])}}"><div class="header">{{ $product->name }}</div></a>
                         </div>
                         <div class="image">
-                            <img src="{{asset($pictureProduct->url)}}">
+                            <a href="{{route('shop_product', [$product->category_id, $product->slug])}}"><img class="ui image" src="{{asset($pictureProduct->url)}}"></a>
                         </div>
                     </div>
                 </div>

@@ -33,7 +33,7 @@ class ActivityPolicy
      */
     public function create(User $user)
     {
-        return !$user->isCesi();
+        return true;
     }
 
     /**

@@ -17,7 +17,7 @@
                         <label for="email">E-Mail</label>
 
                         <div class="ui left icon input">
-                            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+                            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus style="color: black">
                             <i class="mail icon"></i>
                         </div>
                         @if ($errors->has('email'))

@@ -4,7 +4,7 @@
 <div>&nbsp;</div>
 <h1>Gestions des utilisateurs</h1>
 <div class="ui grid">
-    <button class="sixteen wide phone sixteen wide computer column ">
+    <div class="sixteen wide phone sixteen wide computer column ">
         <table class="ui very basic collapsing celled table">
             <thead>
             <tr><th>Utilisateurs</th>
