@@ -16,7 +16,9 @@ GRANT ALL PRIVILEGES ON bde.* TO 'bde'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-Then we need to configure laravel with `.env` at root of project, you can copy `.env.example` to have a template, fill it with your information.
+Then we need to configure laravel with `.env` at root of project, you can copy `.env.example` to have a template, fill it with your information like database credential and mail sender credential.
+
+We need to install al dependencies with `composer update`.
 
 Now we need run migration with `php artisan migrate` and you can run a server with `php artisan serve` :)
 
@@ -37,6 +39,8 @@ On root directory project (after a `composer update`) you can run behat :
 ```bash
 vendor/bin/behat
 ```
+
+All behat test are on `features` directory.
 
 Enjoy !
  
