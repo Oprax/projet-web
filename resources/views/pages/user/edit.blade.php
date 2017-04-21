@@ -1,6 +1,14 @@
 @extends('layouts/app')
 
 @section('content')
+    <?php
+        if(!Auth::user()->isCesiBDE()){
+            $disabled = 'disabled';
+            }
+        else{
+            $disabled ='';
+        }
+    ?>
     <div>&nbsp;</div>
     <div class="ui grid">
         <div class="three wide computer only column"></div>
@@ -38,7 +46,7 @@
                     </div>
                 </div>
                 <div class="fields">
-                    <div class="required field">
+                    <div class="required {{$disabled}} field">
                         <label for="name">Nom</label>
                         <input type="text" name="name" value="{{ old('name') ? old('name') : $User->name }}" required>
                         @if ($errors->has('name'))
@@ -47,7 +55,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="required field">
+                    <div class="required {{$disabled}} field">
                         <label for="forename">Prénom</label>
                         <input type="text" name="forename" value="{{old('forename') ? old('forename') : $User->forename}}" required>
                         @if ($errors->has('forename'))
@@ -57,7 +65,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="required field">
+                <div class="required {{$disabled}} field">
                     <label for="birthday">Date de naissance</label>
                     <div class="ui calendar" id="calendarYearFirst">
                         <div class="ui input left icon">
@@ -71,7 +79,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="field">
+                <div class="required {{$disabled}} field">
                     <label for="email">Email</label>
                     <input type="email" name="email" value="{{old('email') ? old('email') : $User->email}}" required>
                     @if ($errors->has('email'))
@@ -112,6 +120,7 @@
                         </div>
                     @endif
                 </div>
+                @if (Auth::user()->isCesiBDE())
                 <div class="required  field">
                     <label for="role">Role</label>
                     <select name="role" class="ui dropdown">
@@ -126,6 +135,7 @@
                         </div>
                     @endif
                 </div>
+                @endif
                 <div class="required field">
                     <label for="association">Association</label>
                     <select name="association" class="ui dropdown">
